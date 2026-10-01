@@ -1,0 +1,7 @@
+ggplot2
+jsonlite
+svglite
+ragg
+systemfonts
+png
+readxl

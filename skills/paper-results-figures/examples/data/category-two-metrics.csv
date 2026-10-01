@@ -1,0 +1,43 @@
+category,model,metric,value
+Category A,Ours,Metric A,0.91
+Category A,Ours,Metric B,0.85
+Category B,Ours,Metric A,0.78
+Category B,Ours,Metric B,0.93
+Category C,Ours,Metric A,0.86
+Category C,Ours,Metric B,0.77
+Category D,Ours,Metric A,0.94
+Category D,Ours,Metric B,0.88
+Category E,Ours,Metric A,0.81
+Category E,Ours,Metric B,0.96
+Category F,Ours,Metric A,0.89
+Category F,Ours,Metric B,0.8
+Category G,Ours,Metric A,0.76
+Category G,Ours,Metric B,0.9
+Category A,Method A,Metric A,0.57
+Category A,Method A,Metric B,0.69
+Category B,Method A,Metric A,0.68
+Category B,Method A,Metric B,0.44
+Category C,Method A,Metric A,0.42
+Category C,Method A,Metric B,0.58
+Category D,Method A,Metric A,0.72
+Category D,Method A,Metric B,0.37
+Category E,Method A,Metric A,0.36
+Category E,Method A,Metric B,0.73
+Category F,Method A,Metric A,0.61
+Category F,Method A,Metric B,0.52
+Category G,Method A,Metric A,0.48
+Category G,Method A,Metric B,0.64
+Category A,Method B,Metric A,0.24
+Category A,Method B,Metric B,0.31
+Category B,Method B,Metric A,0.39
+Category B,Method B,Metric B,0.2
+Category C,Method B,Metric A,0.16
+Category C,Method B,Metric B,0.45
+Category D,Method B,Metric A,0.43
+Category D,Method B,Metric B,0.26
+Category E,Method B,Metric A,0.28
+Category E,Method B,Metric B,0.41
+Category F,Method B,Metric A,0.19
+Category F,Method B,Metric B,0.35
+Category G,Method B,Metric A,0.35
+Category G,Method B,Metric B,0.17

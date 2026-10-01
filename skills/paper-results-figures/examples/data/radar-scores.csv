@@ -1,0 +1,25 @@
+method_id,category_id,score
+Ours,Category A,0.94
+Ours,Category B,0.86
+Ours,Category C,0.98
+Ours,Category D,0.89
+Ours,Category E,0.93
+Ours,Category F,0.82
+Ours,Category G,0.96
+Ours,Category H,0.87
+Method A,Category A,0.7
+Method A,Category B,0.4
+Method A,Category C,0.79
+Method A,Category D,0.52
+Method A,Category E,0.74
+Method A,Category F,0.61
+Method A,Category G,0.42
+Method A,Category H,0.68
+Method B,Category A,0.22
+Method B,Category B,0.62
+Method B,Category C,0.35
+Method B,Category D,0.67
+Method B,Category E,0.29
+Method B,Category F,0.49
+Method B,Category G,0.58
+Method B,Category H,0.31

@@ -1,0 +1,24 @@
+{
+  "plot_type": "mutl-comparison",
+  "input": "INPUT_DATA_PATH",
+  "output_prefix": "OUTPUT_PARENT/mutl-comparison-bar-horizontal/mutl-comparison-bar-horizontal",
+  "data_mode": "raw",
+  "layout": "long",
+  "model": "model",
+  "value": "score",
+  "id": "observation_id",
+  "paired": true,
+  "style": "bar",
+  "orientation": "horizontal",
+  "direction": "higher",
+  "sort": "performance",
+  "highlight": "Ours",
+  "palette": "blue-yellow",
+  "show_points": false,
+  "show_sd": true,
+  "value_label": "Score",
+  "metric_domain": [
+    0,
+    1
+  ]
+}

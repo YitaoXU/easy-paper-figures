@@ -1,0 +1,36 @@
+{
+  "plot_type": "trend-comparsion",
+  "input": "INPUT_DATA_PATH",
+  "output_prefix": "OUTPUT_PARENT/trend-dual-metric/trend-dual-metric",
+  "mode": "continuous",
+  "x": "covariate",
+  "value": "value",
+  "model": "model",
+  "metric": "metric",
+  "id": "id",
+  "sampling_unit": "One independent unit within each metric; 40 IDs supply both metrics at identical covariates. IDs are independent; separate within-metric OLS fits do not use cross-metric dependence.",
+  "palette": "muted-green-blue-purple",
+  "dual_axis": true,
+  "regression": "linear",
+  "statistics": [
+    "pearson_r",
+    "p_value"
+  ],
+  "p_value_target": "pearson",
+  "metric_order": [
+    "Metric A",
+    "Metric B"
+  ],
+  "metric_labels": {
+    "Metric A": "Metric A (response units)",
+    "Metric B": "Metric B (dimensionless)"
+  },
+  "x_label": "Continuous covariate",
+  "x_limits": [
+    0,
+    1
+  ],
+  "fit_extent": "axis",
+  "show_points": true,
+  "show_ci": true
+}

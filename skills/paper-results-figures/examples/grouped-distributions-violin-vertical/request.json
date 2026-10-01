@@ -1,0 +1,51 @@
+{
+  "plot_type": "multi-metric-comparison",
+  "combo_layout": "grouped-distributions",
+  "input": "INPUT_DATA_PATH",
+  "output_prefix": "OUTPUT_PARENT/grouped-distributions-violin-vertical/grouped-distributions-violin-vertical",
+  "data_mode": "raw",
+  "model": "model",
+  "metric": "metric",
+  "value": "value",
+  "id": "observation_id",
+  "paired": true,
+  "metrics": [
+    "Metric A",
+    "Metric B",
+    "Metric C"
+  ],
+  "style": "violin",
+  "orientation": "vertical",
+  "direction": "higher",
+  "model_order": [
+    "Ours",
+    "Method A",
+    "Method B"
+  ],
+  "palette": "rainbow-transparent",
+  "show_points": true,
+  "show_sd": false,
+  "show_values": false,
+  "show_rank": false,
+  "show_significance": false,
+  "value_label": "Score",
+  "combo_units": {
+    "Metric A": "unitless score",
+    "Metric B": "unitless score",
+    "Metric C": "unitless score"
+  },
+  "combo_domains": {
+    "Metric A": [
+      0,
+      1
+    ],
+    "Metric B": [
+      0,
+      1
+    ],
+    "Metric C": [
+      0,
+      1
+    ]
+  }
+}

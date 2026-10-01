@@ -1,0 +1,39 @@
+{
+  "plot_type": "trend-comparsion",
+  "input": "INPUT_DATA_PATH",
+  "output_prefix": "OUTPUT_PARENT/trend-categorical-horizontal/trend-categorical-horizontal",
+  "mode": "categorical",
+  "x": "category",
+  "value": "value",
+  "model": "model",
+  "metric": "metric",
+  "sampling_unit": "One established summary per category/model/metric; no replicates or uncertainty; nominal categories; comparable unitless scores with established [0,1] domains",
+  "palette": "blue-pink-purple-peach-transparent",
+  "orientation": "horizontal",
+  "facet_scales": "fixed",
+  "category_order": [
+    "Category A",
+    "Category B",
+    "Category C",
+    "Category D",
+    "Category E",
+    "Category F",
+    "Category G"
+  ],
+  "model_order": [
+    "Ours",
+    "Method A",
+    "Method B"
+  ],
+  "metric_order": [
+    "Metric A",
+    "Metric B",
+    "Metric C"
+  ],
+  "x_label": "Category",
+  "y_label": "Comparable score",
+  "y_limits": [
+    0,
+    1
+  ]
+}

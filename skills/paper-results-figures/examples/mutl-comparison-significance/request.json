@@ -1,0 +1,29 @@
+{
+  "plot_type": "mutl-comparison",
+  "input": "INPUT_DATA_PATH",
+  "output_prefix": "OUTPUT_PARENT/mutl-comparison-significance/mutl-comparison-significance",
+  "data_mode": "raw",
+  "layout": "long",
+  "model": "model",
+  "value": "score",
+  "id": "observation_id",
+  "paired": true,
+  "style": "violin",
+  "orientation": "vertical",
+  "direction": "higher",
+  "sort": "performance",
+  "highlight": "Ours",
+  "palette": "rainbow-transparent",
+  "show_points": false,
+  "show_sd": true,
+  "show_values": true,
+  "show_rank": true,
+  "show_significance": true,
+  "significance_model": "Ours",
+  "p_adjust": "none",
+  "value_label": "Score",
+  "metric_domain": [
+    0,
+    1
+  ]
+}

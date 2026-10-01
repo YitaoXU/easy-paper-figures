@@ -1,0 +1,33 @@
+{
+  "plot_type": "paired-comparison-scatter",
+  "input": "INPUT_DATA_PATH",
+  "output_prefix": "OUTPUT_PARENT/paired-comparison-scatter-size-stars/paired-comparison-scatter-size-stars",
+  "x": "reference_score",
+  "y": "focal_score",
+  "id": "pair_id",
+  "metric_source": "User brief: independent matched units identified by pair_id; reference_score and focal_score are unitless [0,1] scores; higher is better; equal per-pair statistical weight.",
+  "x_label": "Reference score",
+  "y_label": "Focal score",
+  "alternative": "greater",
+  "color": "covariate",
+  "color_type": "continuous",
+  "color_label": "Covariate",
+  "colorbar_limits": [
+    12,
+    22
+  ],
+  "colorbar_placement": "auto",
+  "size": "sample_count",
+  "size_label": "Sample count",
+  "size_type": "count",
+  "size_legend_placement": "auto",
+  "star_ids": [
+    "P05",
+    "P12"
+  ],
+  "point_labels": {
+    "P05": "P05",
+    "P12": "P12"
+  },
+  "palette": "muted-green-blue-purple"
+}

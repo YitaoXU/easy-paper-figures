@@ -1,0 +1,24 @@
+{
+  "plot_type": "mutl-comparison",
+  "input": "INPUT_DATA_PATH",
+  "output_prefix": "OUTPUT_PARENT/palette-rainbow/palette-rainbow",
+  "data_mode": "raw",
+  "layout": "long",
+  "model": "model",
+  "value": "score",
+  "id": "observation_id",
+  "paired": true,
+  "style": "violin",
+  "orientation": "vertical",
+  "direction": "higher",
+  "sort": "performance",
+  "highlight": "Ours",
+  "palette": "rainbow",
+  "show_points": true,
+  "show_sd": true,
+  "value_label": "Score",
+  "metric_domain": [
+    0,
+    1
+  ]
+}

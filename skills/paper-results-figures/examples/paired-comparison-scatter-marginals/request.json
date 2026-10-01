@@ -1,0 +1,17 @@
+{
+  "plot_type": "paired-comparison-scatter",
+  "input": "INPUT_DATA_PATH",
+  "output_prefix": "OUTPUT_PARENT/paired-comparison-scatter-marginals/paired-comparison-scatter-marginals",
+  "x": "reference_score",
+  "y": "focal_score",
+  "id": "pair_id",
+  "metric_source": "User brief: reference_score and focal_score are unitless [0,1] scores; higher is better. pair_id identifies independent matched units.",
+  "x_label": "Reference score",
+  "y_label": "Focal score",
+  "alternative": "greater",
+  "color": "group",
+  "color_type": "categorical",
+  "color_label": "Group",
+  "palette": "rainbow-transparent",
+  "marginals": true
+}

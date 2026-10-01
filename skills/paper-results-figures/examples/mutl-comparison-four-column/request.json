@@ -1,0 +1,25 @@
+{
+  "plot_type": "mutl-comparison",
+  "input": "INPUT_DATA_PATH",
+  "output_prefix": "OUTPUT_PARENT/mutl-comparison-four-column/mutl-comparison-four-column",
+  "data_mode": "raw",
+  "layout": "long",
+  "model": "model",
+  "value": "score",
+  "id": "observation_id",
+  "paired": true,
+  "style": "box",
+  "orientation": "vertical",
+  "direction": "higher",
+  "sort": "performance",
+  "highlight": "Ours",
+  "palette": "blue-yellow-transparent",
+  "show_points": true,
+  "show_sd": true,
+  "value_label": "Score",
+  "metric_domain": [
+    0,
+    1
+  ],
+  "layout_columns": 4
+}

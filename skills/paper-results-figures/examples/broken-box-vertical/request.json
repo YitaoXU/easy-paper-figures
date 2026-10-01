@@ -1,0 +1,29 @@
+{
+  "plot_type": "mutl-comparison",
+  "input": "INPUT_DATA_PATH",
+  "output_prefix": "OUTPUT_PARENT/broken-box-vertical/broken-box-vertical",
+  "data_mode": "raw",
+  "layout": "long",
+  "model": "model",
+  "value": "value",
+  "id": "observation_id",
+  "paired": true,
+  "style": "box",
+  "orientation": "vertical",
+  "direction": "higher",
+  "highlight": "Ours",
+  "palette": "rainbow-transparent",
+  "show_points": true,
+  "show_sd": true,
+  "show_rank": false,
+  "show_significance": false,
+  "metric_domain": [
+    0,
+    1
+  ],
+  "axis_break": [
+    0.16,
+    0.72
+  ],
+  "value_label": "Score"
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Paper Results Figures"
+  short_description: "Reproducible manuscript figures with R and curated palettes"
+  default_prompt: "Use $paper-results-figures to create a manuscript result figure from my data with a suitable plot type and a muted palette."

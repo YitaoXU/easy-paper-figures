@@ -1,0 +1,17 @@
+{
+  "plot_type": "paired-comparison-scatter",
+  "input": "INPUT_DATA_PATH",
+  "output_prefix": "OUTPUT_PARENT/paired-comparison-scatter-continuous/paired-comparison-scatter-continuous",
+  "x": "reference_score",
+  "y": "focal_score",
+  "id": "pair_id",
+  "metric_source": "User brief: reference_score and focal_score are unitless [0,1] scores; higher is better. pair_id identifies independent matched units. covariate is unitless on [0,1].",
+  "x_label": "Reference score",
+  "y_label": "Focal score",
+  "alternative": "greater",
+  "color": "covariate",
+  "color_type": "continuous",
+  "color_label": "Covariate (unitless)",
+  "colorbar_placement": "outside",
+  "palette": "muted-green-blue-purple"
+}

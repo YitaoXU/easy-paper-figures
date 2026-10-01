@@ -1,0 +1,34 @@
+{
+  "plot_type": "trend-comparsion",
+  "input": "INPUT_DATA_PATH",
+  "output_prefix": "OUTPUT_PARENT/trend-polynomial/trend-polynomial",
+  "mode": "continuous",
+  "x": "covariate",
+  "value": "value",
+  "model": "model",
+  "metric": "metric",
+  "id": "id",
+  "sampling_unit": "One independent observation within model and metric; IDs are local and not paired across models; covariate unitless in [0,1]; response in response units with no established finite domain or performance ranking",
+  "palette": "muted-green-blue-purple",
+  "regression": "auto",
+  "statistics": [
+    "r_squared",
+    "pearson_r"
+  ],
+  "model_order": [
+    "Ours",
+    "Method A"
+  ],
+  "metric_order": [
+    "Response"
+  ],
+  "x_label": "Continuous covariate",
+  "y_label": "Response",
+  "x_limits": [
+    0,
+    1
+  ],
+  "fit_extent": "axis",
+  "show_points": true,
+  "show_ci": true
+}

@@ -1,0 +1,44 @@
+{
+  "plot_type": "multi-metric-comparison",
+  "combo_layout": "stacked-bars",
+  "input": "INPUT_DATA_PATH",
+  "output_prefix": "OUTPUT_PARENT/multi-metric-stacked-bars/multi-metric-stacked-bars",
+  "data_mode": "raw",
+  "model": "model",
+  "metric": "metric",
+  "value": "value",
+  "id": "observation_id",
+  "paired": true,
+  "metrics": [
+    "Metric A",
+    "Metric B"
+  ],
+  "orientation": "vertical",
+  "combo_styles": [
+    "bar",
+    "bar"
+  ],
+  "combo_order_by": "Metric A",
+  "direction": "higher",
+  "sort": "performance",
+  "highlight": "Ours",
+  "palette": "muted-green-blue-purple-transparent",
+  "show_values": true,
+  "combo_value_placement": "inside",
+  "show_sd": true,
+  "show_points": false,
+  "combo_labels": {
+    "Metric A": "Metric A (unitless)",
+    "Metric B": "Metric B (response units)"
+  },
+  "combo_units": {
+    "Metric A": "unitless",
+    "Metric B": "response units"
+  },
+  "combo_domains": {
+    "Metric A": [
+      0,
+      1
+    ]
+  }
+}

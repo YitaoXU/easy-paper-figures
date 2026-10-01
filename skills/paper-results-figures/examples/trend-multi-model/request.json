@@ -1,0 +1,33 @@
+{
+  "plot_type": "trend-comparsion",
+  "input": "INPUT_DATA_PATH",
+  "output_prefix": "OUTPUT_PARENT/trend-multi-model/trend-multi-model",
+  "mode": "continuous",
+  "x": "covariate",
+  "value": "value",
+  "model": "model",
+  "metric": "metric",
+  "id": "id",
+  "sampling_unit": "One independent observation within model and metric; IDs are local row identifiers, not paired across models",
+  "palette": "blue-pink-purple-peach-transparent",
+  "regression": "linear",
+  "statistics": [
+    "slope",
+    "r_squared"
+  ],
+  "model_order": [
+    "Ours",
+    "Method A",
+    "Method B",
+    "Method C"
+  ],
+  "x_label": "Continuous covariate",
+  "y_label": "Response",
+  "x_limits": [
+    0,
+    1
+  ],
+  "fit_extent": "axis",
+  "show_points": true,
+  "show_ci": false
+}

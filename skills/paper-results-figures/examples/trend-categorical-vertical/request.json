@@ -1,0 +1,38 @@
+{
+  "plot_type": "trend-comparsion",
+  "input": "INPUT_DATA_PATH",
+  "output_prefix": "OUTPUT_PARENT/trend-categorical-vertical/trend-categorical-vertical",
+  "mode": "categorical",
+  "x": "category",
+  "value": "value",
+  "model": "model",
+  "metric": "metric",
+  "sampling_unit": "One established summary per category/model/metric; no uncertainty or replicates. Both metrics are comparable unitless scores with established [0,1] domains. Category spacing is nominal; no regression or inference.",
+  "palette": "blue-yellow-transparent",
+  "orientation": "vertical",
+  "facet_scales": "fixed",
+  "model_order": [
+    "Ours",
+    "Method A",
+    "Method B"
+  ],
+  "metric_order": [
+    "Metric A",
+    "Metric B"
+  ],
+  "category_order": [
+    "Category A",
+    "Category B",
+    "Category C",
+    "Category D",
+    "Category E",
+    "Category F",
+    "Category G"
+  ],
+  "x_label": "Category",
+  "y_label": "Comparable score",
+  "y_limits": [
+    0,
+    1
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "plot_type": "multi-metric-comparison",
+  "input": "INPUT_DATA_PATH",
+  "output_prefix": "OUTPUT_PARENT/multi-metric-comparison-dual-axis-by-metric/multi-metric-comparison-dual-axis-by-metric",
+  "data_mode": "raw",
+  "model": "model",
+  "metric": "metric",
+  "value": "value",
+  "id": "observation_id",
+  "paired": true,
+  "metrics": [
+    "Metric A",
+    "Metric B"
+  ],
+  "orientation": "vertical",
+  "direction": "higher",
+  "highlight": "Ours",
+  "palette": "blue-yellow-transparent",
+  "combo_layout": "dual-axis",
+  "combo_styles": [
+    "bar",
+    "line"
+  ],
+  "combo_color_by": "metric",
+  "combo_labels": {
+    "Metric A": "Metric A (unitless)",
+    "Metric B": "Metric B (response units)"
+  },
+  "combo_units": {
+    "Metric A": "unitless",
+    "Metric B": "response units"
+  },
+  "combo_domains": {
+    "Metric A": [
+      0,
+      1
+    ]
+  },
+  "show_points": false,
+  "show_sd": true,
+  "combo_show_sd": {
+    "Metric A": true,
+    "Metric B": false
+  },
+  "show_values": false,
+  "show_rank": false,
+  "show_mean_correlation": true
+}

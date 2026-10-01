@@ -1,0 +1,44 @@
+{
+  "plot_type": "multi-metric-comparison",
+  "combo_layout": "shared-rows",
+  "input": "INPUT_DATA_PATH",
+  "output_prefix": "OUTPUT_PARENT/multi-metric-shared-rows-no-sd/multi-metric-shared-rows-no-sd",
+  "data_mode": "raw",
+  "model": "model",
+  "metric": "metric",
+  "value": "value",
+  "id": "observation_id",
+  "paired": true,
+  "metrics": [
+    "Metric A",
+    "Metric B"
+  ],
+  "orientation": "horizontal",
+  "combo_styles": [
+    "bar",
+    "bar"
+  ],
+  "combo_order_by": "Metric A",
+  "direction": "higher",
+  "sort": "performance",
+  "highlight": "Ours",
+  "palette": "blue-yellow-transparent",
+  "show_values": true,
+  "show_sd": false,
+  "show_points": false,
+  "combo_value_placement": "inside",
+  "combo_labels": {
+    "Metric A": "Metric A (unitless)",
+    "Metric B": "Metric B (response units)"
+  },
+  "combo_units": {
+    "Metric A": "unitless",
+    "Metric B": "response units"
+  },
+  "combo_domains": {
+    "Metric A": [
+      0,
+      1
+    ]
+  }
+}

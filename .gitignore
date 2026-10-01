@@ -1,0 +1,19 @@
+# Local experiments, private inputs, full test outputs and machine records.
+.private/
+
+# Operating-system and editor artifacts.
+.DS_Store
+._*
+Thumbs.db
+Desktop.ini
+*~
+*.swp
+*.swo
+
+# R session state and incidental Python caches.
+.Rhistory
+.RData
+.Ruserdata
+Rplots.pdf
+__pycache__/
+*.py[cod]

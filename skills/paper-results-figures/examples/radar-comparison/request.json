@@ -1,0 +1,33 @@
+{
+  "plot_type": "radar-comparison",
+  "input": "INPUT_DATA_PATH",
+  "output_prefix": "OUTPUT_PARENT/radar-comparison/radar-comparison",
+  "model": "method_id",
+  "axis": "category_id",
+  "value": "score",
+  "axis_order": [
+    "Category A",
+    "Category B",
+    "Category C",
+    "Category D",
+    "Category E",
+    "Category F",
+    "Category G",
+    "Category H"
+  ],
+  "metric_domain": [
+    0,
+    1
+  ],
+  "unit": "unitless score",
+  "direction": "higher",
+  "sampling_unit": "established method/category summary; no replicate uncertainty",
+  "palette": "muted-green-blue-purple",
+  "focus_models": [
+    "Ours"
+  ],
+  "value_models": [
+    "Ours"
+  ],
+  "show_values": true
+}

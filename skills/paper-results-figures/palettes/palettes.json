@@ -1,0 +1,506 @@
+{
+  "muted-green-blue-purple": {
+    "description": "Moderately muted green, blue and purple with distinct primary hues and a wider dark-to-light range.",
+    "anchors": [
+      "#2F8668",
+      "#3A7FAA",
+      "#8953A2"
+    ],
+    "categorical": [
+      "#2F8668",
+      "#3A7FAA",
+      "#8953A2",
+      "#8BC9A0",
+      "#87B8DC",
+      "#BE96D0"
+    ],
+    "continuous": [
+      "#B3DFBA",
+      "#67B89A",
+      "#448EBB",
+      "#626DB2",
+      "#633E90"
+    ],
+    "missing": "#B8B8B8",
+    "fill_alpha": 0.4,
+    "point_alpha": 0.5,
+    "paired_point_alpha": 0.5,
+    "distribution_point_alpha": 0.55,
+    "distribution_point_darken": 0.2,
+    "categorical_selection": "ordered-prefix",
+    "paired_point_darken": 0.12,
+    "focal_model_mapping": {
+      "focal_slots": [
+        3
+      ],
+      "comparator_slots": [
+        1,
+        2,
+        4,
+        5
+      ],
+      "focal_hue_family": "purple",
+      "comparator_hue_families": [
+        "green",
+        "blue"
+      ],
+      "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
+    }
+  },
+  "rainbow": {
+    "description": "Muted categorical rainbow sampled from interior fills of a supplied raster reference; approximate displayed RGB values, not original source colors. Keep assignments stable across related figures.",
+    "anchors": [
+      "#D7E8C8",
+      "#A0C2D1",
+      "#ADA8C6"
+    ],
+    "categorical": [
+      "#C3CEBC",
+      "#D7E8C8",
+      "#A0C2D1",
+      "#ADA8C6",
+      "#E2BBBD",
+      "#C8C3DD",
+      "#93A3BD",
+      "#DDC9DF",
+      "#BACBE2",
+      "#D3858D"
+    ],
+    "continuous": [
+      "#D7E8C8",
+      "#A0C2D1",
+      "#93A3BD",
+      "#ADA8C6",
+      "#E2BBBD",
+      "#D3858D"
+    ],
+    "missing": "#B8B8B8",
+    "fill_alpha": 1,
+    "point_alpha": 0.5,
+    "paired_point_alpha": 0.5,
+    "distribution_point_alpha": 0.55,
+    "distribution_point_darken": 0.2,
+    "categorical_selection": "ordered-prefix",
+    "paired_point_darken": 0.0,
+    "focal_model_mapping": {
+      "focal_slots": [
+        10
+      ],
+      "comparator_slots": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        9
+      ],
+      "focal_hue_family": "rose",
+      "comparator_hue_families": [
+        "green",
+        "blue",
+        "purple"
+      ],
+      "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
+    }
+  },
+  "rainbow-transparent": {
+    "description": "Transparent variant of rainbow; identical RGB assignments with lower opacity.",
+    "anchors": [
+      "#D7E8C8",
+      "#A0C2D1",
+      "#ADA8C6"
+    ],
+    "categorical": [
+      "#C3CEBC",
+      "#D7E8C8",
+      "#A0C2D1",
+      "#ADA8C6",
+      "#E2BBBD",
+      "#C8C3DD",
+      "#93A3BD",
+      "#DDC9DF",
+      "#BACBE2",
+      "#D3858D"
+    ],
+    "continuous": [
+      "#D7E8C8",
+      "#A0C2D1",
+      "#93A3BD",
+      "#ADA8C6",
+      "#E2BBBD",
+      "#D3858D"
+    ],
+    "missing": "#B8B8B8",
+    "fill_alpha": 0.4,
+    "point_alpha": 0.3,
+    "paired_point_alpha": 0.7,
+    "distribution_point_alpha": 0.55,
+    "distribution_point_darken": 0.2,
+    "categorical_selection": "ordered-prefix",
+    "paired_point_darken": 0.0,
+    "focal_model_mapping": {
+      "focal_slots": [
+        10
+      ],
+      "comparator_slots": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        9
+      ],
+      "focal_hue_family": "rose",
+      "comparator_hue_families": [
+        "green",
+        "blue",
+        "purple"
+      ],
+      "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
+    }
+  },
+  "muted-green-blue-purple-transparent": {
+    "description": "Transparent variant of muted-green-blue-purple; identical higher-contrast RGB slots with softer fills.",
+    "anchors": [
+      "#2F8668",
+      "#3A7FAA",
+      "#8953A2"
+    ],
+    "categorical": [
+      "#2F8668",
+      "#3A7FAA",
+      "#8953A2",
+      "#8BC9A0",
+      "#87B8DC",
+      "#BE96D0"
+    ],
+    "continuous": [
+      "#B3DFBA",
+      "#67B89A",
+      "#448EBB",
+      "#626DB2",
+      "#633E90"
+    ],
+    "missing": "#B8B8B8",
+    "fill_alpha": 0.25,
+    "point_alpha": 0.3,
+    "paired_point_alpha": 0.7,
+    "distribution_point_alpha": 0.55,
+    "distribution_point_darken": 0.2,
+    "categorical_selection": "ordered-prefix",
+    "paired_point_darken": 0.12,
+    "focal_model_mapping": {
+      "focal_slots": [
+        3
+      ],
+      "comparator_slots": [
+        1,
+        2,
+        4,
+        5
+      ],
+      "focal_hue_family": "purple",
+      "comparator_hue_families": [
+        "green",
+        "blue"
+      ],
+      "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
+    }
+  },
+  "blue-yellow": {
+    "description": "Blue and golden yellow derived from color-managed reference samples, then lightened by user request. The first four fixed slots are medium blue, medium yellow, light blue and light yellow; opaque fills remain fully opaque.",
+    "anchors": [
+      "#87AAC4",
+      "#F5C258",
+      "#6392AC"
+    ],
+    "categorical": [
+      "#87AAC4",
+      "#F5C258",
+      "#B5D0E0",
+      "#FAE5B9",
+      "#6392AC",
+      "#F8D389"
+    ],
+    "continuous": [
+      "#6392AC",
+      "#87AAC4",
+      "#B5D0E0",
+      "#FAE5B9",
+      "#F8D389",
+      "#F5C258"
+    ],
+    "missing": "#B8B8B8",
+    "fill_alpha": 1.0,
+    "point_alpha": 0.5,
+    "paired_point_alpha": 0.7,
+    "paired_point_darken": 0.0,
+    "distribution_point_alpha": 0.55,
+    "distribution_point_darken": 0.2,
+    "categorical_selection": "ordered-prefix",
+    "focal_model_mapping": {
+      "focal_slots": [
+        2
+      ],
+      "comparator_slots": [
+        1,
+        3,
+        5
+      ],
+      "focal_hue_family": "yellow",
+      "comparator_hue_families": [
+        "blue"
+      ],
+      "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
+    }
+  },
+  "blue-yellow-transparent": {
+    "description": "Transparent variant of blue-yellow; identical revised RGB slots, with the same balanced two-medium/two-light prefix and lower opacity.",
+    "anchors": [
+      "#87AAC4",
+      "#F5C258",
+      "#6392AC"
+    ],
+    "categorical": [
+      "#87AAC4",
+      "#F5C258",
+      "#B5D0E0",
+      "#FAE5B9",
+      "#6392AC",
+      "#F8D389"
+    ],
+    "continuous": [
+      "#6392AC",
+      "#87AAC4",
+      "#B5D0E0",
+      "#FAE5B9",
+      "#F8D389",
+      "#F5C258"
+    ],
+    "missing": "#B8B8B8",
+    "fill_alpha": 0.4,
+    "point_alpha": 0.3,
+    "paired_point_alpha": 0.6,
+    "paired_point_darken": 0.0,
+    "distribution_point_alpha": 0.55,
+    "distribution_point_darken": 0.2,
+    "categorical_selection": "ordered-prefix",
+    "focal_model_mapping": {
+      "focal_slots": [
+        2
+      ],
+      "comparator_slots": [
+        1,
+        3,
+        5
+      ],
+      "focal_hue_family": "yellow",
+      "comparator_hue_families": [
+        "blue"
+      ],
+      "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
+    }
+  },
+  "blue-pink-purple-peach": {
+    "description": "Blue, pink, purple and peach sampled from interior point-color regions of a supplied raster reference after conversion of its embedded color profile to sRGB; approximate displayed RGB.",
+    "anchors": [
+      "#7E8AB9",
+      "#DEAFC3",
+      "#F6D1B9"
+    ],
+    "categorical": [
+      "#7E8AB9",
+      "#DEAFC3",
+      "#A396B9",
+      "#F6D1B9",
+      "#96A3D0",
+      "#BAADD0"
+    ],
+    "continuous": [
+      "#7E8AB9",
+      "#A396B9",
+      "#BAADD0",
+      "#DEAFC3",
+      "#F6D1B9"
+    ],
+    "missing": "#B8B8B8",
+    "fill_alpha": 1.0,
+    "point_alpha": 0.5,
+    "paired_point_alpha": 0.7,
+    "paired_point_darken": 0.0,
+    "distribution_point_alpha": 0.55,
+    "distribution_point_darken": 0.2,
+    "categorical_selection": "ordered-prefix",
+    "focal_model_mapping": {
+      "focal_slots": [
+        4
+      ],
+      "comparator_slots": [
+        1,
+        3,
+        5,
+        6
+      ],
+      "focal_hue_family": "peach",
+      "comparator_hue_families": [
+        "blue",
+        "purple"
+      ],
+      "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
+    }
+  },
+  "blue-pink-purple-peach-transparent": {
+    "description": "Transparent variant of blue-pink-purple-peach; identical approximate sampled sRGB slots with lower opacity.",
+    "anchors": [
+      "#7E8AB9",
+      "#DEAFC3",
+      "#F6D1B9"
+    ],
+    "categorical": [
+      "#7E8AB9",
+      "#DEAFC3",
+      "#A396B9",
+      "#F6D1B9",
+      "#96A3D0",
+      "#BAADD0"
+    ],
+    "continuous": [
+      "#7E8AB9",
+      "#A396B9",
+      "#BAADD0",
+      "#DEAFC3",
+      "#F6D1B9"
+    ],
+    "missing": "#B8B8B8",
+    "fill_alpha": 0.4,
+    "point_alpha": 0.3,
+    "paired_point_alpha": 0.6,
+    "paired_point_darken": 0.0,
+    "distribution_point_alpha": 0.55,
+    "distribution_point_darken": 0.2,
+    "categorical_selection": "ordered-prefix",
+    "focal_model_mapping": {
+      "focal_slots": [
+        4
+      ],
+      "comparator_slots": [
+        1,
+        3,
+        5,
+        6
+      ],
+      "focal_hue_family": "peach",
+      "comparator_hue_families": [
+        "blue",
+        "purple"
+      ],
+      "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
+    }
+  },
+  "muted-pastel-six": {
+    "description": "Six muted pastel colors: gray, beige, light green, pink, peach, and mint. Approximate displayed sRGB values sampled from flat interiors of a color-managed raster reference; not original design-source values.",
+    "anchors": [
+      "#E9D8C4",
+      "#E9BFDB",
+      "#A2D9C6"
+    ],
+    "categorical": [
+      "#CED2D4",
+      "#E9D8C4",
+      "#D9EAC4",
+      "#E9BFDB",
+      "#FAC3A7",
+      "#A2D9C6"
+    ],
+    "continuous": [
+      "#CED2D4",
+      "#E9D8C4",
+      "#D9EAC4",
+      "#E9BFDB",
+      "#FAC3A7",
+      "#A2D9C6"
+    ],
+    "missing": "#B8B8B8",
+    "fill_alpha": 1.0,
+    "point_alpha": 1.0,
+    "paired_point_alpha": 1.0,
+    "distribution_point_alpha": 0.55,
+    "distribution_point_darken": 0.2,
+    "categorical_selection": "ordered-prefix",
+    "paired_point_darken": 0.0,
+    "focal_model_mapping": {
+      "focal_slots": [
+        5
+      ],
+      "comparator_slots": [
+        1,
+        3,
+        4,
+        6
+      ],
+      "focal_hue_family": "peach",
+      "comparator_hue_families": [
+        "gray",
+        "green",
+        "pink",
+        "mint"
+      ],
+      "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
+    }
+  },
+  "muted-balanced-six": {
+    "description": "Six coordinated, distinct muted colors: blue, apricot, yellow-green, gray-purple, rose, and turquoise. Selected from color-managed raster-reference colors to separate neighboring hues while retaining a soft scientific-figure style. Sampled sRGB values approximate the reference appearance.",
+    "anchors": [
+      "#75A8C7",
+      "#A996B1",
+      "#F5C17D"
+    ],
+    "categorical": [
+      "#75A8C7",
+      "#F5C17D",
+      "#CCE29C",
+      "#A996B1",
+      "#DD7F8D",
+      "#96D6C9"
+    ],
+    "continuous": [
+      "#75A8C7",
+      "#F5C17D",
+      "#CCE29C",
+      "#A996B1",
+      "#DD7F8D",
+      "#96D6C9"
+    ],
+    "missing": "#B8B8B8",
+    "fill_alpha": 1.0,
+    "point_alpha": 1.0,
+    "paired_point_alpha": 1.0,
+    "distribution_point_alpha": 0.55,
+    "distribution_point_darken": 0.2,
+    "categorical_selection": "ordered-prefix",
+    "paired_point_darken": 0.0,
+    "focal_model_mapping": {
+      "focal_slots": [
+        5
+      ],
+      "comparator_slots": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "focal_hue_family": "rose",
+      "comparator_hue_families": [
+        "blue",
+        "apricot",
+        "yellow-green",
+        "gray-purple",
+        "turquoise"
+      ],
+      "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
+    }
+  }
+}

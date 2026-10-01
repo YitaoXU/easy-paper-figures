@@ -1,0 +1,47 @@
+{
+  "plot_type": "multi-metric-comparison",
+  "input": "INPUT_DATA_PATH",
+  "output_prefix": "OUTPUT_PARENT/grouped-distributions-box-vertical/grouped-distributions-box-vertical",
+  "data_mode": "raw",
+  "model": "model",
+  "value": "value",
+  "id": "observation_id",
+  "paired": true,
+  "metric": "metric",
+  "metrics": [
+    "Metric A",
+    "Metric B",
+    "Metric C"
+  ],
+  "combo_layout": "grouped-distributions",
+  "style": "box",
+  "orientation": "vertical",
+  "direction": "higher",
+  "highlight": "Ours",
+  "palette": "rainbow-transparent",
+  "show_points": true,
+  "show_sd": false,
+  "show_values": false,
+  "show_rank": false,
+  "show_significance": false,
+  "value_label": "Score",
+  "combo_units": {
+    "Metric A": "unitless score",
+    "Metric B": "unitless score",
+    "Metric C": "unitless score"
+  },
+  "combo_domains": {
+    "Metric A": [
+      0,
+      1
+    ],
+    "Metric B": [
+      0,
+      1
+    ],
+    "Metric C": [
+      0,
+      1
+    ]
+  }
+}
