@@ -173,13 +173,13 @@ score 是 [0,1] 范围的无量纲分数，越高越好，突出显示 Ours。
 
 ## 固定色板参考
 
-色板定义固定；透明版本保留相同 RGB，按图形元素应用透明度。科学图中的具体配色标在各预览下方。
+色板定义固定；透明版本保留相同 RGB，按图形元素应用透明度。科学图中的具体配色标在各预览下方。点击色板参考可查看原始分辨率图片。
 
 <table><tr>
-<td align="center" width="300" colspan="2"><img src="examples/palettes/palette-overview-card.svg" width="300" height="285" alt="palette-overview"><br><code>palette-overview</code></td>
+<td align="center" width="900" colspan="2"><a href="examples/palettes/palette-overview.png"><img src="examples/palettes/palette-overview.png" width="900" alt="palette-overview"></a><br><code>palette-overview</code></td>
 </tr><tr>
-<td align="center" width="300"><img src="examples/palettes/palette-muted-pastel-six-card.svg" width="300" height="285" alt="palette-muted-pastel-six"><br><code>palette-muted-pastel-six</code></td>
-<td align="center" width="300"><img src="examples/palettes/palette-muted-balanced-six-card.svg" width="300" height="285" alt="palette-muted-balanced-six"><br><code>palette-muted-balanced-six</code></td>
+<td align="center" width="450"><a href="examples/palettes/palette-muted-pastel-six.png"><img src="examples/palettes/palette-muted-pastel-six.png" width="450" alt="palette-muted-pastel-six"></a><br><code>palette-muted-pastel-six</code></td>
+<td align="center" width="450"><a href="examples/palettes/palette-muted-balanced-six.png"><img src="examples/palettes/palette-muted-balanced-six.png" width="450" alt="palette-muted-balanced-six"></a><br><code>palette-muted-balanced-six</code></td>
 </tr></table>
 
 ## 文件组织

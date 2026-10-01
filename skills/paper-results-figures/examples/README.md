@@ -123,13 +123,13 @@ Choose a preview and copy the fenced prompt. For its supplied fixed CSV, edit on
 
 ## Fixed palette references
 
-Named palettes preserve fixed RGB assignments. Transparent variants apply mark-specific opacity. Each scientific preview identifies its actual palette.
+Named palettes preserve fixed RGB assignments. Transparent variants apply mark-specific opacity. Each scientific preview identifies its actual palette. Click a palette reference to view the original-resolution image.
 
 <table><tr>
-<td align="center" width="300" colspan="2"><img src="palettes/palette-overview-card.svg" width="300" height="285" alt="palette-overview"><br><code>palette-overview</code></td>
+<td align="center" width="900" colspan="2"><a href="palettes/palette-overview.png"><img src="palettes/palette-overview.png" width="900" alt="palette-overview"></a><br><code>palette-overview</code></td>
 </tr><tr>
-<td align="center" width="300"><img src="palettes/palette-muted-pastel-six-card.svg" width="300" height="285" alt="palette-muted-pastel-six"><br><code>palette-muted-pastel-six</code></td>
-<td align="center" width="300"><img src="palettes/palette-muted-balanced-six-card.svg" width="300" height="285" alt="palette-muted-balanced-six"><br><code>palette-muted-balanced-six</code></td>
+<td align="center" width="450"><a href="palettes/palette-muted-pastel-six.png"><img src="palettes/palette-muted-pastel-six.png" width="450" alt="palette-muted-pastel-six"></a><br><code>palette-muted-pastel-six</code></td>
+<td align="center" width="450"><a href="palettes/palette-muted-balanced-six.png"><img src="palettes/palette-muted-balanced-six.png" width="450" alt="palette-muted-balanced-six"></a><br><code>palette-muted-balanced-six</code></td>
 </tr></table>
 
 ## File organization
