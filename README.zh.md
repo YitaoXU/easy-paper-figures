@@ -28,3 +28,7 @@
 
 - [ ] `paper-main-figures`
 - [ ] `paper-workflow-figures`
+
+## 许可证
+
+[MIT](LICENSE) © 2026 YitaoXU。

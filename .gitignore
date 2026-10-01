@@ -1,6 +1,9 @@
 # Local experiments, private inputs, full test outputs and machine records.
 .private/
 
+# Local verification records are not distributed.
+/verification.json
+
 # Operating-system and editor artifacts.
 .DS_Store
 ._*

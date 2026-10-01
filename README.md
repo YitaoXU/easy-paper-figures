@@ -28,3 +28,7 @@ Turn result data and a short brief into reproducible manuscript figures. Support
 
 - [ ] `paper-main-figures`
 - [ ] `paper-workflow-figures`
+
+## License
+
+[MIT](LICENSE) © 2026 YitaoXU.
