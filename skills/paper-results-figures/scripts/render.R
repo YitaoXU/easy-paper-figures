@@ -17,7 +17,8 @@ registry <- c("paired-comparison-scatter" = "paired_comparison_scatter.R",
               "multi-metric-comparison" = "multi_comparison.R",
               "trend-comparsion" = "trend_comparison.R",
               "trend-comparison" = "trend_comparison.R",
-              "radar-comparison" = "radar_comparison.R")
+              "radar-comparison" = "radar_comparison.R",
+              "grouped-circular-heatmap" = "grouped_circular_heatmap.R")
 category <- config$plot_type
 if (!is.character(category) || length(category) != 1 || !category %in% names(registry)) {
   stop("Choose an implemented plot_type from references/figure-catalog.md. Available: ", paste(names(registry), collapse = ", "))

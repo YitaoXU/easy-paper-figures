@@ -39,12 +39,17 @@ score 是 [0,1] 范围的无量纲分数，越高越好，突出显示 Ours。
 | 多指标多方法 | 独立数值轴、并列或纵向面板、双轴、可附柱形的共轴均值线、分组柱形/箱线/小提琴 |
 | 随连续变量或类别的变化 | 线性或多项式拟合、可选均值置信区间、指标独立轴、仅外侧共享分类标签的趋势面板 |
 | 多轴指标轮廓 | 基于明确科学取值域的雷达图、突出方法原始值和多种固定色板 |
+| 组内条目的配对方法比较 | 按组计数成比例的环形热图、模型轨道、分组色带和同批条目的配套小提琴图 |
 
 分布与配对差值需要原始观测；汇总值无法还原重复观测或不确定性。共轴指标必须具有相同的已知单位和取值域，雷达图的缩放范围也须有科学依据。按需显示的双轴相关系数使用各方法的均值配对计算，不混合所有原始行。
 
 ## 外观与输出
 
 分类比较通常从 57 × 46 mm 起步；配对散点、趋势和分组分布通常从 57 × 54 mm 起步。每行四图时，宽度为 42 mm；组合布局使用规定的画布分配。所有文字均使用真实 Arial 字体。默认规则处理轴间距、可读刻度、文字适配和安全图例位置。纵向方法比较中，指定突出的方法放在最左侧；横向比较中放在最下方。明确的科学排序优先。较密集的分组箱线图与小提琴图省略内部均值和标准差标记。按方法配色时，默认把指定的焦点方法（或名为 Ours 的方法）放在独立的色相组中，避免与对手混淆；指定色图、按指标配色和连续数值色轴保持各自含义。雷达图采用白色背景、实线外框和虚线内部网格，也可选择带装饰性绿色渐变环带的版本。
+
+分组环形热图支持 1–12 个组，采用整行 180 × 168 mm 画布，默认使用更浅的蓝绿紫色系；小提琴整体右端略超出实际显示的扇形条目文字右端；默认右侧一列以三位小数显示各模型的均值。每个条目只属于一个组，每个模型均有该条目的一个分数。热图和可选小提琴图使用相同的完整配对样本，扣除组间空隙后，扇区角度与各组的唯一条目数成比例。模型标题到环形轨道起点和小提琴图起点的水平留白相等。最多六个组时分组计数图例放在内部，更多组时移到右侧带边框的图例中；中心孔与图例行数随选定位置调整，径向标签根据条目密度自动稀疏显示，所有分数色块仍完整保留。长标签或拥挤布局可能需要缩短显示标签、减少显示的条目标签，或增大画布。
+
+方法和分组色板默认跟随 `heatmap_palette`，使小提琴填色、内部分组色带与热图协调。可分别用 `palette` 和 `group_palette` 独立选择方法与分组色板。浅色蓝绿紫与蓝黄色板各提供十二个固定且协调的分组色位，方法色位保持原有规则。当其他默认继承的热图色板无法提供足够的分组颜色时，渲染器记录采用固定 12 色位的 `muted-balanced-twelve` 色板，避免循环复用分组颜色。显式指定的 `group_palette` 需要有足够的固定分组色位；显式分组颜色映射优先。分组图例显示各组的唯一条目数。`group_legend_placement` 可选 `auto`、`center` 或 `right`；`show_mean: false` 关闭描述性均值列。需要检验时，设置 `show_significance: true`、显式的 `significance_model` 与 `independent_items: true`；采用按条目身份配对的单侧 t 检验，将指定模型与每个其他展示模型比较，默认使用 Holm 校正。显著性会替代均值列。只有全部校正后检验通过 p < 0.05 时才在右侧画灰色括号，否则显示 `Brackets omitted`，全部结果仍保留记录。在原始数值浮点精度内无法区分的配对差值会记录为不可检验。单个括号的侧栏较窄时，校正标题放到单独的上方一行，以保留小提琴宽度。不能从配对或分组标签推断独立性。1、3、8 组预览展示检验，其他预览保留描述性均值。小提琴标题、刻度与侧边标注采用更大的 Arial 字体，并按实际文字尺寸适配布局。
 
 每张图在输出目录中有独立文件夹，包含矢量 PDF、可编辑 SVG、600 dpi PNG、最终配置、绘图数据、统计记录和 R 会话记录。保留配置及输入适配步骤即可复现。修改同一张图时沿用其文件夹，并保持科学数值不变。
 
@@ -150,6 +155,23 @@ score 是 [0,1] 范围的无量纲分数，越高越好，突出显示 Ours。
 <table><tr>
 <td align="center" width="300"><a href="examples/radar-comparison-pastel/prompt.md"><img src="examples/radar-comparison-pastel/preview-card.svg" width="300" height="285" alt="雷达图：蓝粉紫桃"></a><br><strong>雷达图：蓝粉紫桃</strong><br><code>blue-pink-purple-peach-transparent</code><br><a href="examples/radar-comparison-pastel/prompt.md">Prompt 与 CSV</a> · <a href="examples/radar-comparison-pastel/preview.png">实际导出</a></td>
 <td align="center" width="300"><a href="examples/radar-comparison-bands/prompt.md"><img src="examples/radar-comparison-bands/preview-card.svg" width="300" height="285" alt="雷达图：绿色渐变环带"></a><br><strong>雷达图：绿色渐变环带</strong><br><code>muted-green-blue-purple</code><br><a href="examples/radar-comparison-bands/prompt.md">Prompt 与 CSV</a> · <a href="examples/radar-comparison-bands/preview.png">实际导出</a></td>
+</tr></table>
+
+### 分组环形热图与小提琴图
+
+<table><tr>
+<td align="center" width="300"><a href="examples/grouped-circular-heatmap-blue-yellow/prompt.md"><img src="examples/grouped-circular-heatmap-blue-yellow/preview-card.svg" width="300" height="285" alt="环形热图：蓝黄"></a><br><strong>环形热图：蓝黄</strong><br><code>blue-yellow</code><br><a href="examples/grouped-circular-heatmap-blue-yellow/prompt.md">Prompt 与 CSV</a> · <a href="examples/grouped-circular-heatmap-blue-yellow/preview.png">实际导出</a></td>
+<td align="center" width="300"><a href="examples/grouped-circular-heatmap-pastel/prompt.md"><img src="examples/grouped-circular-heatmap-pastel/preview-card.svg" width="300" height="285" alt="环形热图：蓝粉紫桃"></a><br><strong>环形热图：蓝粉紫桃</strong><br><code>blue-pink-purple-peach</code><br><a href="examples/grouped-circular-heatmap-pastel/prompt.md">Prompt 与 CSV</a> · <a href="examples/grouped-circular-heatmap-pastel/preview.png">实际导出</a></td>
+</tr></table>
+
+<table><tr>
+<td align="center" width="300"><a href="examples/grouped-circular-heatmap-one-group/prompt.md"><img src="examples/grouped-circular-heatmap-one-group/preview-card.svg" width="300" height="285" alt="环形热图：1 个组"></a><br><strong>环形热图：1 个组</strong><br><code>blue-pink-purple-peach</code><br><a href="examples/grouped-circular-heatmap-one-group/prompt.md">Prompt 与 CSV</a> · <a href="examples/grouped-circular-heatmap-one-group/preview.png">实际导出</a></td>
+<td align="center" width="300"><a href="examples/grouped-circular-heatmap-three-groups/prompt.md"><img src="examples/grouped-circular-heatmap-three-groups/preview-card.svg" width="300" height="285" alt="环形热图：3 个不等大的组"></a><br><strong>环形热图：3 个不等大的组</strong><br><code>blue-yellow</code><br><a href="examples/grouped-circular-heatmap-three-groups/prompt.md">Prompt 与 CSV</a> · <a href="examples/grouped-circular-heatmap-three-groups/preview.png">实际导出</a></td>
+</tr></table>
+
+<table><tr>
+<td align="center" width="300"><a href="examples/grouped-circular-heatmap-eight-groups/prompt.md"><img src="examples/grouped-circular-heatmap-eight-groups/preview-card.svg" width="300" height="285" alt="环形热图：8 个不等大的组"></a><br><strong>环形热图：8 个不等大的组</strong><br><code>blue-yellow</code><br><a href="examples/grouped-circular-heatmap-eight-groups/prompt.md">Prompt 与 CSV</a> · <a href="examples/grouped-circular-heatmap-eight-groups/preview.png">实际导出</a></td>
+<td align="center" width="300"><a href="examples/grouped-circular-heatmap-twelve-groups/prompt.md"><img src="examples/grouped-circular-heatmap-twelve-groups/preview-card.svg" width="300" height="285" alt="环形热图：12 个小组"></a><br><strong>环形热图：12 个小组</strong><br><code>muted-green-blue-purple-light</code><br><a href="examples/grouped-circular-heatmap-twelve-groups/prompt.md">Prompt 与 CSV</a> · <a href="examples/grouped-circular-heatmap-twelve-groups/preview.png">实际导出</a></td>
 </tr></table>
 
 ### 相同数据的不同色板

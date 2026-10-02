@@ -1,0 +1,16 @@
+{
+  "plot_type": "grouped-circular-heatmap",
+  "input": "INPUT_DATA_PATH",
+  "output_prefix": "OUTPUT_PARENT/grouped-circular-heatmap/grouped-circular-heatmap",
+  "metric_label": "Benchmark score",
+  "metric_domain": [
+    0,
+    1
+  ],
+  "sampling_unit": "one synthetic evaluation item, matched across all models, belonging to one group",
+  "direction": "higher",
+  "focus_model": "Ours",
+  "heatmap_palette": "muted-green-blue-purple-light",
+  "title": "Grouped benchmark profiles",
+  "caption": "Synthetic data | one score per matched item and model"
+}

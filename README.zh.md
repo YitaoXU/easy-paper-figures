@@ -24,6 +24,11 @@
 <td align="center" width="300"><a href="skills/paper-results-figures/examples/radar-comparison-bands/prompt.md"><img src="skills/paper-results-figures/examples/radar-comparison-bands/preview-card.svg" width="300" height="285" alt="雷达图：绿色渐变环带"></a><br><strong>雷达图：绿色渐变环带</strong><br><code>muted-green-blue-purple</code></td>
 </tr></table>
 
+<table><tr>
+<td align="center" width="300"><a href="skills/paper-results-figures/examples/grouped-circular-heatmap-blue-yellow/prompt.md"><img src="skills/paper-results-figures/examples/grouped-circular-heatmap-blue-yellow/preview-card.svg" width="300" height="285" alt="环形热图：蓝黄"></a><br><strong>环形热图：蓝黄</strong><br><code>blue-yellow</code></td>
+<td align="center" width="300"><a href="skills/paper-results-figures/examples/grouped-circular-heatmap-eight-groups/prompt.md"><img src="skills/paper-results-figures/examples/grouped-circular-heatmap-eight-groups/preview-card.svg" width="300" height="285" alt="环形热图：8 个不等大的组"></a><br><strong>环形热图：8 个不等大的组</strong><br><code>blue-yellow</code></td>
+</tr></table>
+
 ## To do
 
 - [ ] `paper-main-figures`

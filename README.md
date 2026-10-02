@@ -24,6 +24,11 @@ Turn result data and a short brief into reproducible manuscript figures. Support
 <td align="center" width="300"><a href="skills/paper-results-figures/examples/radar-comparison-bands/prompt.md"><img src="skills/paper-results-figures/examples/radar-comparison-bands/preview-card.svg" width="300" height="285" alt="Radar: green tinted bands"></a><br><strong>Radar: green tinted bands</strong><br><code>muted-green-blue-purple</code></td>
 </tr></table>
 
+<table><tr>
+<td align="center" width="300"><a href="skills/paper-results-figures/examples/grouped-circular-heatmap-blue-yellow/prompt.md"><img src="skills/paper-results-figures/examples/grouped-circular-heatmap-blue-yellow/preview-card.svg" width="300" height="285" alt="Circular heatmap: blue-yellow"></a><br><strong>Circular heatmap: blue-yellow</strong><br><code>blue-yellow</code></td>
+<td align="center" width="300"><a href="skills/paper-results-figures/examples/grouped-circular-heatmap-eight-groups/prompt.md"><img src="skills/paper-results-figures/examples/grouped-circular-heatmap-eight-groups/preview-card.svg" width="300" height="285" alt="Circular heatmap: eight unequal groups"></a><br><strong>Circular heatmap: eight unequal groups</strong><br><code>blue-yellow</code></td>
+</tr></table>
+
 ## To do
 
 - [ ] `paper-main-figures`

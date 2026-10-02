@@ -254,7 +254,21 @@
         "blue"
       ],
       "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
-    }
+    },
+    "group_categorical": [
+      "#9BBACF",
+      "#F4CC7B",
+      "#C0D7E4",
+      "#F8E7C4",
+      "#81A7BD",
+      "#F6DCA8",
+      "#AAC8D9",
+      "#EDD597",
+      "#CEE0E9",
+      "#EBDDB8",
+      "#93B3C5",
+      "#F3DFB5"
+    ]
   },
   "blue-yellow-transparent": {
     "description": "Transparent variant of blue-yellow; identical revised RGB slots, with the same balanced two-medium/two-light prefix and lower opacity.",
@@ -463,7 +477,13 @@
       "#CCE29C",
       "#A996B1",
       "#DD7F8D",
-      "#96D6C9"
+      "#96D6C9",
+      "#486F8A",
+      "#BA8955",
+      "#80944F",
+      "#6B577F",
+      "#A14D64",
+      "#397C72"
     ],
     "continuous": [
       "#75A8C7",
@@ -502,5 +522,131 @@
       ],
       "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
     }
+  },
+  "muted-balanced-twelve": {
+    "description": "Twelve fixed muted categorical colors for larger group guides. The first six preserve muted-balanced-six slots; six additional design colors are fixed, never interpolated or recycled.",
+    "anchors": [
+      "#75A8C7",
+      "#A996B1",
+      "#F5C17D"
+    ],
+    "categorical": [
+      "#75A8C7",
+      "#F5C17D",
+      "#CCE29C",
+      "#A996B1",
+      "#DD7F8D",
+      "#96D6C9",
+      "#486F8A",
+      "#BA8955",
+      "#80944F",
+      "#6B577F",
+      "#A14D64",
+      "#397C72"
+    ],
+    "continuous": [
+      "#75A8C7",
+      "#F5C17D",
+      "#CCE29C",
+      "#A996B1",
+      "#DD7F8D",
+      "#96D6C9"
+    ],
+    "missing": "#B8B8B8",
+    "fill_alpha": 1.0,
+    "point_alpha": 1.0,
+    "paired_point_alpha": 1.0,
+    "distribution_point_alpha": 0.55,
+    "distribution_point_darken": 0.2,
+    "categorical_selection": "ordered-prefix",
+    "paired_point_darken": 0.0,
+    "focal_model_mapping": {
+      "focal_slots": [
+        5
+      ],
+      "comparator_slots": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        8,
+        9,
+        10,
+        12
+      ],
+      "focal_hue_family": "rose",
+      "comparator_hue_families": [
+        "blue",
+        "apricot",
+        "yellow-green",
+        "purple",
+        "turquoise"
+      ],
+      "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
+    }
+  },
+  "muted-green-blue-purple-light": {
+    "description": "Lighter green-blue-purple preset for circular score tracks and coordinated method/group colors, with fixed pale continuous stops and preserved distinct focal purple hue.",
+    "anchors": [
+      "#78B695",
+      "#7DA6C5",
+      "#9A81BA"
+    ],
+    "categorical": [
+      "#78B695",
+      "#7DA6C5",
+      "#9A81BA",
+      "#B9DFC1",
+      "#B5CEDE",
+      "#C9B4DC"
+    ],
+    "continuous": [
+      "#C4E6CB",
+      "#A1D6C1",
+      "#8DBCD8",
+      "#AAAED5",
+      "#AB91C4"
+    ],
+    "missing": "#B8B8B8",
+    "fill_alpha": 0.4,
+    "point_alpha": 0.5,
+    "paired_point_alpha": 0.5,
+    "distribution_point_alpha": 0.55,
+    "distribution_point_darken": 0.2,
+    "categorical_selection": "ordered-prefix",
+    "paired_point_darken": 0.12,
+    "focal_model_mapping": {
+      "focal_slots": [
+        3
+      ],
+      "comparator_slots": [
+        1,
+        2,
+        4,
+        5
+      ],
+      "focal_hue_family": "purple",
+      "comparator_hue_families": [
+        "green",
+        "blue"
+      ],
+      "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
+    },
+    "group_categorical": [
+      "#9BCAB0",
+      "#9DBED4",
+      "#B4A3CD",
+      "#C5E2CD",
+      "#C3D7E5",
+      "#D3C6E3",
+      "#A5CFC6",
+      "#ABC9DB",
+      "#B6B7D9",
+      "#B6D3BE",
+      "#A4C3CE",
+      "#C0ADD6"
+    ]
   }
 }

@@ -1,0 +1,7 @@
+item,group,model,score
+001,Group A,Model A,0.4
+001,Group A,Ours,0.65
+002,Group A,Model A,0.4
+002,Group A,Ours,0.72
+003,Group B,Model A,0.4
+003,Group B,Ours,0.82
