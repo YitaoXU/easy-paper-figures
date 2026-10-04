@@ -61,9 +61,13 @@ if ("colorbar_title_width" %in% names(user) && !"colorbar_inside_title_width" %i
 if (is.null(cfg$point_alpha) || is.null(cfg$point_darken)) {
   pals <- jsonlite::fromJSON(file.path(skill_dir, "palettes/palettes.json"))
   if (is.null(pals[[cfg$palette]])) stop("Unknown palette.")
-  # Paired-scatter opacity is independent of distribution fills and points.
-  if (is.null(cfg$point_alpha)) cfg$point_alpha <- pals[[cfg$palette]]$paired_point_alpha
-  if (is.null(cfg$point_darken)) cfg$point_darken <- pals[[cfg$palette]]$paired_point_darken
+  # The compact marginal layout needs deeper rainbow points on its white panel.
+  # Preserve explicit/saved values and the ordinary paired palette profile.
+  marginal_rainbow <- isTRUE(cfg$marginals) && identical(cfg$palette, "rainbow-transparent")
+  if (is.null(cfg$point_alpha)) cfg$point_alpha <-
+    if (marginal_rainbow) .90 else pals[[cfg$palette]]$paired_point_alpha
+  if (is.null(cfg$point_darken)) cfg$point_darken <-
+    if (marginal_rainbow) .20 else pals[[cfg$palette]]$paired_point_darken
 }
 cfg <- resolve_paper_dimensions(cfg,user,default_height_mm=54)
 if (!identical(cfg$font_family, "Arial")) stop("All figure text must use Arial; set font_family to Arial.")
