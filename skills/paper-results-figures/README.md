@@ -32,26 +32,22 @@ The example values describe the supplied fictional input. Headers can be detecte
 
 ## Available figures
 
-| Scientific comparison | Layouts |
-| --- | --- |
-| Two methods on matched observations | Equal-axis paired scatter; category or continuous colors, point sizes, selected stars and optional marginal distributions |
-| Methods on one metric | Bars, boxes, violins and mean lines in either orientation; optional raw points, SD, paired reference differences and focal tests |
-| Several metrics across methods | Separate axes, parallel or stacked panels, dual axes, comparable mean lines with optional bars, grouped bar/box/violin clusters |
-| Changes across a continuous covariate or categories | Linear or polynomial fits with optional mean CI, metric-specific axes, categorical profiles with shared outside labels |
-| Profiles over several axes | Radar with declared scientific domains, raw focal values and several fixed palettes |
-| Matched items within groups | Proportional circular heatmap sectors, model tracks, group bands and companion matched-item violins |
+| Scientific comparison | Layouts | Figure guide |
+| --- | --- | --- |
+| Two methods on matched observations | Paired scatter with optional colors, sizes and marginals | [Paired scatter](references/paired-comparison-scatter.md) |
+| Methods on one metric | Bars, boxes, violins and mean lines in either orientation | [Single-metric comparison](references/mutl-comparison.md) |
+| Several metrics across methods | Separate panels, dual axes, shared-axis lines and grouped distributions | [Multi-metric comparison](references/multi-metric-comparison.md) |
+| Changes across a continuous covariate or categories | Regression fits and categorical profiles | [Trends](references/trend-comparsion.md) |
+| Profiles over several axes | Radar with declared scientific domains | [Radar](references/radar-comparison.md) |
+| Matched items within groups | Circular heatmap with optional matched-item violins | [Grouped circular heatmap](references/grouped-circular-heatmap.md) |
+
+Each figure guide in `references/` contains its data requirements, options, defaults and statistical assumptions. Use the gallery below for copyable prompts and previews.
 
 Use raw observations for distributions and paired differences. Supplied summaries cannot reconstruct replicates or uncertainty. Shared-axis metrics need identical established units and domains; radar domains must be scientifically justified. A dual-axis correlation annotation uses per-method mean pairs when requested, rather than pooling observations.
 
 ## Appearance and outputs
 
-Categorical panels typically start at 57 × 46 mm; paired scatter, trends and grouped distributions start at 57 × 54 mm. Four-column panels start at 42 mm wide; compound layouts use their specified allocation. All text uses actual Arial. Defaults handle axis spacing, readable ticks, label fitting and safe legend placement. Vertical method comparisons place the designated focal method at the left; horizontal comparisons place it at the bottom. Explicit scientific orders remain authoritative. Dense grouped boxes and violins omit internal means and SD overlays. When colors encode methods, the designated focal method (or a method named Ours) uses a hue family distinct from all automatic comparators; supplied named maps, metric colors and continuous numeric colors retain their meanings. White radar backgrounds use a solid outer boundary and dashed inner grid rings; a decorative green tinted-band version is also available.
-
-The marginal histogram/KDE layout with `rainbow-transparent` uses darker scatter marks at 90% opacity for clearer visibility, with matching color guides. Explicit saved point settings remain available.
-
-Grouped circular heatmaps support 1–12 groups on a full-row 180 × 168 mm canvas, defaulting to a lighter green-blue-purple family. The complete violin block ends just beyond the rightmost displayed circular item label; its default right-side column reports each model’s mean to three decimals. Each item belongs to one group and has one score per model; the heatmap and optional violins share the complete matched sample. Group sectors remain proportional to unique-item counts after inter-group gaps. Model titles have equal horizontal clearance between the circular track endpoint and the violin start. The group count legend stays inside for up to six groups and moves to a framed right-side guide for larger group sets; the center hole and guide rows adapt to that placement, and radial label thinning adapts to item density while retaining every score tile. Long labels or crowded layouts may require shorter display labels, fewer shown item labels or a larger canvas.
-
-The method and group palettes follow `heatmap_palette` by default, coordinating the violin fills and inner group bands with the heatmap. Set `palette` for methods or `group_palette` for groups to choose them independently. The light green-blue-purple and blue-yellow families each supply twelve fixed coordinated group colors independently of their unchanged method slots. When another inherited heatmap palette has too few group colors, the renderer records a fixed 12-slot `muted-balanced-twelve` fallback without recycling group colors. An explicit `group_palette` needs enough fixed group slots; explicit named group colors remain authoritative. The group guide reports unique-item group counts. Set `group_legend_placement` to `auto`, `center` or `right`; `show_mean: false` hides the descriptive mean column. For requested tests, set `show_significance: true`, an explicit `significance_model` and `independent_items: true`; one-sided paired t-tests compare that model with every other displayed model, with Holm correction by default. Significance replaces the mean column. Gray right-side brackets appear only when all adjusted tests pass p < 0.05; otherwise `Brackets omitted` appears and every result is still recorded. Paired differences indistinguishable at source floating precision are recorded as untestable. For a narrow single-bracket column, the correction heading sits on a separate upper row to preserve violin width. Do not infer independence from pairing or group labels. The 1-, 3- and 8-group previews show tests; other previews retain descriptive means. Violin titles, tick labels and side annotations use larger readable Arial, with measured layout fitting.
+All text uses actual Arial. Defaults handle manuscript dimensions, readable ticks, label fitting and safe legend placement. Vertical method comparisons place the designated focal method at the left; horizontal comparisons place it at the bottom. Explicit scientific orders remain authoritative. Choose a fixed palette from the references below; layout-specific settings are documented in the figure guides.
 
 Each figure has its own folder under your output parent. It contains vector PDF, editable SVG, 600 dpi PNG, the resolved configuration, plotted data, statistics and the R session record. Keep the configuration and any saved input-preparation step to reproduce the figure. Refinements use the same figure folder and preserve scientific values.
 
