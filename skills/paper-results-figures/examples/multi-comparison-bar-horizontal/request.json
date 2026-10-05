@@ -1,7 +1,7 @@
 {
   "plot_type": "mutl-comparison",
   "input": "INPUT_DATA_PATH",
-  "output_prefix": "OUTPUT_PARENT/mutl-comparison-bar-horizontal/mutl-comparison-bar-horizontal",
+  "output_prefix": "OUTPUT_PARENT/multi-comparison-bar-horizontal/multi-comparison-bar-horizontal",
   "data_mode": "raw",
   "layout": "long",
   "model": "model",

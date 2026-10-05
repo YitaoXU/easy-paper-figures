@@ -1,4 +1,4 @@
-# Paired reference differences
+# Horizontal significance brackets
 
 Sample input: [CSV](../data/method-scores.csv). Copy the prompt below. With this sample, change only INPUT_DATA_PATH and OUTPUT_PARENT; for your data, edit the DATA SETTINGS values. Keep FIGURE SETTINGS to reproduce this layout.
 
@@ -15,15 +15,14 @@ Sampling/pairing: raw long data; each ID is one independent sampling unit matche
 Focal method: Ours (visual highlight).
 Method order: performance by the metric and its improvement direction.
 Missing observations: error; do not drop or impute.
-Reference: Method A; compute each ID-matched difference as method score minus reference score; difference domain [-1,1]; display label = Score difference vs Method A.
-Test: none.
+Test: one-sided paired t-tests of the focal method against every other displayed method; hypothesis focal > comparator; p adjustment = none; threshold = 0.05.
 Infer unambiguous column mappings from the file if I set a mapping to auto; ask only about unresolved scientific meaning.
 
 FIGURE SETTINGS (keep for this layout):
 Plot category: mutl-comparison.
-Palette: muted-green-blue-purple-transparent.
-Output figure folder: mutl-comparison-reference-line (under OUTPUT_PARENT).
-Marks: vertical line comparisons with mean icons, numeric means, sample SD and Performance Ranking. Omit raw points.
-Ordering: use the supplied method order; put the focal method at the left. Preserve method color identities.
-Reference display: summarize the supplied paired differences and retain the zero reference line.
+Palette: blue-pink-purple-peach-transparent.
+Output figure folder: multi-comparison-significance-horizontal (under OUTPUT_PARENT).
+Marks: horizontal violin comparisons with mean icons, numeric means, sample SD and Performance Ranking. Omit raw points.
+Ordering: use the supplied method order; put the focal method at the bottom. Preserve method color identities.
+Significance display: draw all comparator brackets only when every supplied test passes the threshold; otherwise draw none and retain all test results.
 ```

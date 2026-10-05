@@ -1,29 +1,25 @@
 {
   "plot_type": "mutl-comparison",
   "input": "INPUT_DATA_PATH",
-  "output_prefix": "OUTPUT_PARENT/mutl-comparison-significance/mutl-comparison-significance",
+  "output_prefix": "OUTPUT_PARENT/multi-comparison-four-column/multi-comparison-four-column",
   "data_mode": "raw",
   "layout": "long",
   "model": "model",
   "value": "score",
   "id": "observation_id",
   "paired": true,
-  "style": "violin",
+  "style": "box",
   "orientation": "vertical",
   "direction": "higher",
   "sort": "performance",
   "highlight": "Ours",
-  "palette": "rainbow-transparent",
-  "show_points": false,
+  "palette": "blue-yellow-transparent",
+  "show_points": true,
   "show_sd": true,
-  "show_values": true,
-  "show_rank": true,
-  "show_significance": true,
-  "significance_model": "Ours",
-  "p_adjust": "none",
   "value_label": "Score",
   "metric_domain": [
     0,
     1
-  ]
+  ],
+  "layout_columns": 4
 }

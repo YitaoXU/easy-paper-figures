@@ -15,7 +15,7 @@ Turn result data and a short brief into reproducible manuscript figures. Support
 <table><tr>
 <td align="center" width="300"><a href="skills/paper-results-figures/examples/paired-comparison-scatter-marginals/prompt.md"><img src="skills/paper-results-figures/examples/paired-comparison-scatter-marginals/preview-card.svg" width="300" height="285" alt="Marginal histograms and KDE"></a><br><strong>Marginal histograms and KDE</strong><br><code>rainbow-transparent</code></td>
 <td align="center" width="300"><a href="skills/paper-results-figures/examples/paired-comparison-scatter-size-stars/prompt.md"><img src="skills/paper-results-figures/examples/paired-comparison-scatter-size-stars/preview-card.svg" width="300" height="285" alt="Point sizes and selected stars"></a><br><strong>Point sizes and selected stars</strong><br><code>muted-green-blue-purple</code></td>
-<td align="center" width="300"><a href="skills/paper-results-figures/examples/mutl-comparison-significance/prompt.md"><img src="skills/paper-results-figures/examples/mutl-comparison-significance/preview-card.svg" width="300" height="285" alt="Vertical significance brackets"></a><br><strong>Vertical significance brackets</strong><br><code>rainbow-transparent</code></td>
+<td align="center" width="300"><a href="skills/paper-results-figures/examples/multi-comparison-significance/prompt.md"><img src="skills/paper-results-figures/examples/multi-comparison-significance/preview-card.svg" width="300" height="285" alt="Vertical significance brackets"></a><br><strong>Vertical significance brackets</strong><br><code>rainbow-transparent</code></td>
 </tr></table>
 
 <table><tr>

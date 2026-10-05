@@ -1,4 +1,4 @@
-# Horizontal mean bars
+# Boxes, points and SD
 
 Sample input: [CSV](../data/method-scores.csv). Copy the prompt below. With this sample, change only INPUT_DATA_PATH and OUTPUT_PARENT; for your data, edit the DATA SETTINGS values. Keep FIGURE SETTINGS to reproduce this layout.
 
@@ -20,8 +20,8 @@ Infer unambiguous column mappings from the file if I set a mapping to auto; ask 
 
 FIGURE SETTINGS (keep for this layout):
 Plot category: mutl-comparison.
-Palette: blue-yellow.
-Output figure folder: mutl-comparison-bar-horizontal (under OUTPUT_PARENT).
-Marks: horizontal bar comparisons with mean bars, numeric means, sample SD and Performance Ranking. Omit raw points.
-Ordering: use the supplied method order; put the focal method at the bottom. Preserve method color identities.
+Palette: rainbow-transparent.
+Output figure folder: multi-comparison (under OUTPUT_PARENT).
+Marks: vertical box comparisons with mean icons, numeric means, sample SD and Performance Ranking. Show raw points.
+Ordering: use the supplied method order; put the focal method at the left. Preserve method color identities.
 ```

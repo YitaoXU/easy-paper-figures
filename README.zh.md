@@ -15,7 +15,7 @@
 <table><tr>
 <td align="center" width="300"><a href="skills/paper-results-figures/examples/paired-comparison-scatter-marginals/prompt.md"><img src="skills/paper-results-figures/examples/paired-comparison-scatter-marginals/preview-card.svg" width="300" height="285" alt="边际直方图与密度曲线"></a><br><strong>边际直方图与密度曲线</strong><br><code>rainbow-transparent</code></td>
 <td align="center" width="300"><a href="skills/paper-results-figures/examples/paired-comparison-scatter-size-stars/prompt.md"><img src="skills/paper-results-figures/examples/paired-comparison-scatter-size-stars/preview-card.svg" width="300" height="285" alt="点大小与指定星形标记"></a><br><strong>点大小与指定星形标记</strong><br><code>muted-green-blue-purple</code></td>
-<td align="center" width="300"><a href="skills/paper-results-figures/examples/mutl-comparison-significance/prompt.md"><img src="skills/paper-results-figures/examples/mutl-comparison-significance/preview-card.svg" width="300" height="285" alt="纵向显著性括号"></a><br><strong>纵向显著性括号</strong><br><code>rainbow-transparent</code></td>
+<td align="center" width="300"><a href="skills/paper-results-figures/examples/multi-comparison-significance/prompt.md"><img src="skills/paper-results-figures/examples/multi-comparison-significance/preview-card.svg" width="300" height="285" alt="纵向显著性括号"></a><br><strong>纵向显著性括号</strong><br><code>rainbow-transparent</code></td>
 </tr></table>
 
 <table><tr>

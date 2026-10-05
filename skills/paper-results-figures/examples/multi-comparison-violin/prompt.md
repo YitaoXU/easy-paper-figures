@@ -1,4 +1,4 @@
-# Boxes, points and SD
+# Violins, points and SD
 
 Sample input: [CSV](../data/method-scores.csv). Copy the prompt below. With this sample, change only INPUT_DATA_PATH and OUTPUT_PARENT; for your data, edit the DATA SETTINGS values. Keep FIGURE SETTINGS to reproduce this layout.
 
@@ -20,8 +20,8 @@ Infer unambiguous column mappings from the file if I set a mapping to auto; ask 
 
 FIGURE SETTINGS (keep for this layout):
 Plot category: mutl-comparison.
-Palette: rainbow-transparent.
-Output figure folder: mutl-comparison (under OUTPUT_PARENT).
-Marks: vertical box comparisons with mean icons, numeric means, sample SD and Performance Ranking. Show raw points.
+Palette: blue-pink-purple-peach-transparent.
+Output figure folder: multi-comparison-violin (under OUTPUT_PARENT).
+Marks: vertical violin comparisons with mean icons, numeric means, sample SD and Performance Ranking. Show raw points.
 Ordering: use the supplied method order; put the focal method at the left. Preserve method color identities.
 ```

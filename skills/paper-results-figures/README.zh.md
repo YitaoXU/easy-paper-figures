@@ -35,7 +35,7 @@ score 是 [0,1] 范围的无量纲分数，越高越好，突出显示 Ours。
 | 科学比较 | 图形形式 | 图形指南（英文） |
 | --- | --- | --- |
 | 相同观测上的两个方法 | 配对散点图，可选配色、点大小与边际分布 | [配对散点图](references/paired-comparison-scatter.md) |
-| 单指标多方法 | 横向或纵向柱形、箱线、小提琴和均值线 | [单指标比较](references/mutl-comparison.md) |
+| 单指标多方法 | 横向或纵向柱形、箱线、小提琴和均值线 | [单指标比较](references/multi-comparison.md) |
 | 多指标多方法 | 独立面板、双轴、共轴均值线和分组分布 | [多指标比较](references/multi-metric-comparison.md) |
 | 随连续变量或类别的变化 | 回归拟合和分类趋势 | [趋势图](references/trend-comparsion.md) |
 | 多轴指标轮廓 | 基于明确科学取值域的雷达图 | [雷达图](references/radar-comparison.md) |
@@ -70,19 +70,19 @@ score 是 [0,1] 范围的无量纲分数，越高越好，突出显示 Ours。
 ### 单指标多方法
 
 <table><tr>
-<td align="center" width="300"><a href="examples/mutl-comparison/prompt.md"><img src="examples/mutl-comparison/preview-card.svg" width="300" height="285" alt="箱线图、散点与标准差"></a><br><strong>箱线图、散点与标准差</strong><br><code>rainbow-transparent</code><br><a href="examples/mutl-comparison/prompt.md">Prompt 与 CSV</a> · <a href="examples/mutl-comparison/preview.png">实际导出</a></td>
-<td align="center" width="300"><a href="examples/mutl-comparison-violin/prompt.md"><img src="examples/mutl-comparison-violin/preview-card.svg" width="300" height="285" alt="小提琴图、散点与标准差"></a><br><strong>小提琴图、散点与标准差</strong><br><code>blue-pink-purple-peach-transparent</code><br><a href="examples/mutl-comparison-violin/prompt.md">Prompt 与 CSV</a> · <a href="examples/mutl-comparison-violin/preview.png">实际导出</a></td>
-<td align="center" width="300"><a href="examples/mutl-comparison-bar-horizontal/prompt.md"><img src="examples/mutl-comparison-bar-horizontal/preview-card.svg" width="300" height="285" alt="横向均值柱形图"></a><br><strong>横向均值柱形图</strong><br><code>blue-yellow</code><br><a href="examples/mutl-comparison-bar-horizontal/prompt.md">Prompt 与 CSV</a> · <a href="examples/mutl-comparison-bar-horizontal/preview.png">实际导出</a></td>
+<td align="center" width="300"><a href="examples/multi-comparison/prompt.md"><img src="examples/multi-comparison/preview-card.svg" width="300" height="285" alt="箱线图、散点与标准差"></a><br><strong>箱线图、散点与标准差</strong><br><code>rainbow-transparent</code><br><a href="examples/multi-comparison/prompt.md">Prompt 与 CSV</a> · <a href="examples/multi-comparison/preview.png">实际导出</a></td>
+<td align="center" width="300"><a href="examples/multi-comparison-violin/prompt.md"><img src="examples/multi-comparison-violin/preview-card.svg" width="300" height="285" alt="小提琴图、散点与标准差"></a><br><strong>小提琴图、散点与标准差</strong><br><code>blue-pink-purple-peach-transparent</code><br><a href="examples/multi-comparison-violin/prompt.md">Prompt 与 CSV</a> · <a href="examples/multi-comparison-violin/preview.png">实际导出</a></td>
+<td align="center" width="300"><a href="examples/multi-comparison-bar-horizontal/prompt.md"><img src="examples/multi-comparison-bar-horizontal/preview-card.svg" width="300" height="285" alt="横向均值柱形图"></a><br><strong>横向均值柱形图</strong><br><code>blue-yellow</code><br><a href="examples/multi-comparison-bar-horizontal/prompt.md">Prompt 与 CSV</a> · <a href="examples/multi-comparison-bar-horizontal/preview.png">实际导出</a></td>
 </tr></table>
 
 <table><tr>
-<td align="center" width="300"><a href="examples/mutl-comparison-reference-line/prompt.md"><img src="examples/mutl-comparison-reference-line/preview-card.svg" width="300" height="285" alt="配对参考差值"></a><br><strong>配对参考差值</strong><br><code>muted-green-blue-purple-transparent</code><br><a href="examples/mutl-comparison-reference-line/prompt.md">Prompt 与 CSV</a> · <a href="examples/mutl-comparison-reference-line/preview.png">实际导出</a></td>
-<td align="center" width="300"><a href="examples/mutl-comparison-four-column/prompt.md"><img src="examples/mutl-comparison-four-column/preview-card.svg" width="300" height="285" alt="四栏论文尺寸"></a><br><strong>四栏论文尺寸</strong><br><code>blue-yellow-transparent</code><br><a href="examples/mutl-comparison-four-column/prompt.md">Prompt 与 CSV</a> · <a href="examples/mutl-comparison-four-column/preview.png">实际导出</a></td>
+<td align="center" width="300"><a href="examples/multi-comparison-reference-line/prompt.md"><img src="examples/multi-comparison-reference-line/preview-card.svg" width="300" height="285" alt="配对参考差值"></a><br><strong>配对参考差值</strong><br><code>muted-green-blue-purple-transparent</code><br><a href="examples/multi-comparison-reference-line/prompt.md">Prompt 与 CSV</a> · <a href="examples/multi-comparison-reference-line/preview.png">实际导出</a></td>
+<td align="center" width="300"><a href="examples/multi-comparison-four-column/prompt.md"><img src="examples/multi-comparison-four-column/preview-card.svg" width="300" height="285" alt="四栏论文尺寸"></a><br><strong>四栏论文尺寸</strong><br><code>blue-yellow-transparent</code><br><a href="examples/multi-comparison-four-column/prompt.md">Prompt 与 CSV</a> · <a href="examples/multi-comparison-four-column/preview.png">实际导出</a></td>
 </tr></table>
 
 <table><tr>
-<td align="center" width="300"><a href="examples/mutl-comparison-significance/prompt.md"><img src="examples/mutl-comparison-significance/preview-card.svg" width="300" height="285" alt="纵向显著性括号"></a><br><strong>纵向显著性括号</strong><br><code>rainbow-transparent</code><br><a href="examples/mutl-comparison-significance/prompt.md">Prompt 与 CSV</a> · <a href="examples/mutl-comparison-significance/preview.png">实际导出</a></td>
-<td align="center" width="300"><a href="examples/mutl-comparison-significance-horizontal/prompt.md"><img src="examples/mutl-comparison-significance-horizontal/preview-card.svg" width="300" height="285" alt="横向显著性括号"></a><br><strong>横向显著性括号</strong><br><code>blue-pink-purple-peach-transparent</code><br><a href="examples/mutl-comparison-significance-horizontal/prompt.md">Prompt 与 CSV</a> · <a href="examples/mutl-comparison-significance-horizontal/preview.png">实际导出</a></td>
+<td align="center" width="300"><a href="examples/multi-comparison-significance/prompt.md"><img src="examples/multi-comparison-significance/preview-card.svg" width="300" height="285" alt="纵向显著性括号"></a><br><strong>纵向显著性括号</strong><br><code>rainbow-transparent</code><br><a href="examples/multi-comparison-significance/prompt.md">Prompt 与 CSV</a> · <a href="examples/multi-comparison-significance/preview.png">实际导出</a></td>
+<td align="center" width="300"><a href="examples/multi-comparison-significance-horizontal/prompt.md"><img src="examples/multi-comparison-significance-horizontal/preview-card.svg" width="300" height="285" alt="横向显著性括号"></a><br><strong>横向显著性括号</strong><br><code>blue-pink-purple-peach-transparent</code><br><a href="examples/multi-comparison-significance-horizontal/prompt.md">Prompt 与 CSV</a> · <a href="examples/multi-comparison-significance-horizontal/preview.png">实际导出</a></td>
 </tr></table>
 
 ### 多指标多方法
