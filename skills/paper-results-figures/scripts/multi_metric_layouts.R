@@ -12,7 +12,7 @@ if(cfg$combo_layout=="stacked-bars"){
  if(any(cfg$combo_styles!="bar"))stop("stacked-bars requires two bar styles.")
  if(!is.null(cfg$limits)||!is.null(cfg$breaks))stop("Use named combo_limits/combo_breaks for stacked-bars.")
  inside<-cfg$combo_value_placement=="inside";stacked_plots<-list();combo_axes<-list();inside_value_placement<-list()
- provisional_panel<-c(width=cfg$width_mm-12,height=(cfg$height_mm-17)/2)
+ provisional_panel<-c(width=cfg$width_mm-12,height=(cfg$height_mm-14)/2)
  # Only the bottom panel shows model names, fitted at the complete figure dimensions.
  fitted<-fit_comparison_text(base(),cfg,labels,positions,text_fit_policy,sm$annotation,cfg$show_values&&!inside,panel_override_mm=provisional_panel)
  cfg$label_angle<-fitted$label_angle;cfg$value_angle<-fitted$value_angle;labels<-fitted$labels;text_fitting<-fitted$record
@@ -20,6 +20,13 @@ if(cfg$combo_layout=="stacked-bars"){
  for(i in seq_along(cfg$metrics)){
   key<-cfg$metrics[i];ss<-sm[sm$metric==key,];dd<-dat[dat$metric==key,];sd_on<-metric_sd[[key]]
   ax<-resolve_multi_axis(multi_metric_extent(ss,dd,sd_on,cfg$show_points,"bar"),cfg,cfg$combo_limits[[key]],cfg$combo_breaks[[key]],provisional_panel["height"],FALSE,"bar")
+  # Very short stacked numeric axes can exhaust the ordinary pretty-tick
+  # candidates. Keep two compact major ticks inside the unchanged view rather
+  # than displaying long raw view endpoints; explicit user breaks stay exact.
+  if(is.null(cfg$combo_breaks[[key]]) && isTRUE(all.equal(as.numeric(ax$breaks),as.numeric(ax$limits),tolerance=1e-9))){
+   compact_ticks<-snap_axis_breaks(pretty(ax$limits,n=5),ax$limits)
+   if(length(compact_ticks)>=2)ax$breaks<-compact_ticks[c(1,length(compact_ticks))]
+  }
   sd_modes<-rep(if(cfg$combo_sd_display=="outward")"outward"else"both",nrow(ss))
   if(inside&&cfg$show_values){
    view<-resolve_inside_bar_view(ss,cfg,ax,provisional_panel,"vertical",sd_on,text_fit_policy$value_angle,is.null(cfg$combo_limits[[key]]),is.null(cfg$combo_breaks[[key]]))
@@ -33,7 +40,7 @@ if(cfg$combo_layout=="stacked-bars"){
   text_fitting$numeric_axis_endpoint_padding_by_metric[[key]]<-list(top_mm=top_gutter_mm,
    tick_text_height_mm=tick_height_mm,clearance_mm=.46)
   p_i<-apply_comparison_text(add_marks(base(),ss,dd,"bar",baseline,sd_on,sd_modes,combo_metric_cols[[key]]),cfg,labels,positions)+
-   labs(title=NULL,tag=NULL,caption=NULL,y=metric_lab(key))+
+   labs(title=NULL,tag=NULL,caption=NULL,y=if(grepl("\n",metric_lab(key),fixed=TRUE))metric_lab(key)else wrap_arial_labels(metric_lab(key),max(6,provisional_panel["height"]-1),cfg$axis_title_size))+
    scale_y_continuous(breaks=ax$breaks,labels=axis_labels,expand=expansion(mult=0))+
    coord_cartesian(xlim=c(1-cfg$category_padding,length(models)+cfg$category_padding),ylim=lim,clip="off",expand=FALSE)+
    theme(plot.margin=margin(top_gutter_mm*72/25.4,cfg$outer_margin,if(i==1)cfg$combo_panel_gap_mm*72/25.4 else cfg$outer_margin,cfg$outer_margin))
@@ -105,6 +112,28 @@ if(cfg$combo_layout=="stacked-bars"){
  }
  if(cfg$line_markers)p<-p+geom_point(size=cfg$line_marker_size,stroke=cfg$inner_width)
  for(key in cfg$metrics)if(metric_sd[[key]])p<-p+geom_errorbar(data=sm[sm$metric==key,],aes(ymin=mean-sd,ymax=mean+sd),width=.09,linewidth=cfg$sd_width,linetype="solid",show.legend=FALSE)
+ # Measure the native top guide at export size and wrap it into rows when
+ # scientific metric labels are wider than the single complete-canvas budget.
+ measure_shared_guide<-function(plot){
+  ragg::agg_capture(width=cfg$width_mm,height=cfg$height_mm,units="mm",res=cfg$dpi)
+  on.exit(grDevices::dev.off())
+  gg<-ggplotGrob(plot);idx<-which(gg$layout$name=="guide-box-top")
+  if(!length(idx)||inherits(gg$grobs[[idx[1]]],"zeroGrob"))return(c(width=0,height=0))
+  guide<-gg$grobs[[idx[1]]]
+  c(width=grid::convertWidth(grid::grobWidth(guide),"mm",valueOnly=TRUE),height=grid::convertHeight(grid::grobHeight(guide),"mm",valueOnly=TRUE))
+ }
+ guide_budget<-min(cfg$width_mm-2*cfg$outer_margin*25.4/72-1.6,unname(measure_text_panel_mm(p,cfg)["width"])-1.6)
+ guide_labels<-metric_lab(cfg$metrics)
+ guide_labels<-unname(vapply(guide_labels,function(label)if(grepl("\n",label,fixed=TRUE))label else wrap_arial_labels(label,max(6,guide_budget-7),cfg$axis_text_size),character(1)))
+ p<-p+scale_color_manual(values=metric_cols,labels=guide_labels,breaks=cfg$metrics)+scale_linetype_manual(values=patterns,labels=guide_labels,breaks=cfg$metrics)+scale_shape_manual(values=shapes,labels=guide_labels,breaks=cfg$metrics)
+ guide_fit<-FALSE
+ for(nc in seq.int(length(cfg$metrics),1)){
+  candidate<-p+guides(color=guide_legend(ncol=nc,byrow=TRUE),linetype=guide_legend(ncol=nc,byrow=TRUE),shape=guide_legend(ncol=nc,byrow=TRUE))
+  guide_size<-measure_shared_guide(candidate)
+  if(guide_size["width"]<=guide_budget){p<-candidate;guide_fit<-TRUE;break}
+ }
+ if(!guide_fit)stop("Shared-axis metric guide does not fit at readable size; use a wider canvas or shorter display labels.")
+ shared_legend_record<-list(columns=nc,rows=ceiling(length(cfg$metrics)/nc),width_mm=unname(guide_size["width"]),height_mm=unname(guide_size["height"]),labels=guide_labels)
  # Shared categorical positions may obscure another metric's mean/SD glyphs.
  # Separate complete series within each category only when physical bounds collide.
  offsets<-if(cfg$combo_bars)bar_offsets else setNames(rep(0,length(cfg$metrics)),cfg$metrics)
@@ -139,7 +168,7 @@ if(cfg$combo_layout=="stacked-bars"){
  }
  fitted<-fit_comparison_text(p,cfg,labels,positions,text_fit_policy,NULL,FALSE);cfg$label_angle<-fitted$label_angle;cfg$value_angle<-fitted$value_angle;labels<-fitted$labels;text_fitting<-fitted$record;p<-apply_comparison_text(p,cfg,labels,positions)
  cfg$show_rank<-FALSE;cfg$show_values<-FALSE
- metric_encoding<-list(color_by="metric",colors=cfg$combo_metric_colors,line_types=cfg$combo_line_types,marker_shapes=cfg$combo_marker_shapes,common_units=units[1],common_domain=domains[[1]],rescaled=FALSE,category_series_offsets=as.list(offsets),
+ metric_encoding<-list(color_by="metric",legend=shared_legend_record,colors=cfg$combo_metric_colors,line_types=cfg$combo_line_types,marker_shapes=cfg$combo_marker_shapes,common_units=units[1],common_domain=domains[[1]],rescaled=FALSE,category_series_offsets=as.list(offsets),
   category_offset_meaning=if(cfg$combo_bars)"Within-category metric offsets align each bar, mean icon and line; scores and common model order are unchanged."else"Within-category offsets separate overlapping metric symbols/SD only; scores, model identities and common order are unchanged.",
   bars=list(shown=cfg$combo_bars,baseline=if(cfg$combo_bars)0 else NULL,total_category_width=if(cfg$combo_bars)cfg$combo_bar_width else NULL),
   focal_highlight=if(length(highlight))list(models=highlight,display_labels=unname(labels[highlight]),encoding="red bold method-axis label; metric colors unchanged")else NULL)

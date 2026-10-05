@@ -19,9 +19,9 @@ paired_marginal_record <- function(cfg, dat, limits, palette) {
   if (!isTRUE(cfg$marginals)) return(NULL)
   colors <- c(reference = cfg$marginal_reference_color, focal = cfg$marginal_focal_color)
   if (is.null(cfg$marginal_reference_color)) colors["reference"] <-
-    darken_palette_colors(palette$anchors[2], cfg$point_darken)
+    paired_point_colors(if (is.null(cfg$point_color)) palette$anchors[2] else cfg$point_color, cfg)
   if (is.null(cfg$marginal_focal_color)) colors["focal"] <-
-    darken_palette_colors(palette$anchors[3], cfg$point_darken)
+    paired_point_colors(if (is.null(cfg$point_color)) palette$anchors[3] else cfg$point_color, cfg)
   grDevices::col2rgb(colors)
   list(enabled = TRUE, retained_pair_count = nrow(dat), bins = cfg$marginal_bins,
     strip_size_mm = cfg$marginal_strip_mm, strip_gap_mm = cfg$marginal_gap_mm,

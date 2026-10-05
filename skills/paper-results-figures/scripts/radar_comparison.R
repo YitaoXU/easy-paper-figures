@@ -14,7 +14,7 @@ radar_defaults <- function() list(
  value_position="auto", value_offset=.055, value_clearance_mm=.30, value_offsets=NULL,
  radial_breaks=NULL, start_angle=90, clockwise=TRUE,
  title=NULL, caption=NULL, panel_tag=NULL,
- layout_columns=3, width_mm=NULL, height_mm=NULL, width=57/25.4, height=54/25.4,
+ layout_columns=3, width_mm=NULL, height_mm=NULL, width=56/25.4, height=40/25.4,
  base_size=7, title_size=7.5, axis_text_size=6.0, legend_text_size=6,
  formats=c("pdf","svg","png"), dpi=600)
 
@@ -277,7 +277,7 @@ radar_main <- function(script_path, args) {
  radar_assert(radar_string(cfg$input) && radar_string(cfg$output_prefix), "input and output_prefix are required.")
  cfg$input<-normalizePath(resolve(cfg$input),mustWork=TRUE);cfg$output_prefix<-resolve(cfg$output_prefix)
  nm<-basename(cfg$output_prefix);if(basename(dirname(cfg$output_prefix))!=nm)cfg$output_prefix<-file.path(dirname(cfg$output_prefix),nm,nm)
- cfg<-resolve_paper_dimensions(cfg,user,default_height_mm=54)
+ cfg<-resolve_paper_dimensions(cfg,user,default_height_mm=40)
  radar_assert(is.character(cfg$formats) && length(cfg$formats)>0L && !anyDuplicated(cfg$formats) && all(cfg$formats %in% c("pdf","svg","png")), "formats must select pdf, svg and/or png without duplicates.")
  for(k in c("line_width","point_size","grid_width","value_size","value_clearance_mm","base_size","title_size","axis_text_size","legend_text_size","legend_clearance_mm","dpi"))radar_assert(is.numeric(cfg[[k]]) && length(cfg[[k]])==1L && is.finite(cfg[[k]]) && cfg[[k]]>0,paste("Invalid positive setting:",k))
  for(k in c("show_values","show_polygons"))radar_assert(is.logical(cfg[[k]]) && length(cfg[[k]])==1L && !is.na(cfg[[k]]),paste(k,"must be true or false."))

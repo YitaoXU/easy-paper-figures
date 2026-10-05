@@ -91,8 +91,14 @@ paired_arial_bounds <- function(text, size_mm, lineheight = 1) {
   result <- tryCatch({
     grob <- grid::textGrob(text, gp = grid::gpar(fontfamily = "Arial",
       fontsize = size_mm * 72.27 / 25.4, lineheight = lineheight))
-    c(width = grid::convertWidth(grid::grobWidth(grob), "mm", valueOnly = TRUE),
-      height = grid::convertHeight(grid::grobHeight(grob), "mm", valueOnly = TRUE))
+    # grid grobHeight(text) omits the glyph descent although the ink extends
+    # below that anchor. Include it and retain the centering correction used by
+    # statistics and category grobs, especially for a final line with p/y/g.
+    descent <- grid::convertHeight(grid::grobDescent(grob), "mm", valueOnly = TRUE)
+    result <- c(width = grid::convertWidth(grid::grobWidth(grob), "mm", valueOnly = TRUE),
+      height = grid::convertHeight(grid::grobHeight(grob), "mm", valueOnly = TRUE) + descent)
+    attr(result, "descent_mm") <- descent
+    result
   }, finally = {grDevices::dev.off(); unlink(path)})
   assign(key, result, envir = paired_text_metric_cache)
   result
@@ -225,100 +231,269 @@ paired_candidate_occupancy <- function(box, dat, limits, panel_mm, cfg, labels =
     annotations = annotation_hits, safe = !any(point_hits) && label_hits == 0 && annotation_hits == 0)
 }
 
+# Paired-only visual transform; keep the palette's base identity intact.
+paired_point_colors <- function(colors, cfg) {
+  result <- darken_palette_colors(colors, cfg$point_darken)
+  amount <- if (is.null(cfg$point_lighten)) 0 else cfg$point_lighten
+  if (amount == 0) return(result)
+  rgb <- grDevices::col2rgb(result)
+  rgb <- round(rgb * (1 - amount) + 255 * amount)
+  transformed <- grDevices::rgb(rgb[1, ], rgb[2, ], rgb[3, ], maxColorValue = 255)
+  names(transformed) <- names(colors)
+  transformed
+}
+
 paired_statistics_layout <- function(cfg, panel_mm, lines) {
   scale <- panel_mm / cfg$annotation_reference_mm
   size <- cfg$stats_font_size * scale
-  width <- max(paired_arial_width(lines, size)) / (1 - 2 * cfg$stats_padding_fraction) / panel_mm
-  height <- 2.9 * size / panel_mm
+  bounds <- paired_arial_bounds(paste(lines, collapse = "\n"), size, lineheight = 1.25)
+  content_width <- max(vapply(lines, function(line) paired_arial_bounds(line, size)["width"], numeric(1)))
+  horizontal_padding <- max(.75 * scale, content_width * cfg$stats_padding_fraction / (1 - 2 * cfg$stats_padding_fraction))
+  width <- (content_width + 2 * horizontal_padding) / panel_mm
+  padding <- .55 * scale
+  height <- (bounds["height"] + 2 * padding) / panel_mm
   auto <- is.null(cfg$stats_box)
   box <- if (auto) c(.97 - width, .97, .035, .035 + height) else paired_box_valid(cfg$stats_box, "stats_box")
+  box <- unname(box)
   paired_box_valid(box, "Resolved statistics box")
-  text_fraction <- max(paired_arial_width(lines, size)) / (diff(box[1:2]) * panel_mm)
-  if (text_fraction > 1.001) stop("The statistics text is wider than the requested frame; increase stats_box width or adjust annotation_reference_mm.")
+  text_fraction <- content_width / (diff(box[1:2]) * panel_mm)
+  if (diff(box[1:2]) * panel_mm < content_width + 2 * .35 * scale)
+    stop("The statistics text needs physical clearance inside its frame; increase stats_box width or adjust annotation_reference_mm.")
+  if (diff(box[3:4]) * panel_mm < bounds["height"] + 2 * .35 * scale)
+    stop("The statistics text needs vertical clearance inside its frame; increase stats_box height.")
   list(box = box, text_size_mm = size, reference_panel_mm = cfg$annotation_reference_mm,
     scale_factor = scale, box_mode = if (auto) "measured" else "explicit",
-    content_width_mm = max(paired_arial_width(lines, size)),
+    content_width_mm = unname(content_width), content_height_mm = unname(bounds["height"]),
+    minimum_horizontal_clearance_mm = .35 * scale,
+    vertical_padding_mm = unname((diff(box[3:4]) * panel_mm - bounds["height"]) / 2),
     text_fraction_of_width = text_fraction, horizontal_padding_fraction = (1 - text_fraction) / 2)
 }
 
-paired_category_layout <- function(cfg, panel_mm, names, colors, statistics_box) {
+paired_category_layout <- function(cfg, panel_mm, names, colors, statistics_box, columns = NULL) {
   scale <- panel_mm / cfg$annotation_reference_mm
   text_size <- cfg$legend_font_size * scale; title_size <- cfg$legend_title_size * scale
-  ncols <- if (length(names) >= 3) 2L else length(names)
+  ncols <- if (!is.null(columns)) columns else if (length(names) >= 3) 2L else length(names)
   nrows <- ceiling(length(names) / ncols)
   rows <- lapply(seq_len(nrows), function(i) seq.int((i - 1L) * ncols + 1L, min(i * ncols, length(names))))
-  widths <- paired_arial_width(names, text_size)
-  key <- .85 * scale; key_gap <- .60 * scale; col_gap <- 1.1 * scale
+  label_bounds <- vapply(names, paired_arial_bounds, numeric(2), size_mm = text_size)
+  widths <- label_bounds["width", ]
+  key <- .85 * scale; key_gap <- .50 * scale; col_gap <- .85 * scale
   col_widths <- vapply(seq_len(ncols), function(j) max(widths[seq.int(j, length(names), by = ncols)]), numeric(1))
   row_widths <- vapply(rows, function(ids) sum(col_widths[seq_along(ids)] + key + key_gap) +
     max(0, length(ids) - 1L) * col_gap, numeric(1))
   title <- if (is.null(cfg$color_label)) cfg$color else cfg$color_label
-  content <- max(row_widths, paired_arial_width(title, title_size))
+  title_bounds <- paired_arial_bounds(title, title_size)
+  content <- max(row_widths, title_bounds["width"])
   width <- content / (1 - 2 * cfg$legend_padding_fraction) / panel_mm
-  height_mm <- title_size * 1.05 + nrows * text_size * 1.3 + 1.0 * scale
+  padding <- .35 * scale; row_gap <- .40 * scale; title_gap <- .45 * scale
+  row_height <- max(key, label_bounds["height", ])
+  height_mm <- unname(title_bounds["height"] + title_gap + nrows * row_height +
+    max(0, nrows - 1) * row_gap + 2 * padding)
   box <- if (is.null(cfg$legend_box)) c(.97 - width, .97, statistics_box[4] + .025,
     statistics_box[4] + .025 + height_mm / panel_mm) else paired_box_valid(cfg$legend_box, "legend_box")
   fits <- all(box >= 0 & box <= 1) && diff(box[1:2]) * panel_mm >= content &&
-    diff(box[3:4]) * panel_mm >= height_mm * .95
-  list(box = box, rows = rows, row_widths_mm = row_widths, column_widths_mm = col_widths,
+    diff(box[3:4]) * panel_mm >= height_mm - .02
+  extra <- max(0, (diff(box[3:4]) * panel_mm - height_mm) / 2)
+  list(box = unname(box), rows = rows, columns = ncols, row_widths_mm = row_widths, column_widths_mm = col_widths,
     key_mm = key, key_gap_mm = key_gap, column_gap_mm = col_gap,
     text_size_mm = text_size, title_size_mm = title_size, fits = fits,
+    title_from_top_mm = unname(extra + padding + title_bounds["height"] / 2),
+    row_from_top_mm = unname(extra + padding + title_bounds["height"] + title_gap +
+      row_height / 2 + (seq_len(nrows) - 1) * (row_height + row_gap)),
+    required_height_mm = height_mm, vertical_padding_mm = padding + extra,
     labels = names, colors = colors, title = title,
     content_width_mm = content, box_mode = if (is.null(cfg$legend_box)) "measured" else "explicit",
     horizontal_padding_fraction = (1 - content / (diff(box[1:2]) * panel_mm)) / 2)
 }
 
-paired_match_frame_widths <- function(statistics, category, cfg, panel_mm, dat, limits, labels = NULL) {
+# The lower statistics frame is never narrower than its upper category frame.
+# Apply this constraint before occupancy search so a later resize cannot create
+# an untested collision. Explicit frames remain authoritative and must comply.
+paired_stack_frame_widths <- function(statistics, category, cfg, panel_mm) {
+  widths <- c(statistics = diff(statistics$box[1:2]), category = diff(category$box[1:2]))
+  original <- widths
+  if (widths["statistics"] + 1e-8 < widths["category"]) {
+    if (statistics$box_mode == "explicit")
+      stop("The lower stats_box must be at least as wide as the upper legend_box; widen stats_box or reduce the readable legend frame.")
+    statistics$box[1] <- statistics$box[2] - widths["category"]
+  }
+  # Equalize close automatic frames only when doing so does not give the
+  # narrower content excessive padding; the lower-width constraint is unconditional.
   widths <- c(statistics = diff(statistics$box[1:2]), category = diff(category$box[1:2]))
   relative_difference <- abs(diff(widths)) / max(widths)
-  record <- list(matched = FALSE, relative_difference = unname(relative_difference),
-    tolerance = cfg$guide_width_match_tolerance, original_widths_mm = widths * panel_mm)
-  if (statistics$box_mode != "measured" || category$box_mode != "measured") {
-    record$reason <- "explicit frames preserve their supplied geometry"
-  } else if (!category$fits || relative_difference > cfg$guide_width_match_tolerance) {
-    record$reason <- "natural measured widths differ beyond the matching threshold or the category frame cannot fit"
-  } else {
-    common_width <- max(widths)
-    statistic_box <- statistics$box; category_box <- category$box
-    statistic_box[1] <- statistic_box[2] - common_width
-    category_box[1] <- category_box[2] - common_width
-    padding <- c(statistics = (1 - statistics$content_width_mm / (common_width * panel_mm)) / 2,
-      category = (1 - category$content_width_mm / (common_width * panel_mm)) / 2)
-    fits <- all(c(statistic_box, category_box) >= .005 & c(statistic_box, category_box) <= .995) &&
-      all(padding >= 0 & padding <= cfg$guide_width_match_max_padding_fraction) &&
-      paired_candidate_occupancy(statistic_box, dat, limits, panel_mm, cfg, labels,
-        list(category_box))$safe &&
-      paired_candidate_occupancy(category_box, dat, limits, panel_mm, cfg, labels,
-        list(statistic_box))$safe
-    if (fits) {
-      statistics$box <- statistic_box; category$box <- category_box
-      statistics$text_fraction_of_width <- 1 - 2 * padding["statistics"]
-      statistics$horizontal_padding_fraction <- unname(padding["statistics"])
-      category$horizontal_padding_fraction <- unname(padding["category"])
-      record$matched <- TRUE; record$common_width_mm <- common_width * panel_mm
-      record$reason <- "near-equal automatic frames share a readable collision-free width"
-    } else record$reason <- "matching would exceed padding bounds or overlap data/annotations"
+  if (statistics$box_mode == "measured" && category$box_mode == "measured" &&
+      relative_difference <= cfg$guide_width_match_tolerance) {
+    common <- max(widths)
+    padding <- (1 - c(statistics$content_width_mm, category$content_width_mm) / (common * panel_mm)) / 2
+    if (all(padding <= cfg$guide_width_match_max_padding_fraction))
+      category$box[1] <- category$box[2] - common
   }
-  list(statistics = statistics, category = category, record = record)
+  widths <- c(statistics = diff(statistics$box[1:2]), category = diff(category$box[1:2]))
+  statistics$text_fraction_of_width <- statistics$content_width_mm / (widths["statistics"] * panel_mm)
+  statistics$horizontal_padding_fraction <- unname((1 - statistics$text_fraction_of_width) / 2)
+  category$horizontal_padding_fraction <- unname((1 - category$content_width_mm / (widths["category"] * panel_mm)) / 2)
+  list(statistics = statistics, category = category,
+    record = list(matched = abs(diff(widths)) < 1e-8,
+      policy = "Lower statistics frame width is at least the upper category frame width before joint occupancy search",
+      original_widths_mm = original * panel_mm, resolved_widths_mm = widths * panel_mm,
+      lower_at_least_upper = widths["statistics"] + 1e-8 >= widths["category"],
+      tolerance = cfg$guide_width_match_tolerance))
+}
+
+# Category background may be transparent over isolated points, but glyphs and
+# keys always retain clear physical envelopes. Bounds match the drawn grobs.
+paired_category_content_boxes <- function(layout, panel_mm) {
+  box <- layout$box; center_x <- mean(box[1:2]); top <- box[4]
+  title <- paired_arial_bounds(layout$title, layout$title_size_mm)
+  result <- list(c(center_x - title["width"] / (2 * panel_mm),
+    center_x + title["width"] / (2 * panel_mm),
+    top - (layout$title_from_top_mm + title["height"] / 2) / panel_mm,
+    top - (layout$title_from_top_mm - title["height"] / 2) / panel_mm))
+  for (row in seq_along(layout$rows)) {
+    left <- center_x - layout$row_widths_mm[row] / (2 * panel_mm)
+    y <- top - layout$row_from_top_mm[row] / panel_mm
+    for (j in seq_along(layout$rows[[row]])) {
+      i <- layout$rows[[row]][j]
+      key <- layout$key_mm / panel_mm
+      result[[length(result) + 1L]] <- c(left, left + key, y - key / 2, y + key / 2)
+      glyph <- paired_arial_bounds(layout$labels[i], layout$text_size_mm)
+      label_left <- left + (layout$key_mm + layout$key_gap_mm) / panel_mm
+      result[[length(result) + 1L]] <- c(label_left, label_left + glyph["width"] / panel_mm,
+        y - glyph["height"] / (2 * panel_mm), y + glyph["height"] / (2 * panel_mm))
+      left <- left + (layout$key_mm + layout$key_gap_mm + layout$column_widths_mm[j] + layout$column_gap_mm) / panel_mm
+    }
+  }
+  lapply(result, function(b) unname(b + c(-1, 1, -1, 1) * .15 / panel_mm))
+}
+
+paired_category_candidate_allowed <- function(occupancy, cfg) {
+  occupancy$labels == 0 && occupancy$annotations == 0 &&
+    occupancy$points <= cfg$legend_max_overlapping_points &&
+    (occupancy$points == 0 || cfg$legend_alpha <= .80)
+}
+
+# Search complete above-statistics stacks at the final panel geometry. Prefer
+# completely empty candidates; an explicitly permitted transparent category
+# frame may cover a bounded number of marks only after zero-overlap search fails.
+paired_category_statistics_layout <- function(cfg, panel_mm, names, colors, statistics,
+                                               dat, limits, labels = NULL) {
+  preferred <- if (length(names) >= 3) 2L else length(names)
+  columns <- if (!is.null(cfg$legend_box)) preferred else unique(c(preferred, min(3L, length(names)), 1L))
+  checked <- 0L; fallback <- NULL; permitted <- NULL
+  original_statistics <- statistics
+  for (ncols in columns) {
+    statistics <- original_statistics
+    category <- paired_category_layout(cfg, panel_mm, names, colors, statistics$box, ncols)
+    if (is.null(fallback)) fallback <- category
+    if (!category$fits) next
+    matching <- paired_stack_frame_widths(statistics, category, cfg, panel_mm)
+    statistics <- matching$statistics; category <- matching$category
+    sw <- diff(statistics$box[1:2]); sh <- diff(statistics$box[3:4])
+    cw <- diff(category$box[1:2]); ch <- diff(category$box[3:4]); gap <- .025
+    candidates <- list(list(statistics = statistics$box, category = category$box))
+    if (is.null(cfg$legend_box) && is.null(cfg$stats_box) &&
+        max(sw, cw) <= .955 && sh + gap + ch <= .95) {
+      rights <- unique(c(.97, seq(.97, max(sw, cw) + .015, by = -.25 / panel_mm)))
+      bottoms <- unique(c(.035, .015, seq(.035, .985 - sh - gap - ch, by = .25 / panel_mm)))
+      for (bottom in bottoms) for (right in rights)
+        candidates[[length(candidates) + 1L]] <- list(
+          statistics = c(right - sw, right, bottom, bottom + sh),
+          category = c(right - cw, right, bottom + sh + gap, bottom + sh + gap + ch))
+    } else if (is.null(cfg$legend_box)) {
+      right <- statistics$box[2]; bottom <- statistics$box[4] + gap
+      for (left in unique(c(right - cw, seq(.015, max(.015, .985 - cw), length.out = 25))))
+        candidates[[length(candidates) + 1L]] <- list(statistics = statistics$box,
+          category = c(left, left + cw, bottom, bottom + ch))
+    }
+    for (candidate in candidates) {
+      sb <- candidate$statistics; cb <- candidate$category
+      if (any(c(sb, cb) < .005 | c(sb, cb) > .995) || cb[3] <= sb[4]) next
+      checked <- checked + 1L
+      so <- paired_candidate_occupancy(sb, dat, limits, panel_mm, cfg, labels, list(cb))
+      co <- paired_candidate_occupancy(cb, dat, limits, panel_mm, cfg, labels, list(sb))
+      if (!so$safe || !paired_category_candidate_allowed(co, cfg)) next
+      resolved <- matching
+      resolved$statistics$box <- sb; resolved$category$box <- cb
+      content_boxes <- paired_category_content_boxes(resolved$category, panel_mm)
+      content_hits <- sum(vapply(content_boxes, function(content_box)
+        paired_candidate_occupancy(content_box, dat, limits, panel_mm, cfg, labels)$points, numeric(1)))
+      if (co$points > 0 && content_hits > 0) next
+      resolved$category$content_overlapping_points <- content_hits
+      resolved$category$content_clearance_mm <- .15
+      resolved$category$candidate_overlapping_points <- co$points
+      resolved$category$overlapping_point_ids <- co$point_ids
+      resolved$category$candidate_overlapping_labels <- co$labels
+      resolved$category$candidates_checked <- checked
+      resolved$category$background_alpha <- cfg$legend_alpha
+      resolved$category$maximum_permitted_overlapping_points <- cfg$legend_max_overlapping_points
+      resolved$category$placement_policy <- "Arial-measured category above statistics; lower frame at least upper width; empty positions preferred before explicitly bounded transparent point overlap"
+      resolved$category$safe <- TRUE
+      resolved$category$point_overlap_permitted <- co$points > 0
+      if (co$points == 0) return(resolved)
+      if (is.null(permitted) || co$points < permitted$category$candidate_overlapping_points)
+        permitted <- resolved
+    }
+  }
+  if (!is.null(permitted)) {
+    permitted$category$candidates_checked <- checked
+    return(permitted)
+  }
+  fallback$candidates_checked <- checked; fallback$safe <- FALSE
+  occ <- paired_candidate_occupancy(fallback$box, dat, limits, panel_mm, cfg, labels, list(original_statistics$box))
+  fallback$candidate_overlapping_points <- occ$points
+  fallback$candidate_overlapping_labels <- occ$labels
+  list(statistics = original_statistics, category = fallback,
+    record = list(matched = FALSE, reason = "No compliant complete category/statistics candidate"))
+}
+
+# Resolve a standalone statistics frame without concealing points or labels.
+paired_safe_statistics_layout <- function(layout, cfg, panel_mm, dat, limits, labels = NULL) {
+  check <- paired_candidate_occupancy(layout$box, dat, limits, panel_mm, cfg, labels)
+  if (check$safe) return(layout)
+  if (layout$box_mode == "explicit")
+    stop("The explicit statistics frame overlaps points or labels; move stats_box to a verified empty region.")
+  width <- diff(layout$box[1:2]); height <- diff(layout$box[3:4])
+  rights <- unique(c(.97, seq(.97, width + .015, by = -.25 / panel_mm)))
+  bottoms <- unique(c(.035, .015, seq(.035, .985 - height, by = .25 / panel_mm)))
+  for (bottom in bottoms) for (right in rights) {
+    box <- c(right - width, right, bottom, bottom + height)
+    if (all(box >= .005 & box <= .995) &&
+        paired_candidate_occupancy(box, dat, limits, panel_mm, cfg, labels)$safe) {
+      layout$box <- box
+      return(layout)
+    }
+  }
+  stop("No empty region fits the readable statistics frame; increase the canvas or provide an inspected stats_box.")
+}
+
+paired_statistics_grob <- function(layout, cfg, text) {
+  grid::grobTree(
+    grid::rectGrob(gp = grid::gpar(fill = scales::alpha("white", cfg$stats_alpha),
+      col = "#555555", lwd = .51)),
+    grid::textGrob(text, x = .5,
+      y = grid::unit(.5, "npc") + grid::unit(attr(paired_arial_bounds(text, layout$text_size_mm, 1.25), "descent_mm") / 2, "mm"),
+      hjust = .5, vjust = .5,
+      gp = grid::gpar(fontfamily = "Arial", fontsize = layout$text_size_mm * 72.27 / 25.4,
+        lineheight = 1.25, col = "#222222")), name = "internal-statistics")
 }
 
 paired_category_grob <- function(layout, cfg) {
-  children <- list(grid::rectGrob(gp = grid::gpar(fill = scales::alpha("white", .90), col = "#555555", lwd = .51)),
-    grid::textGrob(layout$title, x = .5, y = grid::unit(1, "npc") - grid::unit(layout$title_size_mm * .65, "mm"),
+  children <- list(grid::rectGrob(gp = grid::gpar(fill = scales::alpha("white", cfg$legend_alpha), col = "#555555", lwd = .51)),
+    grid::textGrob(layout$title, x = .5, y = grid::unit(1, "npc") - grid::unit(layout$title_from_top_mm - attr(paired_arial_bounds(layout$title, layout$title_size_mm), "descent_mm") / 2, "mm"),
       gp = grid::gpar(fontfamily = "Arial", fontsize = layout$title_size_mm * 72.27 / 25.4, col = "#222222")))
   for (row in seq_along(layout$rows)) {
     ids <- layout$rows[[row]]
     # An incomplete final row is centered as a whole; text remains left-aligned.
     left <- grid::unit(.5, "npc") - grid::unit(layout$row_widths_mm[row] / 2, "mm")
-    y <- grid::unit(1, "npc") - grid::unit(layout$title_size_mm * 1.05 +
-      layout$text_size_mm * (row - .35) * 1.3 + .3 * layout$key_mm / .85, "mm")
+    y <- grid::unit(1, "npc") - grid::unit(layout$row_from_top_mm[row], "mm")
     for (j in seq_along(ids)) {
       i <- ids[j]
       children[[length(children) + 1L]] <- grid::circleGrob(x = left + grid::unit(layout$key_mm / 2, "mm"),
         y = y, r = grid::unit(layout$key_mm / 2, "mm"),
         gp = grid::gpar(fill = scales::alpha(layout$colors[i], cfg$point_alpha), col = NA))
       children[[length(children) + 1L]] <- grid::textGrob(layout$labels[i],
-        x = left + grid::unit(layout$key_mm + layout$key_gap_mm, "mm"), y = y, just = "left",
+        x = left + grid::unit(layout$key_mm + layout$key_gap_mm, "mm"),
+        y = y + grid::unit(attr(paired_arial_bounds(layout$labels[i], layout$text_size_mm), "descent_mm") / 2, "mm"), just = "left",
         gp = grid::gpar(fontfamily = "Arial", fontsize = layout$text_size_mm * 72.27 / 25.4, col = "#222222"))
       left <- left + grid::unit(layout$key_mm + layout$key_gap_mm + layout$column_widths_mm[j] + layout$column_gap_mm, "mm")
     }

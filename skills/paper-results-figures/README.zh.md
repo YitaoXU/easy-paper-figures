@@ -199,6 +199,8 @@ score 是 [0,1] 范围的无量纲分数，越高越好，突出显示 Ours。
 <td align="center" width="450"><a href="examples/palettes/palette-muted-balanced-six.png"><img src="examples/palettes/palette-muted-balanced-six.png" width="450" alt="palette-muted-balanced-six"></a><br><code>palette-muted-balanced-six</code></td>
 </tr></table>
 
+配对散点图可用固定 `point_color` 绘制单色散点，不需要颜色协变量或图例；未指定边缘分布颜色时会继承同一散点颜色。分类图例与统计框一起测量并上下排列；自动布局中，下方统计框至少与上方图例等宽，并检查真实 Arial 文字和框内留白。明确允许时，透明分类图例背景可与限定数量的散点轻微重叠，但文字、色标和统计框仍避开散点。蓝绿紫配对散点在原有变暗处理后混入 18% 白色；基础 RGB 类别映射和其他图形类别保持原配色。六类别备选包括 `blue-green-yellow`、`blue-green-coral`、`muted-reference-six`、`yellow-green`、`yellow-green-red` 与 `warm-yellow-leaf-crisper`。最后一套拉开金橙与杏橙、叶绿与黄绿的差异，配合黄色和青绿；中等深浅的散点色与浅色橙黄绿渐变属于同一色板。
+
 ## 文件组织
 
 `examples/<figure-id>/prompt.md` 是面向用户的使用示例，`request.json` 在适用时提供最小配置结构，`preview.png` 是未经修改的科学导出，`preview-card.svg` 将其等比例放入统一尺寸的展示框。共享合成输入集中放在 `examples/data/`。运行时说明、科学契约、可复用渲染器和固定色板分别位于 `SKILL.md`、`references/`、`scripts/` 和 `palettes/`。
@@ -207,3 +209,5 @@ score 是 [0,1] 范围的无量纲分数，越高越好，突出显示 Ours。
 ## 扩展图形与色板
 
 若需要其他表达形式，请提供结果数据和参考图，并说明需要保留哪些视觉元素。Agent 会检查数据的科学含义，再选择或调整可复用的布局。
+
+新图默认使用包含全部文字的 56 × 40 mm 或 42 × 40 mm 画布；横向占用两格的组合图使用 88 × 40 mm。柱状图、箱型图和小提琴图的外轮廓默认 0.28 mm。已保存的显式图形设置继续保留，既有示例预览保持原导出尺寸。统一的 `warm-yellow-leaf-crisper` 色板同时包含中等深浅的分类颜色与浅色橙黄绿渐变，可用于连续色标或明确指定顺序的命名颜色映射；见[色板参考](examples/palettes/palette-warm-yellow-leaf-crisper.png)。

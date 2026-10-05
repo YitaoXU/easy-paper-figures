@@ -199,6 +199,8 @@ Named palettes preserve fixed RGB assignments. Transparent variants apply mark-s
 <td align="center" width="450"><a href="examples/palettes/palette-muted-balanced-six.png"><img src="examples/palettes/palette-muted-balanced-six.png" width="450" alt="palette-muted-balanced-six"></a><br><code>palette-muted-balanced-six</code></td>
 </tr></table>
 
+Paired scatter supports a fixed `point_color` without a color covariate or legend; omitted marginal colors inherit that same transformed color. Categorical guides are measured together with the statistics and placed above them; the automatic lower statistics frame is at least as wide as the upper guide, with actual Arial text and inner clearance checked. Explicit requests can permit a bounded number of points beneath a transparent category-guide background while keeping labels/keys and statistics clear. Green-blue-purple paired marks use an 18% white blend after their existing darkening; base RGB identities and other figure families retain their colors. Additional six-category palettes include `blue-green-yellow`, `blue-green-coral`, `muted-reference-six`, `yellow-green`, `yellow-green-red` and `warm-yellow-leaf-crisper`. The last preset separates golden orange from apricot orange and leaf green from yellow green, alongside yellow and teal; medium-tone scatter colors share one family with a light orange-yellow-green ramp.
+
 ## File organization
 
 `examples/<figure-id>/prompt.md` is the user-facing example, `request.json` provides a minimal configuration structure where useful, and `preview.png` is the unchanged scientific export and `preview-card.svg` contains it in an equal-size display frame. Shared synthetic inputs live in `examples/data/`. Runtime instructions, scientific contracts, reusable renderers and fixed palette definitions live in `SKILL.md`, `references/`, `scripts/` and `palettes/`.
@@ -207,3 +209,5 @@ Named palettes preserve fixed RGB assignments. Transparent variants apply mark-s
 ## Extend a figure or palette
 
 When a different encoding is needed, provide the result data and a reference figure, then identify the visual elements to retain. The agent inspects the scientific meaning and chooses or adapts a reusable layout.
+
+New figures use complete 56 × 40 mm or 42 × 40 mm canvases; a two-slot horizontal compound canvas is 88 × 40 mm. Bar, box and violin outer outlines default to 0.28 mm. Saved explicit figure settings retain their values. Existing gallery images retain their previously exported sizes. The single `warm-yellow-leaf-crisper` family combines medium categorical colors with a light orange-yellow-green ramp for continuous guides or explicitly ordered named maps; see its [color reference](examples/palettes/palette-warm-yellow-leaf-crisper.png).

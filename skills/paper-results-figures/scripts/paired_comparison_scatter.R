@@ -38,12 +38,12 @@ defaults <- list(
   point_label_placement = NULL, axis_canvas_layout = NULL,
   palette = "muted-green-blue-purple", alternative = "greater",
   missing_pairs = "error", limits = NULL, breaks = NULL, axis_digits = NULL,
-  width = 57/25.4, height = 54/25.4, layout_columns = 3, width_mm = NULL, height_mm = NULL, base_size = 7, font_family = "Arial", panel_tag = NULL,
-  point_size = 0.75, point_alpha = NULL, point_darken = NULL, stats_box = NULL,
-  annotation_reference_mm = 40, stats_padding_fraction = .03, legend_padding_fraction = .06,
+  width = 56/25.4, height = 40/25.4, layout_columns = 3, width_mm = NULL, height_mm = NULL, base_size = 7, font_family = "Arial", panel_tag = NULL,
+  point_size = 0.75, point_alpha = NULL, point_darken = NULL, point_lighten = NULL, point_color = NULL, stats_box = NULL,
+  annotation_reference_mm = 40, stats_padding_fraction = .03, legend_padding_fraction = .035,
   guide_width_match_tolerance = .08, guide_width_match_max_padding_fraction = .10,
   stats_font_size = 2.2, stats_alpha = 0.90,
-  legend_placement = "auto", legend_box = NULL, legend_font_size = 2.0, legend_title_size = 2.3, show_mean_caption = FALSE,
+  legend_placement = "auto", legend_box = NULL, legend_alpha = .90, legend_max_overlapping_points = 0L, legend_font_size = 2.0, legend_title_size = 2.3, show_mean_caption = FALSE,
   marginals = FALSE, marginal_bins = 8L, marginal_strip_mm = 6, marginal_gap_mm = .65,
   marginal_bandwidth = "nrd0", marginal_kde_min_n = 5L, marginal_alpha = .35,
   marginal_reference_color = NULL, marginal_focal_color = NULL,
@@ -58,9 +58,10 @@ if ("colorbar_title_size" %in% names(user) && !"colorbar_inside_title_size" %in%
   cfg$colorbar_inside_title_size <- cfg$colorbar_title_size
 if ("colorbar_title_width" %in% names(user) && !"colorbar_inside_title_width" %in% names(user))
   cfg$colorbar_inside_title_width <- cfg$colorbar_title_width
-if (is.null(cfg$point_alpha) || is.null(cfg$point_darken)) {
+if (is.null(cfg$point_alpha) || is.null(cfg$point_darken) || is.null(cfg$point_lighten)) {
   pals <- jsonlite::fromJSON(file.path(skill_dir, "palettes/palettes.json"))
   if (is.null(pals[[cfg$palette]])) stop("Unknown palette.")
+  if (is.null(cfg$point_lighten)) cfg$point_lighten <- if (is.null(pals[[cfg$palette]]$paired_point_lighten)) 0 else pals[[cfg$palette]]$paired_point_lighten
   # The compact marginal layout needs deeper rainbow points on its white panel.
   # Preserve explicit/saved values and the ordinary paired palette profile.
   marginal_rainbow <- isTRUE(cfg$marginals) && identical(cfg$palette, "rainbow-transparent")
@@ -69,7 +70,7 @@ if (is.null(cfg$point_alpha) || is.null(cfg$point_darken)) {
   if (is.null(cfg$point_darken)) cfg$point_darken <-
     if (marginal_rainbow) .20 else pals[[cfg$palette]]$paired_point_darken
 }
-cfg <- resolve_paper_dimensions(cfg,user,default_height_mm=54)
+cfg <- resolve_paper_dimensions(cfg,user,default_height_mm=40)
 if (!identical(cfg$font_family, "Arial")) stop("All figure text must use Arial; set font_family to Arial.")
 for (k in c("input", "output_prefix", "x", "y")) {
   if (!is.character(cfg[[k]]) || length(cfg[[k]]) != 1 || !nzchar(cfg[[k]])) stop("Required string: ", k)
@@ -95,9 +96,21 @@ if (!is.numeric(cfg$colorbar_tick_offset_mm) || length(cfg$colorbar_tick_offset_
 # inward marks always originate at the gradient boundary and do not apply it.
 if (cfg$colorbar_tick_length_mm >= cfg$colorbar_width_mm)
   stop("colorbar_tick_length_mm must be shorter than colorbar_width_mm; ticks must not span the gradient.")
-for (k in c("point_alpha", "point_darken", "stats_alpha", "marginal_alpha")) {
+if (!is.null(cfg$point_color)) {
+  if (!is.character(cfg$point_color) || length(cfg$point_color) != 1 || is.na(cfg$point_color))
+    stop("point_color must be one valid color string.")
+  grDevices::col2rgb(cfg$point_color)
+  if (!is.null(cfg$color)) stop("point_color requires color = null; choose uniform color or covariate encoding.")
+}
+for (k in c("point_alpha", "point_darken", "point_lighten", "stats_alpha", "legend_alpha", "marginal_alpha")) {
   if (!is.numeric(cfg[[k]]) || length(cfg[[k]]) != 1 || !is.finite(cfg[[k]]) || cfg[[k]] < 0 || cfg[[k]] > 1) stop("Invalid opacity: ", k)
 }
+if (!is.numeric(cfg$legend_max_overlapping_points) || length(cfg$legend_max_overlapping_points) != 1 ||
+    !is.finite(cfg$legend_max_overlapping_points) || cfg$legend_max_overlapping_points < 0 ||
+    cfg$legend_max_overlapping_points > 10 || cfg$legend_max_overlapping_points != round(cfg$legend_max_overlapping_points))
+  stop("legend_max_overlapping_points must be an integer from zero to ten.")
+if (cfg$legend_max_overlapping_points > 0 && cfg$legend_alpha > .80)
+  stop("Permitted legend point overlap requires legend_alpha at most .80 so observations remain visible.")
 if (!cfg$colorbar_placement %in% c("auto", "inside", "outside")) stop("colorbar_placement must be auto, inside, or outside.")
 if (!cfg$colorbar_orientation %in% c("auto", "horizontal", "vertical")) stop("colorbar_orientation must be auto, horizontal, or vertical.")
 if (!is.logical(cfg$marginals) || length(cfg$marginals) != 1 || is.na(cfg$marginals)) stop("marginals must be true or false.")
@@ -238,7 +251,7 @@ if (!is.null(cfg$color)) {
     dat$color <- factor(values, levels = levels)
     cfg$color_levels <- levels
     cfg$color_values <- as.list(color_mapping)
-    point_color_mapping <- darken_palette_colors(color_mapping, cfg$point_darken)
+    point_color_mapping <- paired_point_colors(color_mapping, cfg)
   }
   missing_color <- sum(is.na(dat$color))
 }
@@ -341,7 +354,7 @@ GeomPairedStar <- ggproto("GeomPairedStar", Geom,
     grid::gTree(children = do.call(grid::gList, vertices), name = "paired-star-points")
   })
 point_args <- list(mapping = mapping, alpha = cfg$point_alpha)
-if (is.null(cfg$color)) point_args$colour <- darken_palette_colors(palette$anchors[2], cfg$point_darken)
+if (is.null(cfg$color)) point_args$colour <- paired_point_colors(cfg$point_color %or% palette$anchors[2], cfg)
 if (is.null(cfg$size)) point_args$size <- cfg$point_size
 for (shape_kind in c("circle", "star")) {
   subset <- dat[dat$point_shape == shape_kind, , drop = FALSE]
@@ -377,7 +390,7 @@ if (!is.null(cfg$color)) {
                                na.value = palette$missing, drop = FALSE,
                                guide = guide_legend(override.aes = list(alpha = cfg$point_alpha, size = 1.0)))
   } else {
-    gradient_colors <- darken_palette_colors(palette$continuous, cfg$point_darken)
+    gradient_colors <- paired_point_colors(palette$continuous, cfg)
     colorbar_title <- cfg$color_label %or% cfg$color
     internal_colorbar_title <- colorbar_title
     if (!grepl("\n", colorbar_title, fixed = TRUE))
@@ -493,6 +506,7 @@ for (pass in 1:4) {
   panel_mm <- unname(paired_measure_panel(p, cfg, marginal_record, limits)["width"])
   if (panel_mm < 12) stop("The square panel is too small for readable paired annotations; adapt canvas/guide layout.")
   statistics_layout <- paired_statistics_layout(cfg, panel_mm, strsplit(box_text, "\n", fixed = TRUE)[[1]])
+  statistics_layout <- paired_safe_statistics_layout(statistics_layout, cfg, panel_mm, dat, limits)
   b <- statistics_layout$box
   symbol_mm <- rep(cfg$point_size, nrow(dat))
   if (!is.null(cfg$size)) {
@@ -519,17 +533,11 @@ for (pass in 1:4) {
     }
   }
   if (category_requested) {
-    category_guide_record <- paired_category_layout(cfg, panel_mm, legend_names, legend_colors, b)
-    matching <- paired_match_frame_widths(statistics_layout, category_guide_record, cfg,
-      panel_mm, dat, limits, label_data)
+    matching <- paired_category_statistics_layout(cfg, panel_mm, legend_names, legend_colors,
+      statistics_layout, dat, limits, label_data)
     statistics_layout <- matching$statistics; category_guide_record <- matching$category
     frame_width_matching <- matching$record; b <- statistics_layout$box
-    lb <- category_guide_record$box
-    occ <- if (category_guide_record$fits) paired_candidate_occupancy(lb, dat, limits, panel_mm,
-      cfg, label_data, list(b)) else list(points = 0, labels = 0, safe = FALSE)
-    inside_legend <- category_guide_record$fits && occ$safe
-    category_guide_record$candidate_overlapping_points <- occ$points
-    category_guide_record$candidate_overlapping_labels <- occ$labels
+    inside_legend <- isTRUE(category_guide_record$safe)
     if (!inside_legend) {
       category_requested <- FALSE
       guide_changed <- TRUE
@@ -573,7 +581,7 @@ if (nrow(label_data)) {
   if (!is.null(cfg$color)) label_mapping$colour <- aes(colour = color)$colour
   label_args <- list(data = label_data, mapping = label_mapping, size = cfg$point_label_size,
     family = "Arial", show.legend = FALSE, inherit.aes = FALSE)
-  if (is.null(cfg$color)) label_args$colour <- darken_palette_colors(palette$anchors[2], cfg$point_darken)
+  if (is.null(cfg$color)) label_args$colour <- paired_point_colors(cfg$point_color %or% palette$anchors[2], cfg)
   p <- p + do.call(geom_text, label_args)
   dat$label_x <- dat$label_y <- NA_real_
   ids <- match(label_data$pair_id, dat$pair_id)
@@ -583,12 +591,9 @@ if (nrow(label_data)) {
 # Preserve safe common-width decisions resolved against the final native-guide geometry.
 b <- statistics_layout$box; box <- limits[1] + b * diff(limits)
 overlap <- paired_candidate_occupancy(b, dat, limits, panel_mm, cfg, label_data)$points
-if (overlap > 0) warning(overlap, " points overlap the statistics box; inspect and adjust stats_box.")
-p <- p + annotate("rect", xmin = box[1], xmax = box[2], ymin = box[3], ymax = box[4],
-  fill = "white", alpha = cfg$stats_alpha, color = "#555555", linewidth = .18) +
-  annotate("text", x = mean(box[1:2]), y = mean(box[3:4]), label = box_text,
-    hjust = .5, vjust = .5, lineheight = 1.25, size = statistics_layout$text_size_mm,
-    family = "Arial", color = "#222222")
+if (overlap > 0) stop("The statistics frame overlaps points; resolve a verified empty stats_box before export.")
+p <- p + annotation_custom(paired_statistics_grob(statistics_layout, cfg, box_text),
+  xmin = box[1], xmax = box[2], ymin = box[3], ymax = box[4])
 legend_overlap <- if (is.null(category_guide_record)) 0 else category_guide_record$candidate_overlapping_points
 if (inside_legend) {
   bounds <- limits[1] + category_guide_record$box * diff(limits)
@@ -687,7 +692,9 @@ summary <- list(
   legend_candidate_overlapping_points = legend_overlap, axis_limits = limits, axis_breaks = cfg$breaks,
   color_mapping = if (!is.null(color_mapping)) as.list(color_mapping) else NULL,
   point_color_mapping = if (!is.null(point_color_mapping)) as.list(point_color_mapping) else NULL,
-  point_darken = cfg$point_darken, color_scale = color_scale_record,
+  point_darken = cfg$point_darken, point_lighten = cfg$point_lighten,
+  uniform_point_color = if (is.null(cfg$color)) paired_point_colors(cfg$point_color %or% palette$anchors[2], cfg) else NULL,
+  color_scale = color_scale_record,
   provenance = list(input = cfg$input, input_md5 = unname(tools::md5sum(cfg$input)),
                     config_md5 = unname(tools::md5sum(config_path)),
                     script_md5 = unname(tools::md5sum(script_path)),

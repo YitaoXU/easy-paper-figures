@@ -83,8 +83,8 @@ point_colors<-darken_palette_colors(colors,cfg$point_darken)
 shapes<-if(is.null(cfg$shape_values))setNames(rep(c(16,17,18,15,3,4,8,7,9,10),length.out=length(series)),series)else unlist(cfg$shape_values)
 if(!all(series %in% names(shapes)))stop("shape_values must name each series.")
 cfg$shape_values<-as.list(shapes)
-if(is.null(cfg$width_mm))cfg$width_mm<-if(cfg$layout_columns==4)42 else 57
-if(is.null(cfg$height_mm))cfg$height_mm<-54
+if(is.null(cfg$width_mm))cfg$width_mm<-if(cfg$layout_columns==4)42 else 56
+if(is.null(cfg$height_mm))cfg$height_mm<-40
 if(is.null(cfg$point_size))cfg$point_size<-if(cfg$mode=="categorical").65 else 1.1
 if(any(!is.finite(c(cfg$width_mm,cfg$height_mm)))||min(cfg$width_mm,cfg$height_mm)<=0)stop("Invalid physical size.")
 faces<-resolve_arial_fonts()

@@ -34,10 +34,10 @@ defaults <- list(plot_type="mutl-comparison", input=NULL, output_prefix=NULL,
  point_alpha=NULL, point_size=NULL, jitter_width=0.11, seed=42,
  limits=NULL, breaks=NULL, axis_break=NULL, axis_policy="auto", occupancy=0.92,
  legend_placement="auto", legend_clearance_mm=.8,
- width=57/25.4, height=46/25.4, layout_columns=3, width_mm=NULL, height_mm=NULL, font_family="Arial", base_size=7, title_size=7.5,
+ width=56/25.4, height=40/25.4, layout_columns=3, width_mm=NULL, height_mm=NULL, font_family="Arial", base_size=7, title_size=7.5,
  axis_title_size=7, axis_text_size=6, category_text_size=6.4, value_size=2.2,
  rank_size=2.1, right_margin=36, annotation_gap=17, label_angle="auto", value_angle="auto", label_wrap="auto", text_fit_gap_mm=.7, text_min_panel_mm=12, bar_width=NULL, border_color="#454545",
- outline_width=0.38, inner_width=0.22, border_alpha=0.8, point_darken=NULL, category_padding=NULL, sd_width=0.30, mean_width=0.38,
+ outline_width=0.28, inner_width=0.22, border_alpha=0.8, point_darken=NULL, category_padding=NULL, sd_width=0.30, mean_width=0.38,
  rank_offset=0.07, value_offset=0.135, rank_text_gap=0.045, tag_size=9, outer_margin=2,
  fill_alpha=NULL, line_markers=TRUE, line_marker_shape=18, line_marker_size=1.3, line_type="dashed", combo_styles=c("bar","line"),
  combo_layout="facets", combo_labels=NULL, combo_order_by=NULL, combo_directions=NULL, combo_limits=NULL, combo_breaks=NULL,
@@ -62,7 +62,7 @@ if(cfg$layout_columns==4){
  compact<-list(category_text_size=5.7,value_size=1.9,rank_size=1.8,title_size=7,
   axis_title_size=6.5,axis_text_size=5.5,value_offset=.19,rank_text_gap=.05)
  for(k in names(compact))if(!k %in% names(user))cfg[[k]]<-compact[[k]]
- if(!any(c("height","height_mm") %in% names(user)))cfg$height_mm<-38
+ if(!any(c("height","height_mm") %in% names(user)))cfg$height_mm<-40
 }
 # Paired reference differences use a larger mean diamond while saved overrides persist.
 if(cfg$plot_type!="multi-metric-comparison" && cfg$style=="line" &&
@@ -93,8 +93,8 @@ if(cfg$plot_type=="multi-metric-comparison" && cfg$combo_layout %in% c("shared-r
  if(!"combo_styles" %in% names(user))cfg$combo_styles<-if(cfg$combo_layout=="shared-axis")"line"else c("bar","bar")
  if(!"show_rank" %in% names(user))cfg$show_rank<-FALSE
  visual_profile<-cfg$combo_layout
- if(!any(c("width_mm","width","layout_columns") %in% names(user)))cfg$width_mm<-if(cfg$combo_layout=="shared-rows" && cfg$combo_value_placement=="outside")76 else 70
- if(cfg$layout_columns==3 && !any(c("height_mm","height") %in% names(user)))cfg$height_mm<-if(cfg$combo_layout=="shared-axis")46 else 54
+ if(!any(c("width_mm","width","layout_columns") %in% names(user)))cfg$width_mm<-if(cfg$combo_layout %in% c("shared-rows","stacked-bars"))88 else 56
+ if(cfg$layout_columns==3 && !any(c("height_mm","height") %in% names(user)))cfg$height_mm<-40
  # Internal values need sufficient bar thickness for automatic 90-degree fitting.
  # This uses category space without shrinking Arial or widening the canvas.
  if(cfg$combo_layout=="shared-rows" && cfg$combo_value_placement=="inside" && !"bar_width" %in% names(user))cfg$bar_width<-.84
@@ -114,23 +114,23 @@ if(cfg$plot_type=="multi-metric-comparison" && cfg$combo_layout=="grouped-distri
  if(!"combo_styles" %in% names(user))cfg$combo_styles<-cfg$style
  if(!"show_rank" %in% names(user))cfg$show_rank<-FALSE
  if(!"show_values" %in% names(user))cfg$show_values<-FALSE
- if(!any(c("width","width_mm","layout_columns") %in% names(user)))cfg$width_mm<-if(cfg$layout_columns==4)42 else 57
- if(!any(c("height","height_mm") %in% names(user)))cfg$height_mm<-54
+ if(!any(c("width","width_mm","layout_columns") %in% names(user)))cfg$width_mm<-if(cfg$layout_columns==4)42 else 56
+ if(!any(c("height","height_mm") %in% names(user)))cfg$height_mm<-40
 }
 if(!is.null(cfg$axis_break)){
  if(cfg$style!="box" || cfg$data_mode!="raw")stop("axis_break is supported only for raw box plots.")
  if(!"show_values" %in% names(user))cfg$show_values<-FALSE
  if(!"show_rank" %in% names(user))cfg$show_rank<-FALSE
- if(!any(c("height","height_mm") %in% names(user)))cfg$height_mm<-54
+ if(!any(c("height","height_mm") %in% names(user)))cfg$height_mm<-40
  if(!"right_margin" %in% names(user))cfg$right_margin<-cfg$outer_margin
  if(cfg$show_values || cfg$show_rank || cfg$show_significance)stop("Broken boxes do not support value, ranking or significance annotations; use separate continuous-axis views for inference.")
 }
 if(cfg$plot_type=="multi-metric-comparison" && cfg$combo_layout=="facets"){
  visual_profile<-"facets"
- if(!any(c("width","width_mm","layout_columns") %in% names(user)))cfg$width_mm<-114
+ if(!any(c("width","width_mm","layout_columns") %in% names(user)))cfg$width_mm<-88
 }
 if(cfg$plot_type!="multi-metric-comparison" && isTRUE(cfg$show_significance) && cfg$layout_columns==3 &&
-   !any(c("height","height_mm") %in% names(user)))cfg$height_mm<-54
+   !any(c("height","height_mm") %in% names(user)))cfg$height_mm<-40
 cfg <- resolve_paper_dimensions(cfg,user)
 palettes<-jsonlite::fromJSON(file.path(skill_dir,"palettes/palettes.json"));pal<-palettes[[cfg$palette]]
 if(is.null(pal))stop("Unknown palette.")

@@ -1,6 +1,6 @@
 {
   "muted-green-blue-purple": {
-    "description": "Moderately muted green, blue and purple with distinct primary hues and a wider dark-to-light range.",
+    "description": "Moderately muted green, blue and purple with distinct primary hues and a wider dark-to-light range. Paired scatter uses a fixed 18% white blend after darkening; base slots and other mark families retain their existing colors.",
     "anchors": [
       "#2F8668",
       "#3A7FAA",
@@ -45,7 +45,8 @@
         "blue"
       ],
       "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
-    }
+    },
+    "paired_point_lighten": 0.18
   },
   "rainbow": {
     "description": "Muted categorical rainbow sampled from interior fills of a supplied raster reference; approximate displayed RGB values, not original source colors. Keep assignments stable across related figures.",
@@ -162,7 +163,7 @@
     }
   },
   "muted-green-blue-purple-transparent": {
-    "description": "Transparent variant of muted-green-blue-purple; identical higher-contrast RGB slots with softer fills.",
+    "description": "Transparent variant of muted-green-blue-purple; identical higher-contrast RGB slots with softer fills. Paired scatter uses a fixed 18% white blend after darkening; base slots and other mark families retain their existing colors.",
     "anchors": [
       "#2F8668",
       "#3A7FAA",
@@ -207,7 +208,8 @@
         "blue"
       ],
       "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
-    }
+    },
+    "paired_point_lighten": 0.18
   },
   "blue-yellow": {
     "description": "Blue and golden yellow derived from color-managed reference samples, then lightened by user request. The first four fixed slots are medium blue, medium yellow, light blue and light yellow; opaque fills remain fully opaque.",
@@ -648,5 +650,310 @@
       "#A4C3CE",
       "#C0ADD6"
     ]
+  },
+  "yellow-green": {
+    "description": "Six fixed yellow and green design colors for categorical comparisons: medium gold/green, light gold/green and deep gold/green. Colors encode identities without an ordinal or performance meaning. Continuous stops are illustrative and are not perceptually uniform.",
+    "anchors": [
+      "#D5B14A",
+      "#6E9D72",
+      "#3F7661"
+    ],
+    "categorical": [
+      "#D5B14A",
+      "#6E9D72",
+      "#E9CE7A",
+      "#A5C39B",
+      "#A9872E",
+      "#3F7661"
+    ],
+    "continuous": [
+      "#E9CE7A",
+      "#D5B14A",
+      "#A5C39B",
+      "#6E9D72",
+      "#3F7661"
+    ],
+    "missing": "#B8B8B8",
+    "fill_alpha": 0.4,
+    "point_alpha": 0.5,
+    "paired_point_alpha": 0.7,
+    "paired_point_darken": 0.0,
+    "paired_point_lighten": 0.0,
+    "distribution_point_alpha": 0.55,
+    "distribution_point_darken": 0.2,
+    "categorical_selection": "ordered-prefix",
+    "focal_model_mapping": {
+      "focal_slots": [
+        1
+      ],
+      "comparator_slots": [
+        2,
+        4,
+        6
+      ],
+      "focal_hue_family": "yellow",
+      "comparator_hue_families": [
+        "green"
+      ],
+      "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
+    }
+  },
+  "yellow-green-red": {
+    "description": "Six fixed muted yellow, green and red design colors for categorical comparisons: three medium hues and their lighter counterparts. Colors encode identities without an ordinal or performance meaning. Continuous stops are illustrative and are not perceptually uniform.",
+    "anchors": [
+      "#D6B14C",
+      "#639B77",
+      "#C97070"
+    ],
+    "categorical": [
+      "#D6B14C",
+      "#639B77",
+      "#C97070",
+      "#E9D58C",
+      "#ACC9A5",
+      "#DDA5A1"
+    ],
+    "continuous": [
+      "#639B77",
+      "#ACC9A5",
+      "#E9D58C",
+      "#D6B14C",
+      "#DDA5A1",
+      "#C97070"
+    ],
+    "missing": "#B8B8B8",
+    "fill_alpha": 0.4,
+    "point_alpha": 0.5,
+    "paired_point_alpha": 0.7,
+    "paired_point_darken": 0.0,
+    "paired_point_lighten": 0.0,
+    "distribution_point_alpha": 0.55,
+    "distribution_point_darken": 0.2,
+    "categorical_selection": "ordered-prefix",
+    "focal_model_mapping": {
+      "focal_slots": [
+        3
+      ],
+      "comparator_slots": [
+        1,
+        2,
+        4,
+        5
+      ],
+      "focal_hue_family": "red",
+      "comparator_hue_families": [
+        "yellow",
+        "green"
+      ],
+      "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
+    }
+  },
+  "blue-green-yellow": {
+    "description": "Six fixed soft blue, green and golden-yellow design colors: three medium hues followed by lighter counterparts. Category identities are unordered. Continuous stops are illustrative, not perceptually uniform.",
+    "anchors": [
+      "#7BAAC2",
+      "#83B59E",
+      "#D8BA69"
+    ],
+    "categorical": [
+      "#7BAAC2",
+      "#83B59E",
+      "#D8BA69",
+      "#B2CDD9",
+      "#B8D0B1",
+      "#E5D69C"
+    ],
+    "continuous": [
+      "#7BAAC2",
+      "#83B59E",
+      "#D8BA69",
+      "#B2CDD9",
+      "#B8D0B1",
+      "#E5D69C"
+    ],
+    "missing": "#B8B8B8",
+    "fill_alpha": 0.4,
+    "point_alpha": 0.5,
+    "paired_point_alpha": 0.7,
+    "paired_point_darken": 0.0,
+    "paired_point_lighten": 0.0,
+    "distribution_point_alpha": 0.55,
+    "distribution_point_darken": 0.2,
+    "categorical_selection": "ordered-prefix",
+    "focal_model_mapping": {
+      "focal_slots": [
+        3
+      ],
+      "comparator_slots": [
+        1,
+        2,
+        4,
+        5
+      ],
+      "focal_hue_family": "yellow",
+      "comparator_hue_families": [
+        "blue",
+        "green"
+      ],
+      "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
+    }
+  },
+  "blue-green-coral": {
+    "description": "Six fixed soft blue, green and coral design colors: three medium hues followed by lighter counterparts. Category identities are unordered. Continuous stops are illustrative, not perceptually uniform.",
+    "anchors": [
+      "#7DAAC2",
+      "#81B79D",
+      "#D8998E"
+    ],
+    "categorical": [
+      "#7DAAC2",
+      "#81B79D",
+      "#D8998E",
+      "#B7CAD7",
+      "#B7D1B8",
+      "#E7BBB1"
+    ],
+    "continuous": [
+      "#7DAAC2",
+      "#81B79D",
+      "#D8998E",
+      "#B7CAD7",
+      "#B7D1B8",
+      "#E7BBB1"
+    ],
+    "missing": "#B8B8B8",
+    "fill_alpha": 0.4,
+    "point_alpha": 0.5,
+    "paired_point_alpha": 0.7,
+    "paired_point_darken": 0.0,
+    "paired_point_lighten": 0.0,
+    "distribution_point_alpha": 0.55,
+    "distribution_point_darken": 0.2,
+    "categorical_selection": "ordered-prefix",
+    "focal_model_mapping": {
+      "focal_slots": [
+        3
+      ],
+      "comparator_slots": [
+        1,
+        2,
+        4,
+        5
+      ],
+      "focal_hue_family": "coral",
+      "comparator_hue_families": [
+        "blue",
+        "green"
+      ],
+      "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
+    }
+  },
+  "muted-reference-six": {
+    "description": "Six fixed coordinated medium-light design colors: blue, green, lavender, warm yellow, rose and turquoise. Visually matched to a supplied scientific multi-panel reference; approximate sRGB design values, not recovered original source colors. Category identities are unordered. Continuous stops are illustrative, not perceptually uniform.",
+    "anchors": [
+      "#8EABC0",
+      "#AD9AB7",
+      "#D9BF7C"
+    ],
+    "categorical": [
+      "#8EABC0",
+      "#94B5A1",
+      "#AD9AB7",
+      "#D9BF7C",
+      "#CC99A4",
+      "#91BCB4"
+    ],
+    "continuous": [
+      "#8EABC0",
+      "#94B5A1",
+      "#AD9AB7",
+      "#D9BF7C",
+      "#CC99A4",
+      "#91BCB4"
+    ],
+    "missing": "#B8B8B8",
+    "fill_alpha": 0.4,
+    "point_alpha": 0.5,
+    "paired_point_alpha": 0.7,
+    "paired_point_darken": 0.0,
+    "paired_point_lighten": 0.0,
+    "distribution_point_alpha": 0.55,
+    "distribution_point_darken": 0.2,
+    "categorical_selection": "ordered-prefix",
+    "focal_model_mapping": {
+      "focal_slots": [
+        3
+      ],
+      "comparator_slots": [
+        1,
+        2,
+        4,
+        5,
+        6
+      ],
+      "focal_hue_family": "purple",
+      "comparator_hue_families": [
+        "blue",
+        "green",
+        "yellow",
+        "rose",
+        "turquoise"
+      ],
+      "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
+    }
+  },
+  "warm-yellow-leaf-crisper": {
+    "description": "One orange-yellow-green family: six fixed medium-tone unordered categorical slots with separated golden-orange/apricot-orange and leaf-green/yellow-green hues, plus a light crisper orange-yellow-leaf-green continuous ramp. Reuse the ramp as an explicitly requested ordered categorical rank map; never infer model rank colors automatically.",
+    "anchors": [
+      "#FFBC78",
+      "#FFEC9E",
+      "#B5E0BA"
+    ],
+    "categorical": [
+      "#D18A05",
+      "#E0B338",
+      "#228A76",
+      "#E98452",
+      "#399F5C",
+      "#8BA735"
+    ],
+    "continuous": [
+      "#FFBC78",
+      "#FFC680",
+      "#FFD089",
+      "#FFDC91",
+      "#FFE799",
+      "#FCEE9E",
+      "#EBECA7",
+      "#D9E7AD",
+      "#C5E4B2",
+      "#B5E0BA"
+    ],
+    "missing": "#B8B8B8",
+    "fill_alpha": 0.4,
+    "point_alpha": 0.5,
+    "paired_point_alpha": 0.7,
+    "paired_point_darken": 0.0,
+    "paired_point_lighten": 0.0,
+    "distribution_point_alpha": 0.55,
+    "distribution_point_darken": 0.2,
+    "categorical_selection": "ordered-prefix",
+    "focal_model_mapping": {
+      "focal_slots": [
+        3
+      ],
+      "comparator_slots": [
+        1,
+        2,
+        4
+      ],
+      "focal_hue_family": "teal",
+      "comparator_hue_families": [
+        "gold",
+        "yellow",
+        "orange"
+      ],
+      "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
+    }
   }
 }
