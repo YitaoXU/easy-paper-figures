@@ -46,7 +46,15 @@
       ],
       "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
     },
-    "paired_point_lighten": 0.18
+    "paired_point_lighten": 0.18,
+    "ordered_slots": [
+      1,
+      4,
+      5,
+      2,
+      3,
+      6
+    ]
   },
   "rainbow": {
     "description": "Muted categorical rainbow sampled from interior fills of a supplied raster reference; approximate displayed RGB values, not original source colors. Keep assignments stable across related figures.",
@@ -103,7 +111,19 @@
         "purple"
       ],
       "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
-    }
+    },
+    "ordered_slots": [
+      1,
+      2,
+      3,
+      9,
+      7,
+      4,
+      6,
+      8,
+      5,
+      10
+    ]
   },
   "rainbow-transparent": {
     "description": "Transparent variant of rainbow; identical RGB assignments with lower opacity.",
@@ -160,7 +180,19 @@
         "purple"
       ],
       "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
-    }
+    },
+    "ordered_slots": [
+      1,
+      2,
+      3,
+      9,
+      7,
+      4,
+      6,
+      8,
+      5,
+      10
+    ]
   },
   "muted-green-blue-purple-transparent": {
     "description": "Transparent variant of muted-green-blue-purple; identical higher-contrast RGB slots with softer fills. Paired scatter uses a fixed 18% white blend after darkening; base slots and other mark families retain their existing colors.",
@@ -209,7 +241,15 @@
       ],
       "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
     },
-    "paired_point_lighten": 0.18
+    "paired_point_lighten": 0.18,
+    "ordered_slots": [
+      1,
+      4,
+      5,
+      2,
+      3,
+      6
+    ]
   },
   "blue-yellow": {
     "description": "Blue and golden yellow derived from color-managed reference samples, then lightened by user request. The first four fixed slots are medium blue, medium yellow, light blue and light yellow; opaque fills remain fully opaque.",
@@ -270,6 +310,28 @@
       "#EBDDB8",
       "#93B3C5",
       "#F3DFB5"
+    ],
+    "ordered_slots": [
+      5,
+      1,
+      3,
+      4,
+      6,
+      2
+    ],
+    "group_ordered_slots": [
+      5,
+      11,
+      1,
+      7,
+      3,
+      9,
+      10,
+      4,
+      12,
+      6,
+      8,
+      2
     ]
   },
   "blue-yellow-transparent": {
@@ -317,7 +379,29 @@
         "blue"
       ],
       "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
-    }
+    },
+    "ordered_slots": [
+      5,
+      1,
+      3,
+      4,
+      6,
+      2
+    ],
+    "group_ordered_slots": [
+      5,
+      11,
+      1,
+      7,
+      3,
+      9,
+      10,
+      4,
+      12,
+      6,
+      8,
+      2
+    ]
   },
   "blue-pink-purple-peach": {
     "description": "Blue, pink, purple and peach sampled from interior point-color regions of a supplied raster reference after conversion of its embedded color profile to sRGB; approximate displayed RGB.",
@@ -365,7 +449,15 @@
         "purple"
       ],
       "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
-    }
+    },
+    "ordered_slots": [
+      1,
+      5,
+      6,
+      3,
+      2,
+      4
+    ]
   },
   "blue-pink-purple-peach-transparent": {
     "description": "Transparent variant of blue-pink-purple-peach; identical approximate sampled sRGB slots with lower opacity.",
@@ -413,7 +505,15 @@
         "purple"
       ],
       "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
-    }
+    },
+    "ordered_slots": [
+      1,
+      5,
+      6,
+      3,
+      2,
+      4
+    ]
   },
   "muted-pastel-six": {
     "description": "Six muted pastel colors: gray, beige, light green, pink, peach, and mint. Approximate displayed sRGB values sampled from flat interiors of a color-managed raster reference; not original design-source values.",
@@ -464,7 +564,15 @@
         "mint"
       ],
       "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
-    }
+    },
+    "ordered_slots": [
+      1,
+      6,
+      3,
+      2,
+      5,
+      4
+    ]
   },
   "muted-balanced-six": {
     "description": "Six coordinated, distinct muted colors: blue, apricot, yellow-green, gray-purple, rose, and turquoise. Selected from color-managed raster-reference colors to separate neighboring hues while retaining a soft scientific-figure style. Sampled sRGB values approximate the reference appearance.",
@@ -523,7 +631,21 @@
         "turquoise"
       ],
       "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
-    }
+    },
+    "ordered_slots": [
+      8,
+      2,
+      3,
+      9,
+      12,
+      6,
+      1,
+      7,
+      10,
+      4,
+      5,
+      11
+    ]
   },
   "muted-balanced-twelve": {
     "description": "Twelve fixed muted categorical colors for larger group guides. The first six preserve muted-balanced-six slots; six additional design colors are fixed, never interpolated or recycled.",
@@ -587,7 +709,21 @@
         "turquoise"
       ],
       "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
-    }
+    },
+    "ordered_slots": [
+      8,
+      2,
+      3,
+      9,
+      12,
+      6,
+      1,
+      7,
+      10,
+      4,
+      5,
+      11
+    ]
   },
   "muted-green-blue-purple-light": {
     "description": "Lighter green-blue-purple preset for circular score tracks and coordinated method/group colors, with fixed pale continuous stops and preserved distinct focal purple hue.",
@@ -636,6 +772,14 @@
       ],
       "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
     },
+    "ordered_slots": [
+      1,
+      4,
+      5,
+      2,
+      3,
+      6
+    ],
     "group_categorical": [
       "#9BCAB0",
       "#9DBED4",
@@ -649,6 +793,20 @@
       "#B6D3BE",
       "#A4C3CE",
       "#C0ADD6"
+    ],
+    "group_ordered_slots": [
+      1,
+      10,
+      4,
+      7,
+      11,
+      2,
+      8,
+      5,
+      9,
+      3,
+      12,
+      6
     ]
   },
   "yellow-green": {
@@ -696,7 +854,15 @@
         "green"
       ],
       "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
-    }
+    },
+    "ordered_slots": [
+      5,
+      1,
+      3,
+      4,
+      2,
+      6
+    ]
   },
   "yellow-green-red": {
     "description": "Six fixed muted yellow, green and red design colors for categorical comparisons: three medium hues and their lighter counterparts. Colors encode identities without an ordinal or performance meaning. Continuous stops are illustrative and are not perceptually uniform.",
@@ -746,7 +912,15 @@
         "green"
       ],
       "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
-    }
+    },
+    "ordered_slots": [
+      3,
+      6,
+      4,
+      1,
+      2,
+      5
+    ]
   },
   "blue-green-yellow": {
     "description": "Six fixed soft blue, green and golden-yellow design colors: three medium hues followed by lighter counterparts. Category identities are unordered. Continuous stops are illustrative, not perceptually uniform.",
@@ -796,7 +970,15 @@
         "green"
       ],
       "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
-    }
+    },
+    "ordered_slots": [
+      3,
+      6,
+      5,
+      2,
+      1,
+      4
+    ]
   },
   "blue-green-coral": {
     "description": "Six fixed soft blue, green and coral design colors: three medium hues followed by lighter counterparts. Category identities are unordered. Continuous stops are illustrative, not perceptually uniform.",
@@ -846,7 +1028,15 @@
         "green"
       ],
       "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
-    }
+    },
+    "ordered_slots": [
+      3,
+      6,
+      5,
+      2,
+      1,
+      4
+    ]
   },
   "muted-reference-six": {
     "description": "Six fixed coordinated medium-light design colors: blue, green, lavender, warm yellow, rose and turquoise. Visually matched to a supplied scientific multi-panel reference; approximate sRGB design values, not recovered original source colors. Category identities are unordered. Continuous stops are illustrative, not perceptually uniform.",
@@ -900,7 +1090,15 @@
         "turquoise"
       ],
       "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
-    }
+    },
+    "ordered_slots": [
+      4,
+      5,
+      3,
+      1,
+      6,
+      2
+    ]
   },
   "warm-yellow-leaf-crisper": {
     "description": "One orange-yellow-green family: six fixed medium-tone unordered categorical slots with separated golden-orange/apricot-orange and leaf-green/yellow-green hues, plus a light crisper orange-yellow-leaf-green continuous ramp. Reuse the ramp as an explicitly requested ordered categorical rank map; never infer model rank colors automatically.",
@@ -954,6 +1152,65 @@
         "orange"
       ],
       "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
-    }
+    },
+    "ordered_slots": [
+      4,
+      1,
+      2,
+      6,
+      5,
+      3
+    ]
+  },
+  "pastel-green-blue-purple-peach": {
+    "description": "Four fixed pastel design colors: pale green, pale blue, muted purple and peach, with soft distribution fills. Illustrative continuous stops are not perceptually uniform.",
+    "anchors": [
+      "#D9EAC4",
+      "#B5D0E0",
+      "#F6D1B9"
+    ],
+    "categorical": [
+      "#D9EAC4",
+      "#B5D0E0",
+      "#A396B9",
+      "#F6D1B9"
+    ],
+    "continuous": [
+      "#D9EAC4",
+      "#B5D0E0",
+      "#A396B9",
+      "#F6D1B9"
+    ],
+    "missing": "#B8B8B8",
+    "fill_alpha": 0.4,
+    "point_alpha": 0.3,
+    "paired_point_alpha": 0.6,
+    "paired_point_darken": 0.0,
+    "distribution_point_alpha": 0.55,
+    "distribution_point_darken": 0.2,
+    "categorical_selection": "ordered-prefix",
+    "focal_model_mapping": {
+      "focal_slots": [
+        4
+      ],
+      "comparator_slots": [
+        1,
+        2,
+        3
+      ],
+      "focal_hue_family": "peach",
+      "comparator_hue_families": [
+        "green",
+        "blue",
+        "purple"
+      ],
+      "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
+    },
+    "ordered_slots": [
+      1,
+      2,
+      3,
+      4
+    ]
   }
 }

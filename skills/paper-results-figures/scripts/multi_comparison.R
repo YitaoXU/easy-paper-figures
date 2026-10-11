@@ -10,6 +10,7 @@ source(file.path(skill_dir,"scripts/palette_helpers.R"))
 source(file.path(skill_dir,"scripts/paper_layout.R"))
 source(file.path(skill_dir,"scripts/significance.R"))
 source(file.path(skill_dir,"scripts/comparison_annotations.R"))
+source(file.path(skill_dir,"scripts/numeric_reference_lines.R"))
 source(file.path(skill_dir,"scripts/text_fit.R"))
 source(file.path(skill_dir,"scripts/multi_axes.R"))
 source(file.path(skill_dir,"scripts/axis_break.R"))
@@ -24,7 +25,7 @@ config_path <- normalizePath(args[1],mustWork=TRUE)
 defaults <- list(plot_type="mutl-comparison", input=NULL, output_prefix=NULL,
  data_mode="raw", layout="long", model="model", value="value", model_columns=NULL,
  sd=NULL, n=NULL, id=NULL, paired=FALSE, metric=NULL, metrics=NULL, filter=NULL,
- model_labels=NULL, model_order=NULL, color_values=NULL, palette_mapping=NULL, palette="rainbow-transparent",
+ model_labels=NULL, model_order=NULL, color_values=NULL, palette_mapping=NULL, palette="rainbow-transparent", palette_order="ordered", palette_seed=42,
  style="bar", orientation="vertical", direction="higher", sort="performance", highlight=NULL,
  reference=NULL, delta=FALSE, availability=NULL, unavailable_values=c("False","false","0"),
  missing="error", penalty=NULL, title=NULL, panel_tag=NULL, value_label=NULL, caption=NULL,
@@ -32,7 +33,7 @@ defaults <- list(plot_type="mutl-comparison", input=NULL, output_prefix=NULL,
  show_significance=FALSE, significance_model=NULL, p_adjust="none", significance_size=1.8, significance_spacing_mm=2.2,
  significance_gap_mm=0.6, annotation_layout="auto", annotation_strip_mm=NULL, metric_domain=NULL, data_limits=NULL,
  point_alpha=NULL, point_size=NULL, jitter_width=0.11, seed=42,
- limits=NULL, breaks=NULL, axis_break=NULL, axis_policy="auto", occupancy=0.92,
+ limits=NULL, breaks=NULL, axis_break=NULL, reference_lines=NULL, axis_policy="auto", occupancy=0.92,
  legend_placement="auto", legend_clearance_mm=.8,
  width=56/25.4, height=40/25.4, layout_columns=3, width_mm=NULL, height_mm=NULL, font_family="Arial", base_size=7, title_size=7.5,
  axis_title_size=7, axis_text_size=6, category_text_size=6.4, value_size=2.2,
@@ -47,6 +48,9 @@ defaults <- list(plot_type="mutl-comparison", input=NULL, output_prefix=NULL,
 user <- jsonlite::fromJSON(config_path)
 unknown <- setdiff(names(user),names(defaults)); if(length(unknown)) stop("Unknown keys: ",paste(unknown,collapse=", "))
 cfg <- utils::modifyList(defaults,user,keep.null=TRUE)
+validate_palette_order_controls(cfg)
+# Preserve heterogeneous optional fields as objects instead of simplified frames.
+cfg$reference_lines<-jsonlite::fromJSON(config_path,simplifyVector=FALSE)$reference_lines
 if(!cfg$legend_placement %in% c("auto","inside","outside"))stop("legend_placement must be auto, inside or outside.")
 if(!is.numeric(cfg$legend_clearance_mm)||length(cfg$legend_clearance_mm)!=1||!is.finite(cfg$legend_clearance_mm)||cfg$legend_clearance_mm<=0)stop("legend_clearance_mm must be one positive physical distance.")
 text_fit_policy<-list(label_angle=cfg$label_angle,value_angle=cfg$value_angle,label_wrap=cfg$label_wrap)
@@ -95,6 +99,16 @@ if(cfg$plot_type=="multi-metric-comparison" && cfg$combo_layout %in% c("shared-r
  visual_profile<-cfg$combo_layout
  if(!any(c("width_mm","width","layout_columns") %in% names(user)))cfg$width_mm<-if(cfg$combo_layout %in% c("shared-rows","stacked-bars"))88 else 56
  if(cfg$layout_columns==3 && !any(c("height_mm","height") %in% names(user)))cfg$height_mm<-40
+ # Composite inside values need a taller complete canvas for the retained SD
+ # and readable Arial text. Explicit manuscript allocations remain authoritative.
+ if(cfg$combo_layout %in% c("shared-rows","stacked-bars") &&
+    cfg$combo_value_placement=="inside" && isTRUE(cfg$show_values) &&
+    !any(c("height_mm","height","layout_columns") %in% names(user)))cfg$height_mm<-54
+ # A shared metric bar/line overlay needs room for its complete top guide.
+ if(cfg$combo_layout=="shared-axis" && isTRUE(cfg$combo_bars)){
+  if(!any(c("width_mm","width","layout_columns") %in% names(user)))cfg$width_mm<-70
+  if(!any(c("height_mm","height","layout_columns") %in% names(user)))cfg$height_mm<-46
+ }
  # Internal values need sufficient bar thickness for automatic 90-degree fitting.
  # This uses category space without shrinking Arial or widening the canvas.
  if(cfg$combo_layout=="shared-rows" && cfg$combo_value_placement=="inside" && !"bar_width" %in% names(user))cfg$bar_width<-.84
@@ -151,6 +165,7 @@ if(identical(cfg$axis_policy,"auto"))cfg$axis_policy<-if(cfg$style=="bar" && !(c
 if(cfg$font_family!="Arial") stop("Every text element must use Arial.")
 if(!cfg$plot_type %in% c("mutl-comparison","multi-comparison","multi-metric-comparison")) stop("Invalid plot_type.")
 combo <- cfg$plot_type=="multi-metric-comparison"
+cfg$reference_lines<-resolve_numeric_reference_lines(cfg$reference_lines,cfg)
 if(!is.null(cfg$axis_break) && combo && cfg$combo_layout!="grouped-distributions")stop("axis_break supports single-metric or grouped-distributions raw boxes only.")
 if(!cfg$style %in% c("bar","box","violin","line")) stop("Unsupported style.")
 if(!cfg$data_mode %in% c("raw","summary") || !cfg$layout %in% c("long","wide")) stop("Invalid data contract.")
@@ -276,14 +291,15 @@ labels<-setNames(models,models);if(!is.null(cfg$model_labels)){if(!all(models %i
 model_color_active<-!(combo && (cfg$combo_color_by=="metric" || cfg$combo_layout=="shared-axis"))
 model_color_resolution<-resolve_model_palette_mapping(models,pal,
  focal=if(model_color_active)user$highlight else character(),
- colors=cfg$color_values,saved_record=cfg$palette_mapping)
+ colors=cfg$color_values,saved_record=cfg$palette_mapping,
+ palette_order=cfg$palette_order,palette_seed=cfg$palette_seed)
 cols<-model_color_resolution$colors[models];cfg$palette_mapping<-model_color_resolution$record
 invisible(grDevices::col2rgb(cols));cfg$color_values<-as.list(cols);cfg$model_order<-models
 combo_metric_cols<-NULL
 metric_color_policy<-NULL
 if(combo && (cfg$combo_color_by=="metric" || cfg$combo_layout=="shared-axis")){
  if(cfg$combo_layout=="shared-axis")cfg$combo_color_by<-"metric"
- combo_metric_cols<-if(is.null(cfg$combo_metric_colors))fixed_palette_mapping(cfg$metrics,pal)[cfg$metrics]else unlist(cfg$combo_metric_colors)
+ combo_metric_cols<-if(is.null(cfg$combo_metric_colors))fixed_palette_mapping(cfg$metrics,pal,palette_order=cfg$palette_order,palette_seed=cfg$palette_seed)[cfg$metrics]else unlist(cfg$combo_metric_colors)
  metric_color_policy<-if(is.null(cfg$combo_metric_colors))"fixed-palette-metric-identity"else"explicit-named-metric-map"
  if(is.null(cfg$combo_metric_colors) && cfg$combo_layout=="dual-axis" && length(cfg$combo_styles)==2 &&
     setequal(cfg$combo_styles,c("bar","line")) && cfg$palette %in% c("blue-yellow","blue-yellow-transparent")){
@@ -324,6 +340,7 @@ if(cfg$show_significance){
 }
 sig_count<-if(isTRUE(significance$displayed))nrow(significance$comparisons)else 0L
 annotation_layout<-resolve_comparison_annotations(cfg,sig_count)
+attr(cfg,"reference_top_annotation")<-list(values=sm$annotation,faces=sm$face,layout=annotation_layout)
 sig_gutter<-annotation_layout$significance_gutter_mm*72/25.4
 sig_top_gutter<-if(annotation_layout$significance_side=="above")sig_gutter else 0
 sig_right_gutter<-if(annotation_layout$significance_side=="right")sig_gutter else 0
@@ -399,15 +416,17 @@ if(!combo){
  if(cfg$show_sd)extent<-c(extent,sm$mean-sm$sd,sm$mean+sm$sd)
  if(cfg$style %in% c("box","violin")||cfg$show_points)extent<-c(extent,dat$value)
  if(cfg$delta||cfg$axis_policy=="zero"||(cfg$style=="bar"&&cfg$axis_policy!="zoom"))extent<-c(extent,0)
- rr<-range(extent,finite=TRUE);sp<-diff(rr);if(sp==0)sp<-max(abs(rr),1)*.1
+ reference_values<-vapply(cfg$reference_lines,`[[`,numeric(1),"value")
+ axis_extent<-c(extent,reference_values)
+ rr<-range(extent,finite=TRUE);axis_rr<-range(axis_extent,finite=TRUE);sp<-diff(axis_rr);if(sp==0)sp<-max(abs(axis_rr),1)*.1
  auto_limits<-is.null(cfg$limits) && is.null(cfg$data_limits)
  limits<-if(is.null(cfg$data_limits))cfg$limits else cfg$data_limits
- if(is.null(limits)){pad<-if(cfg$axis_policy=="zoom")sp*(1/cfg$occupancy-1)/2 else sp*.06;limits<-rr+c(-pad,pad);if(cfg$style=="bar"&&cfg$axis_policy!="zoom"&&rr[1]==0)limits[1]<-0}
+ if(is.null(limits)){pad<-if(cfg$axis_policy=="zoom")sp*(1/cfg$occupancy-1)/2 else sp*.06;limits<-axis_rr+c(-pad,pad);if(cfg$style=="bar"&&cfg$axis_policy!="zoom"&&axis_rr[1]==0)limits[1]<-0}
  if(length(limits)!=2||any(!is.finite(limits))||diff(limits)<=0)stop("limits must increase.")
- if(min(extent)<limits[1]-1e-12||max(extent)>limits[2]+1e-12)stop("Limits would hide observations or uncertainty; expand them.")
+ if(min(axis_extent)<limits[1]-1e-12||max(axis_extent)>limits[2]+1e-12)stop("Limits would hide observations, uncertainty or numeric reference lines; expand them.")
  # Positive bars start at the axis; keep negative SD visible with an internal zero axis.
- if(cfg$style=="bar" && min(extent)>=0 && limits[1]<0)limits[1]<-0
- if(cfg$style=="bar" && max(extent)<=0 && limits[2]>0)limits[2]<-0
+ if(cfg$style=="bar" && min(axis_extent)>=0 && limits[1]<0)limits[1]<-0
+ if(cfg$style=="bar" && max(axis_extent)<=0 && limits[2]>0)limits[2]<-0
  if(is.null(cfg$breaks)){
   # Measure Arial labels at final print size and allow for labels/annotation gutters.
   available_mm<-if(cfg$orientation=="horizontal")cfg$width_mm-
@@ -444,6 +463,7 @@ if(!combo){
  p<-add_marks(base(),sm,dat,cfg$style,baseline)
  if(cfg$style=="bar" && baseline>limits[1] && baseline<limits[2])p<-p+geom_hline(yintercept=baseline,linewidth=.25,color="#333333")+theme(axis.line.x=if(cfg$orientation=="vertical")element_blank()else element_line(linewidth=.25),axis.line.y=if(cfg$orientation=="horizontal")element_blank()else element_line(linewidth=.25))
  if(cfg$delta)p<-p+geom_hline(yintercept=0,linetype="dotted",linewidth=.25,color="#555555")
+ p<-add_numeric_reference_marks(p,cfg)
  # Estimate the physical data panel, then reserve a safe strip inside its numeric axis.
  core_limits<-limits;cfg$data_limits<-core_limits
  measurement_plot<-p+scale_y_continuous(breaks=cfg$breaks,labels=axis_labels,expand=expansion(mult=0))
@@ -630,7 +650,7 @@ dir.create(dirname(cfg$output_prefix),recursive=TRUE,showWarnings=FALSE)
 outputs<-paste0(cfg$output_prefix,".",cfg$formats)
 if(cfg$input %in% c(outputs,paste0(cfg$output_prefix,".plotted-data.csv")))stop("Output would overwrite input.")
 fonts<-list(family="Arial")
-legend_placements<-list()
+legend_placements<-list();reference_placements<-list()
 for(i in seq_along(cfg$formats)){
  device<-switch(cfg$formats[i],pdf=arial_pdf_device,svg=svglite::svglite,png=ragg::agg_png)
  # Build layout inside each Arial-capable output device for correct text metrics.
@@ -653,7 +673,11 @@ for(i in seq_along(cfg$formats)){
    placement<-add_method_mean_correlation(grob,export_plot,cfg,mean_correlation)
    grob<-placement$grob;correlation_placements[[cfg$formats[i]]]<-placement$record
   }
-  if(!combo)grob<-add_comparison_annotations(grob,sm,positions,cfg,significance,annotation_layout)
+  if(!combo){
+   placement<-frame_numeric_reference_labels(grob,cfg,draw=TRUE)
+   grob<-placement$grob;reference_placements[[cfg$formats[i]]]<-placement$record
+   grob<-add_comparison_annotations(grob,sm,positions,cfg,significance,annotation_layout)
+  }
   grid::grid.draw(grob)
  },finally=grDevices::dev.off())
  if(cfg$formats[i]=="pdf")fonts$pdf<-verify_pdf_arial(outputs[i])
@@ -701,13 +725,13 @@ record<-list(n_input=n_input,n_plotted=nrow(dat),filtered_source_rows=filtered_r
   fonts_pt=list(title=cfg$title_size,axis_title=cfg$axis_title_size,axis_text=cfg$axis_text_size,method=cfg$category_text_size),
   numeric_value_size_mm=if(inside_labels_shown)cfg$combo_inside_value_size else cfg$value_size,line_marker_size_mm=cfg$line_marker_size,bar_width=cfg$bar_width,category_padding=cfg$category_padding),
  penalized_n=sum(dat$penalized),summary=sm,paired=cfg$paired,delta=cfg$delta,reference=cfg$reference,
- model_palette_mapping=cfg$palette_mapping,significance=significance, annotation_layout=annotation_layout,text_fitting=text_fitting,
+ model_palette_mapping=cfg$palette_mapping,reference_lines=cfg$reference_lines,reference_line_placement=reference_placements,significance=significance, annotation_layout=annotation_layout,text_fitting=text_fitting,
  uncertainty=if(any(metric_sd))"sample standard deviation (not SEM or CI)"else "not displayed",
  uncertainty_by_metric=if(combo)cfg$combo_show_sd else NULL,sd_display_by_group=sd_display_by_group,combo_axes=if(combo)combo_axes else NULL,inside_value_placement=if(combo)inside_value_placement else NULL,metric_encoding=metric_encoding,axis_policy_requested=axis_policy_requested,
  mean_line_marker=list(shown=cfg$line_markers && if(combo)any(cfg$combo_styles=="line")else cfg$style=="line",shape=cfg$line_marker_shape,size_mm=cfg$line_marker_size),
  mean_correlation=mean_correlation,mean_correlation_placement=correlation_placements,
  axis_break=axis_break_record,physical_size_mm=c(width=cfg$width_mm,height=cfg$height_mm),distributions=distributions,axis_note=axis_note,dual_axis_transform=transformation,font_verification=fonts,
- provenance=list(input_md5=unname(tools::md5sum(cfg$input)),script_md5=unname(tools::md5sum(script_path)),significance_helper_md5=unname(tools::md5sum(file.path(skill_dir,"scripts/significance.R"))),annotation_helper_md5=unname(tools::md5sum(file.path(skill_dir,"scripts/comparison_annotations.R"))),text_fit_helper_md5=unname(tools::md5sum(file.path(skill_dir,"scripts/text_fit.R"))),multi_axis_helper_md5=unname(tools::md5sum(file.path(skill_dir,"scripts/multi_axes.R"))),legend_space_helper_md5=if(combo && cfg$combo_layout=="grouped-distributions")unname(tools::md5sum(file.path(skill_dir,"scripts/legend_space.R")))else NULL,grouped_distributions_helper_md5=if(combo && cfg$combo_layout=="grouped-distributions")unname(tools::md5sum(file.path(skill_dir,"scripts/grouped_distributions.R")))else NULL,axis_break_helper_md5=if(!is.null(cfg$axis_break))unname(tools::md5sum(file.path(skill_dir,"scripts/axis_break.R")))else NULL,inside_values_helper_md5=unname(tools::md5sum(file.path(skill_dir,"scripts/inside_values.R"))),generated_at_utc=format(Sys.time(),tz="UTC",usetz=TRUE)))
+ provenance=list(input_md5=unname(tools::md5sum(cfg$input)),script_md5=unname(tools::md5sum(script_path)),significance_helper_md5=unname(tools::md5sum(file.path(skill_dir,"scripts/significance.R"))),annotation_helper_md5=unname(tools::md5sum(file.path(skill_dir,"scripts/comparison_annotations.R"))),reference_line_helper_md5=unname(tools::md5sum(file.path(skill_dir,"scripts/numeric_reference_lines.R"))),text_fit_helper_md5=unname(tools::md5sum(file.path(skill_dir,"scripts/text_fit.R"))),multi_axis_helper_md5=unname(tools::md5sum(file.path(skill_dir,"scripts/multi_axes.R"))),legend_space_helper_md5=if(combo && cfg$combo_layout=="grouped-distributions")unname(tools::md5sum(file.path(skill_dir,"scripts/legend_space.R")))else NULL,grouped_distributions_helper_md5=if(combo && cfg$combo_layout=="grouped-distributions")unname(tools::md5sum(file.path(skill_dir,"scripts/grouped_distributions.R")))else NULL,axis_break_helper_md5=if(!is.null(cfg$axis_break))unname(tools::md5sum(file.path(skill_dir,"scripts/axis_break.R")))else NULL,inside_values_helper_md5=unname(tools::md5sum(file.path(skill_dir,"scripts/inside_values.R"))),generated_at_utc=format(Sys.time(),tz="UTC",usetz=TRUE)))
 jsonlite::write_json(record,paste0(cfg$output_prefix,".statistics.json"),pretty=TRUE,auto_unbox=TRUE,digits=NA,null="null",na="null")
 writeLines(capture.output(sessionInfo()),paste0(cfg$output_prefix,".session.txt"))
 message("Rendered ",nrow(dat)," rows in ",length(models)," models; ",sum(dat$penalized)," penalty records.")

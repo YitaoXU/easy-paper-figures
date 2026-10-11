@@ -84,7 +84,7 @@ if(cfg$combo_layout=="stacked-bars"){
  if(!all(vapply(domains,function(r)isTRUE(all.equal(unname(r),unname(domains[[1]]))),logical(1))))stop("Shared-axis metrics must have the same stated domain; no implicit rescaling is performed.")
  for(key in cfg$metrics)if(any(dat$value[dat$metric==key]<domains[[key]][1]-1e-12|dat$value[dat$metric==key]>domains[[key]][2]+1e-12))stop("Values fall outside the stated scientific domain for ",key)
  if(!is.null(cfg$combo_limits)||!is.null(cfg$combo_breaks))stop("Use limits/breaks for the one shared-axis numeric view.")
- metric_cols<-if(is.null(cfg$combo_metric_colors))fixed_palette_mapping(cfg$metrics,pal)[cfg$metrics]else unlist(cfg$combo_metric_colors)
+ metric_cols<-if(is.null(cfg$combo_metric_colors))fixed_palette_mapping(cfg$metrics,pal,palette_order=cfg$palette_order,palette_seed=cfg$palette_seed)[cfg$metrics]else unlist(cfg$combo_metric_colors)
  if(!setequal(names(metric_cols),cfg$metrics))stop("combo_metric_colors must map every metric exactly once.")
  invisible(grDevices::col2rgb(metric_cols));metric_cols<-metric_cols[cfg$metrics];cfg$combo_metric_colors<-as.list(metric_cols)
  patterns<-if(is.null(cfg$combo_line_types))setNames(rep(c("solid","dashed","dotdash","longdash","twodash","dotted"),length.out=length(cfg$metrics)),cfg$metrics)else unlist(cfg$combo_line_types)

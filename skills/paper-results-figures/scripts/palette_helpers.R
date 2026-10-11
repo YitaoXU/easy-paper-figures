@@ -1,15 +1,54 @@
-# Fixed categorical slots, independent of performance, row order and plot family.
-fixed_palette_mapping <- function(categories, palette) {
+# Categorical color sequence is independent of scientific display order and opacity.
+validate_palette_order_controls <- function(cfg) {
+  mode <- cfg$palette_order
+  seed <- cfg$palette_seed
+  if (!is.character(mode) || length(mode) != 1L || is.na(mode) ||
+      !mode %in% c("ordered", "shuffled"))
+    stop("palette_order must be ordered or shuffled.")
+  if (!is.numeric(seed) || length(seed) != 1L || !is.finite(seed) ||
+      seed < 0 || seed > .Machine$integer.max || seed != floor(seed))
+    stop("palette_seed must be a nonnegative integer within the R integer range.")
+  invisible(TRUE)
+}
+
+# Select the original eligible colors first, then permute that same set. This
+# preserves small-palette contrast and the reserved focal/comparator hue policy.
+order_palette_slots <- function(slots, palette, palette_order = "ordered", palette_seed = 42) {
+  validate_palette_order_controls(list(palette_order = palette_order, palette_seed = palette_seed))
+  ordered <- palette$ordered_slots
+  if (is.null(ordered)) ordered <- seq_along(palette$categorical)
+  ordered <- unlist(ordered, use.names = FALSE)
+  if (!is.numeric(ordered) || anyNA(ordered) || any(ordered != floor(ordered)) ||
+      !identical(sort(as.integer(ordered)), seq_along(palette$categorical)))
+    stop("ordered_slots must be a complete permutation of the original categorical slots.")
+  if (palette_order == "ordered") return(slots[order(match(slots, ordered))])
+  if (length(slots) < 2L) return(slots)
+  had_seed <- exists(".Random.seed", envir = .GlobalEnv, inherits = FALSE)
+  if (had_seed) old_seed <- get(".Random.seed", envir = .GlobalEnv)
+  on.exit({
+    if (had_seed) assign(".Random.seed", old_seed, envir = .GlobalEnv)
+    else if (exists(".Random.seed", envir = .GlobalEnv, inherits = FALSE))
+      rm(".Random.seed", envir = .GlobalEnv)
+  })
+  set.seed(as.integer(palette_seed))
+  slots[sample.int(length(slots))]
+}
+
+# Fixed identities are independent of scores, input rows and display order.
+fixed_palette_mapping <- function(categories, palette, palette_order = "ordered", palette_seed = 42) {
   keys <- sort(unique(as.character(categories)), method = "radix")
   if (length(keys) > length(palette$categorical))
     stop("More categories than fixed palette slots; request an extended palette or provide an authorized named color_values map.")
-  setNames(palette$categorical[seq_along(keys)], keys)
+  slots <- order_palette_slots(seq_along(keys), palette, palette_order, palette_seed)
+  setNames(palette$categorical[slots], keys)
 }
 
 # Model emphasis uses reserved hue families rather than the ordered-prefix map.
 # Never select a focal identity from observed scores, rankings or display order.
 resolve_model_palette_mapping <- function(categories, palette, focal = NULL,
-                                          colors = NULL, saved_record = NULL) {
+                                          colors = NULL, saved_record = NULL,
+                                          palette_order = "ordered", palette_seed = 42) {
+  validate_palette_order_controls(list(palette_order = palette_order, palette_seed = palette_seed))
   keys <- sort(unique(as.character(categories)), method = "radix")
   if (anyNA(keys) || any(!nzchar(keys))) stop("Model identities must be nonmissing and nonempty.")
   if (is.null(focal)) focal <- intersect("Ours", keys)
@@ -32,10 +71,12 @@ resolve_model_palette_mapping <- function(categories, palette, focal = NULL,
     return(list(colors = result, record = record))
   }
   if (!length(focal)) {
-    result <- fixed_palette_mapping(keys, palette)
+    slots <- order_palette_slots(seq_along(keys), palette, palette_order, palette_seed)
+    result <- setNames(palette$categorical[slots], keys)
     return(list(colors = result, record = list(policy = "fixed-palette-model-identity",
       focal_models = character(), base_colors = as.list(result),
-      palette_slots = as.list(setNames(seq_along(keys), keys)))))
+      palette_order = palette_order, palette_seed = palette_seed,
+      palette_slots = as.list(setNames(slots, keys)))))
   }
   roles <- palette$focal_model_mapping
   if (is.null(roles)) stop("Palette has no fixed focal-model hue policy; provide an authorized named color_values map.")
@@ -50,11 +91,13 @@ resolve_model_palette_mapping <- function(categories, palette, focal = NULL,
     stop("More focal models than distinct reserved focal hue slots; provide an authorized named color_values map or select a palette with sufficient distinct focal slots.")
   if (length(opponents) > length(comparator_slots))
     stop("More comparator models than reserved contrasting palette slots; select a suitable palette or provide an authorized named color_values map. Automatic colors are never invented or recycled.")
-  assigned <- c(setNames(focal_slots[seq_along(focal)], focal),
-                setNames(comparator_slots[seq_along(opponents)], opponents))[keys]
+  focal_used <- order_palette_slots(focal_slots[seq_along(focal)], palette, palette_order, palette_seed)
+  opponent_used <- order_palette_slots(comparator_slots[seq_along(opponents)], palette, palette_order, palette_seed)
+  assigned <- c(setNames(focal_used, focal), setNames(opponent_used, opponents))[keys]
   result <- setNames(palette$categorical[assigned], keys)
   list(colors = result, record = list(policy = "fixed-focal-model-hue-slots",
     focal_models = focal, base_colors = as.list(result), palette_slots = as.list(assigned),
+    palette_order = palette_order, palette_seed = palette_seed,
     focal_hue_family = roles$focal_hue_family, comparator_hue_families = roles$comparator_hue_families))
 }
 

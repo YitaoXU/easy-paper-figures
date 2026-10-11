@@ -30,6 +30,7 @@ measure_comparison_panel_mm <- function(plot, cfg) {
   arial_pdf_device(path, width = cfg$width, height = cfg$height)
   on.exit({grDevices::dev.off(); unlink(path)}, add = TRUE)
   grob <- ggplot2::ggplotGrob(plot)
+  if (length(cfg$reference_lines)) grob <- frame_numeric_reference_labels(grob, cfg, draw = FALSE)$grob
   width <- cfg$width_mm - grid::convertWidth(sum(grob$widths), "mm", valueOnly = TRUE)
   height <- cfg$height_mm - grid::convertHeight(sum(grob$heights), "mm", valueOnly = TRUE)
   if (any(!is.finite(c(width, height))) || min(width, height) <= 0)

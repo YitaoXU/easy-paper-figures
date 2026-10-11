@@ -7,7 +7,7 @@ defaults <- function() list(plot_type="grouped-circular-heatmap", input=NULL, ou
   metric_domain=NULL, sampling_unit=NULL, direction="higher", focus_model=NULL,
   model_order=NULL, group_order=NULL, item_order=NULL,
   heatmap_palette="muted-green-blue-purple-light", palette=NULL,
-  group_palette=NULL, color_values=NULL, palette_mapping=NULL,
+  group_palette=NULL, palette_order="ordered", palette_seed=42, color_values=NULL, palette_mapping=NULL,
   group_colors=NULL, show_violin=TRUE, show_mean=TRUE, group_legend_placement="auto",
   show_significance=FALSE, significance_model=NULL, independent_items=NULL, p_adjust="holm",
   show_item_labels=TRUE, label_every=NULL,
@@ -60,6 +60,7 @@ render <- function(config_path,skill_dir) {
   cfg<-defaults();request<-jsonlite::fromJSON(config_path)
   unknown<-setdiff(names(request),names(cfg));assert(!length(unknown),paste("Unknown configuration fields:",paste(unknown,collapse=", ")))
   for(k in names(request))cfg[k]<-list(request[[k]])
+  validate_palette_order_controls(cfg)
   if(isTRUE(cfg$show_significance) && !"show_mean" %in% names(request))cfg$show_mean<-FALSE
   assert(identical(cfg$plot_type,"grouped-circular-heatmap"),"Incorrect plot_type.")
   assert(scalar_text(cfg$input) && scalar_text(cfg$output_prefix),"Supply input and output_prefix.")
@@ -88,11 +89,15 @@ render <- function(config_path,skill_dir) {
     cfg$group_palette<-if(length(cfg$group_order)<=length(group_slots))cfg$heatmap_palette else "muted-balanced-twelve"
   }
   for(k in c("heatmap_palette","palette","group_palette"))assert(cfg[[k]] %in% names(palettes),paste("Unknown",k))
-  model_map<-resolve_model_palette_mapping(cfg$model_order,palettes[[cfg$palette]],cfg$focus_model,cfg$color_values,cfg$palette_mapping)
+  model_map<-resolve_model_palette_mapping(cfg$model_order,palettes[[cfg$palette]],cfg$focus_model,cfg$color_values,cfg$palette_mapping,
+    palette_order=cfg$palette_order,palette_seed=cfg$palette_seed)
   cfg$color_values<-as.list(model_map$colors);cfg$palette_mapping<-model_map$record
   group_preset<-palettes[[cfg$group_palette]]
-  if(!is.null(group_preset$group_categorical))group_preset$categorical<-group_preset$group_categorical
-  group_colors<-if(is.null(cfg$group_colors))fixed_palette_mapping(cfg$group_order,group_preset)else unlist(cfg$group_colors)
+  if(!is.null(group_preset$group_categorical)){
+    group_preset$categorical<-group_preset$group_categorical
+    group_preset$ordered_slots<-if(is.null(group_preset$group_ordered_slots))seq_along(group_preset$categorical)else group_preset$group_ordered_slots
+  }
+  group_colors<-if(is.null(cfg$group_colors))fixed_palette_mapping(cfg$group_order,group_preset,palette_order=cfg$palette_order,palette_seed=cfg$palette_seed)else unlist(cfg$group_colors)
   assert(is.character(group_colors) && !is.null(names(group_colors)) && !anyDuplicated(names(group_colors)) && all(cfg$group_order %in% names(group_colors)),"group_colors must cover every group by name.")
   grDevices::col2rgb(group_colors);cfg$group_colors<-as.list(group_colors[cfg$group_order])
   ramp<-grDevices::colorRamp(palettes[[cfg$heatmap_palette]]$continuous)

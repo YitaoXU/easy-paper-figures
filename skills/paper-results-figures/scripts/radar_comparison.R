@@ -6,7 +6,7 @@ radar_defaults <- function() list(
  axis_order=NULL, model_order=NULL, model_labels=NULL, axis_labels=NULL, focus_models=NULL,
  scale_mode="common-domain", metric_domain=NULL, unit=NULL, direction="higher",
  axis_specs=NULL, normalization_reason=NULL, sampling_unit=NULL,
- palette="muted-green-blue-purple", color_values=NULL, palette_mapping=NULL, line_color_values=NULL, line_darken=NULL, shape_values=NULL,
+ palette="muted-green-blue-purple", palette_order="ordered", palette_seed=42, color_values=NULL, palette_mapping=NULL, line_color_values=NULL, line_darken=NULL, shape_values=NULL,
  fill_alpha=NULL, line_alpha=1, line_width=.25, point_size=.70,
  grid_style="circular", band_colors=c("#E8CCC4","#DBD4BE","#C5D2BC","#BFD6B2"), band_alpha=.28,
  grid_color="#D1D4D2", grid_width=.18, show_polygons=FALSE, show_radial_labels=NULL, radial_label_policy="endpoints",
@@ -33,7 +33,8 @@ radar_resolve_colors <- function(cfg, models, palette) {
   result
  }
  base_resolution<-resolve_model_palette_mapping(models,palette,focal=cfg$focus_models,
-  colors=cfg$color_values,saved_record=cfg$palette_mapping)
+  colors=cfg$color_values,saved_record=cfg$palette_mapping,
+  palette_order=cfg$palette_order,palette_seed=cfg$palette_seed)
  base<-base_resolution$colors[models]
  amount<-cfg$line_darken
  if(is.null(amount))amount<-if(is.null(cfg$color_values) && is.null(cfg$line_color_values) && cfg$palette %in% c("rainbow","rainbow-transparent")).40 else 0
@@ -273,6 +274,7 @@ radar_main <- function(script_path, args) {
  defaults<-radar_defaults()
  radar_assert(!length(setdiff(names(user),names(defaults))), paste0("Unknown keys: ",paste(setdiff(names(user),names(defaults)),collapse=", ")))
  cfg<-utils::modifyList(defaults,user,keep.null=TRUE)
+ validate_palette_order_controls(cfg)
  resolve<-function(p){p<-path.expand(p);if(!grepl("^/",p))p<-file.path(dirname(config_path),p);normalizePath(p,mustWork=FALSE)}
  radar_assert(radar_string(cfg$input) && radar_string(cfg$output_prefix), "input and output_prefix are required.")
  cfg$input<-normalizePath(resolve(cfg$input),mustWork=TRUE);cfg$output_prefix<-resolve(cfg$output_prefix)

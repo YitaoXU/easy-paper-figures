@@ -36,7 +36,7 @@ defaults <- list(
   size_legend_min_height_mm = 9, size_legend_padding_mm = .65,
   point_labels = NULL, point_label_offsets = NULL, point_label_size = 1.9,
   point_label_placement = NULL, axis_canvas_layout = NULL,
-  palette = "muted-green-blue-purple", alternative = "greater",
+  palette = "muted-green-blue-purple", palette_order = "ordered", palette_seed = 42, alternative = "greater",
   missing_pairs = "error", limits = NULL, breaks = NULL, axis_digits = NULL,
   width = 56/25.4, height = 40/25.4, layout_columns = 3, width_mm = NULL, height_mm = NULL, base_size = 7, font_family = "Arial", panel_tag = NULL,
   point_size = 0.75, point_alpha = NULL, point_darken = NULL, point_lighten = NULL, point_color = NULL, stats_box = NULL,
@@ -52,6 +52,7 @@ defaults <- list(
 unknown <- setdiff(names(user), names(defaults))
 if (length(unknown)) stop("Unknown configuration keys: ", paste(unknown, collapse = ", "))
 cfg <- utils::modifyList(defaults, user, keep.null = TRUE)
+validate_palette_order_controls(cfg)
 # Existing title controls are shared overrides; separate inside controls refine
 # one placement without changing the compact external guide profile.
 if ("colorbar_title_size" %in% names(user) && !"colorbar_inside_title_size" %in% names(user))
@@ -245,7 +246,7 @@ if (!is.null(cfg$color)) {
       color_mapping <- color_mapping[levels]
     } else {
       if (length(levels) > length(palette$categorical)) stop("More categories than palette colors. Supply explicit named color_values or add a palette.")
-      color_mapping <- fixed_palette_mapping(levels, palette)[levels]
+      color_mapping <- fixed_palette_mapping(levels, palette, palette_order = cfg$palette_order, palette_seed = cfg$palette_seed)[levels]
     }
     grDevices::col2rgb(color_mapping)
     dat$color <- factor(values, levels = levels)

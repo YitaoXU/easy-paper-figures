@@ -1,0 +1,1076 @@
+{
+  "schema_version": 1,
+  "description": "Canonical palette families with exact legacy-compatible variants. Variants replace complete top-level fields; remove_fields preserves omitted fields. Runtime palettes.json is generated.",
+  "preset_order": [
+    "muted-green-blue-purple",
+    "rainbow",
+    "rainbow-transparent",
+    "muted-green-blue-purple-transparent",
+    "blue-yellow",
+    "blue-yellow-transparent",
+    "blue-pink-purple-peach",
+    "blue-pink-purple-peach-transparent",
+    "muted-pastel-six",
+    "muted-balanced-six",
+    "muted-balanced-twelve",
+    "muted-green-blue-purple-light",
+    "yellow-green",
+    "yellow-green-red",
+    "blue-green-yellow",
+    "blue-green-coral",
+    "muted-reference-six",
+    "warm-yellow-leaf-crisper",
+    "pastel-green-blue-purple-peach"
+  ],
+  "families": [
+    {
+      "id": "pastel-green-blue-purple-peach",
+      "title": "Pastel four-color",
+      "tier": "common",
+      "recommended_preset": "pastel-green-blue-purple-peach",
+      "base": {
+        "description": "Four fixed pastel design colors: pale green, pale blue, muted purple and peach, with soft distribution fills. Illustrative continuous stops are not perceptually uniform.",
+        "anchors": [
+          "#D9EAC4",
+          "#B5D0E0",
+          "#F6D1B9"
+        ],
+        "categorical": [
+          "#D9EAC4",
+          "#B5D0E0",
+          "#A396B9",
+          "#F6D1B9"
+        ],
+        "continuous": [
+          "#D9EAC4",
+          "#B5D0E0",
+          "#A396B9",
+          "#F6D1B9"
+        ],
+        "missing": "#B8B8B8",
+        "fill_alpha": 0.4,
+        "point_alpha": 0.3,
+        "paired_point_alpha": 0.6,
+        "paired_point_darken": 0.0,
+        "distribution_point_alpha": 0.55,
+        "distribution_point_darken": 0.2,
+        "categorical_selection": "ordered-prefix",
+        "focal_model_mapping": {
+          "focal_slots": [
+            4
+          ],
+          "comparator_slots": [
+            1,
+            2,
+            3
+          ],
+          "focal_hue_family": "peach",
+          "comparator_hue_families": [
+            "green",
+            "blue",
+            "purple"
+          ],
+          "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
+        },
+        "ordered_slots": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "variants": [
+        {
+          "name": "pastel-green-blue-purple-peach",
+          "label": "Soft four-color"
+        }
+      ]
+    },
+    {
+      "id": "green-blue-purple",
+      "title": "Green / blue / purple",
+      "tier": "common",
+      "recommended_preset": "muted-green-blue-purple",
+      "base": {
+        "description": "Moderately muted green, blue and purple with distinct primary hues and a wider dark-to-light range. Paired scatter uses a fixed 18% white blend after darkening; base slots and other mark families retain their existing colors.",
+        "anchors": [
+          "#2F8668",
+          "#3A7FAA",
+          "#8953A2"
+        ],
+        "categorical": [
+          "#2F8668",
+          "#3A7FAA",
+          "#8953A2",
+          "#8BC9A0",
+          "#87B8DC",
+          "#BE96D0"
+        ],
+        "continuous": [
+          "#B3DFBA",
+          "#67B89A",
+          "#448EBB",
+          "#626DB2",
+          "#633E90"
+        ],
+        "missing": "#B8B8B8",
+        "fill_alpha": 0.4,
+        "point_alpha": 0.5,
+        "paired_point_alpha": 0.5,
+        "distribution_point_alpha": 0.55,
+        "distribution_point_darken": 0.2,
+        "categorical_selection": "ordered-prefix",
+        "paired_point_darken": 0.12,
+        "focal_model_mapping": {
+          "focal_slots": [
+            3
+          ],
+          "comparator_slots": [
+            1,
+            2,
+            4,
+            5
+          ],
+          "focal_hue_family": "purple",
+          "comparator_hue_families": [
+            "green",
+            "blue"
+          ],
+          "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
+        },
+        "paired_point_lighten": 0.18,
+        "ordered_slots": [
+          1,
+          4,
+          5,
+          2,
+          3,
+          6
+        ]
+      },
+      "variants": [
+        {
+          "name": "muted-green-blue-purple",
+          "label": "Classic"
+        },
+        {
+          "name": "muted-green-blue-purple-transparent",
+          "label": "Softer opacity",
+          "overrides": {
+            "description": "Transparent variant of muted-green-blue-purple; identical higher-contrast RGB slots with softer fills. Paired scatter uses a fixed 18% white blend after darkening; base slots and other mark families retain their existing colors.",
+            "fill_alpha": 0.25,
+            "point_alpha": 0.3,
+            "paired_point_alpha": 0.7
+          }
+        },
+        {
+          "name": "muted-green-blue-purple-light",
+          "label": "Lighter RGB",
+          "overrides": {
+            "description": "Lighter green-blue-purple preset for circular score tracks and coordinated method/group colors, with fixed pale continuous stops and preserved distinct focal purple hue.",
+            "anchors": [
+              "#78B695",
+              "#7DA6C5",
+              "#9A81BA"
+            ],
+            "categorical": [
+              "#78B695",
+              "#7DA6C5",
+              "#9A81BA",
+              "#B9DFC1",
+              "#B5CEDE",
+              "#C9B4DC"
+            ],
+            "continuous": [
+              "#C4E6CB",
+              "#A1D6C1",
+              "#8DBCD8",
+              "#AAAED5",
+              "#AB91C4"
+            ],
+            "group_categorical": [
+              "#9BCAB0",
+              "#9DBED4",
+              "#B4A3CD",
+              "#C5E2CD",
+              "#C3D7E5",
+              "#D3C6E3",
+              "#A5CFC6",
+              "#ABC9DB",
+              "#B6B7D9",
+              "#B6D3BE",
+              "#A4C3CE",
+              "#C0ADD6"
+            ],
+            "group_ordered_slots": [
+              1,
+              10,
+              4,
+              7,
+              11,
+              2,
+              8,
+              5,
+              9,
+              3,
+              12,
+              6
+            ]
+          },
+          "remove_fields": [
+            "paired_point_lighten"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rainbow",
+      "title": "Muted rainbow",
+      "tier": "common",
+      "recommended_preset": "rainbow-transparent",
+      "base": {
+        "description": "Muted categorical rainbow sampled from interior fills of a supplied raster reference; approximate displayed RGB values, not original source colors. Keep assignments stable across related figures.",
+        "anchors": [
+          "#D7E8C8",
+          "#A0C2D1",
+          "#ADA8C6"
+        ],
+        "categorical": [
+          "#C3CEBC",
+          "#D7E8C8",
+          "#A0C2D1",
+          "#ADA8C6",
+          "#E2BBBD",
+          "#C8C3DD",
+          "#93A3BD",
+          "#DDC9DF",
+          "#BACBE2",
+          "#D3858D"
+        ],
+        "continuous": [
+          "#D7E8C8",
+          "#A0C2D1",
+          "#93A3BD",
+          "#ADA8C6",
+          "#E2BBBD",
+          "#D3858D"
+        ],
+        "missing": "#B8B8B8",
+        "fill_alpha": 1,
+        "point_alpha": 0.5,
+        "paired_point_alpha": 0.5,
+        "distribution_point_alpha": 0.55,
+        "distribution_point_darken": 0.2,
+        "categorical_selection": "ordered-prefix",
+        "paired_point_darken": 0.0,
+        "focal_model_mapping": {
+          "focal_slots": [
+            10
+          ],
+          "comparator_slots": [
+            1,
+            2,
+            3,
+            4,
+            6,
+            7,
+            9
+          ],
+          "focal_hue_family": "rose",
+          "comparator_hue_families": [
+            "green",
+            "blue",
+            "purple"
+          ],
+          "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
+        },
+        "ordered_slots": [
+          1,
+          2,
+          3,
+          9,
+          7,
+          4,
+          6,
+          8,
+          5,
+          10
+        ]
+      },
+      "variants": [
+        {
+          "name": "rainbow",
+          "label": "Opaque fill"
+        },
+        {
+          "name": "rainbow-transparent",
+          "label": "Soft fill",
+          "overrides": {
+            "description": "Transparent variant of rainbow; identical RGB assignments with lower opacity.",
+            "fill_alpha": 0.4,
+            "point_alpha": 0.3,
+            "paired_point_alpha": 0.7
+          }
+        }
+      ]
+    },
+    {
+      "id": "blue-yellow",
+      "title": "Blue / yellow",
+      "tier": "common",
+      "recommended_preset": "blue-yellow-transparent",
+      "base": {
+        "description": "Blue and golden yellow derived from color-managed reference samples, then lightened by user request. The first four fixed slots are medium blue, medium yellow, light blue and light yellow; opaque fills remain fully opaque.",
+        "anchors": [
+          "#87AAC4",
+          "#F5C258",
+          "#6392AC"
+        ],
+        "categorical": [
+          "#87AAC4",
+          "#F5C258",
+          "#B5D0E0",
+          "#FAE5B9",
+          "#6392AC",
+          "#F8D389"
+        ],
+        "continuous": [
+          "#6392AC",
+          "#87AAC4",
+          "#B5D0E0",
+          "#FAE5B9",
+          "#F8D389",
+          "#F5C258"
+        ],
+        "missing": "#B8B8B8",
+        "fill_alpha": 1.0,
+        "point_alpha": 0.5,
+        "paired_point_alpha": 0.7,
+        "paired_point_darken": 0.0,
+        "distribution_point_alpha": 0.55,
+        "distribution_point_darken": 0.2,
+        "categorical_selection": "ordered-prefix",
+        "focal_model_mapping": {
+          "focal_slots": [
+            2
+          ],
+          "comparator_slots": [
+            1,
+            3,
+            5
+          ],
+          "focal_hue_family": "yellow",
+          "comparator_hue_families": [
+            "blue"
+          ],
+          "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
+        },
+        "group_categorical": [
+          "#9BBACF",
+          "#F4CC7B",
+          "#C0D7E4",
+          "#F8E7C4",
+          "#81A7BD",
+          "#F6DCA8",
+          "#AAC8D9",
+          "#EDD597",
+          "#CEE0E9",
+          "#EBDDB8",
+          "#93B3C5",
+          "#F3DFB5"
+        ],
+        "ordered_slots": [
+          5,
+          1,
+          3,
+          4,
+          6,
+          2
+        ],
+        "group_ordered_slots": [
+          5,
+          11,
+          1,
+          7,
+          3,
+          9,
+          10,
+          4,
+          12,
+          6,
+          8,
+          2
+        ]
+      },
+      "variants": [
+        {
+          "name": "blue-yellow",
+          "label": "Opaque fill"
+        },
+        {
+          "name": "blue-yellow-transparent",
+          "label": "Soft fill",
+          "overrides": {
+            "description": "Transparent variant of blue-yellow; identical revised RGB slots, with the same balanced two-medium/two-light prefix and lower opacity.",
+            "fill_alpha": 0.4,
+            "point_alpha": 0.3,
+            "paired_point_alpha": 0.6
+          },
+          "remove_fields": [
+            "group_categorical"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "blue-pink-purple-peach",
+      "title": "Blue / pink / purple / peach",
+      "tier": "common",
+      "recommended_preset": "blue-pink-purple-peach-transparent",
+      "base": {
+        "description": "Blue, pink, purple and peach sampled from interior point-color regions of a supplied raster reference after conversion of its embedded color profile to sRGB; approximate displayed RGB.",
+        "anchors": [
+          "#7E8AB9",
+          "#DEAFC3",
+          "#F6D1B9"
+        ],
+        "categorical": [
+          "#7E8AB9",
+          "#DEAFC3",
+          "#A396B9",
+          "#F6D1B9",
+          "#96A3D0",
+          "#BAADD0"
+        ],
+        "continuous": [
+          "#7E8AB9",
+          "#A396B9",
+          "#BAADD0",
+          "#DEAFC3",
+          "#F6D1B9"
+        ],
+        "missing": "#B8B8B8",
+        "fill_alpha": 1.0,
+        "point_alpha": 0.5,
+        "paired_point_alpha": 0.7,
+        "paired_point_darken": 0.0,
+        "distribution_point_alpha": 0.55,
+        "distribution_point_darken": 0.2,
+        "categorical_selection": "ordered-prefix",
+        "focal_model_mapping": {
+          "focal_slots": [
+            4
+          ],
+          "comparator_slots": [
+            1,
+            3,
+            5,
+            6
+          ],
+          "focal_hue_family": "peach",
+          "comparator_hue_families": [
+            "blue",
+            "purple"
+          ],
+          "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
+        },
+        "ordered_slots": [
+          1,
+          5,
+          6,
+          3,
+          2,
+          4
+        ]
+      },
+      "variants": [
+        {
+          "name": "blue-pink-purple-peach",
+          "label": "Opaque fill"
+        },
+        {
+          "name": "blue-pink-purple-peach-transparent",
+          "label": "Soft fill",
+          "overrides": {
+            "description": "Transparent variant of blue-pink-purple-peach; identical approximate sampled sRGB slots with lower opacity.",
+            "fill_alpha": 0.4,
+            "point_alpha": 0.3,
+            "paired_point_alpha": 0.6
+          }
+        }
+      ]
+    },
+    {
+      "id": "muted-balanced",
+      "title": "Balanced multicolor",
+      "tier": "common",
+      "recommended_preset": "muted-balanced-twelve",
+      "base": {
+        "description": "Six coordinated, distinct muted colors: blue, apricot, yellow-green, gray-purple, rose, and turquoise. Selected from color-managed raster-reference colors to separate neighboring hues while retaining a soft scientific-figure style. Sampled sRGB values approximate the reference appearance.",
+        "anchors": [
+          "#75A8C7",
+          "#A996B1",
+          "#F5C17D"
+        ],
+        "categorical": [
+          "#75A8C7",
+          "#F5C17D",
+          "#CCE29C",
+          "#A996B1",
+          "#DD7F8D",
+          "#96D6C9",
+          "#486F8A",
+          "#BA8955",
+          "#80944F",
+          "#6B577F",
+          "#A14D64",
+          "#397C72"
+        ],
+        "continuous": [
+          "#75A8C7",
+          "#F5C17D",
+          "#CCE29C",
+          "#A996B1",
+          "#DD7F8D",
+          "#96D6C9"
+        ],
+        "missing": "#B8B8B8",
+        "fill_alpha": 1.0,
+        "point_alpha": 1.0,
+        "paired_point_alpha": 1.0,
+        "distribution_point_alpha": 0.55,
+        "distribution_point_darken": 0.2,
+        "categorical_selection": "ordered-prefix",
+        "paired_point_darken": 0.0,
+        "focal_model_mapping": {
+          "focal_slots": [
+            5
+          ],
+          "comparator_slots": [
+            1,
+            2,
+            3,
+            4,
+            6
+          ],
+          "focal_hue_family": "rose",
+          "comparator_hue_families": [
+            "blue",
+            "apricot",
+            "yellow-green",
+            "gray-purple",
+            "turquoise"
+          ],
+          "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
+        },
+        "ordered_slots": [
+          8,
+          2,
+          3,
+          9,
+          12,
+          6,
+          1,
+          7,
+          10,
+          4,
+          5,
+          11
+        ]
+      },
+      "variants": [
+        {
+          "name": "muted-balanced-six",
+          "label": "Six-method focal capacity"
+        },
+        {
+          "name": "muted-balanced-twelve",
+          "label": "Twelve categorical slots",
+          "overrides": {
+            "description": "Twelve fixed muted categorical colors for larger group guides. The first six preserve muted-balanced-six slots; six additional design colors are fixed, never interpolated or recycled.",
+            "focal_model_mapping": {
+              "focal_slots": [
+                5
+              ],
+              "comparator_slots": [
+                1,
+                2,
+                3,
+                4,
+                6,
+                7,
+                8,
+                9,
+                10,
+                12
+              ],
+              "focal_hue_family": "rose",
+              "comparator_hue_families": [
+                "blue",
+                "apricot",
+                "yellow-green",
+                "purple",
+                "turquoise"
+              ],
+              "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "muted-pastel",
+      "title": "Pastel six-color",
+      "tier": "extended",
+      "recommended_preset": "muted-pastel-six",
+      "base": {
+        "description": "Six muted pastel colors: gray, beige, light green, pink, peach, and mint. Approximate displayed sRGB values sampled from flat interiors of a color-managed raster reference; not original design-source values.",
+        "anchors": [
+          "#E9D8C4",
+          "#E9BFDB",
+          "#A2D9C6"
+        ],
+        "categorical": [
+          "#CED2D4",
+          "#E9D8C4",
+          "#D9EAC4",
+          "#E9BFDB",
+          "#FAC3A7",
+          "#A2D9C6"
+        ],
+        "continuous": [
+          "#CED2D4",
+          "#E9D8C4",
+          "#D9EAC4",
+          "#E9BFDB",
+          "#FAC3A7",
+          "#A2D9C6"
+        ],
+        "missing": "#B8B8B8",
+        "fill_alpha": 1.0,
+        "point_alpha": 1.0,
+        "paired_point_alpha": 1.0,
+        "distribution_point_alpha": 0.55,
+        "distribution_point_darken": 0.2,
+        "categorical_selection": "ordered-prefix",
+        "paired_point_darken": 0.0,
+        "focal_model_mapping": {
+          "focal_slots": [
+            5
+          ],
+          "comparator_slots": [
+            1,
+            3,
+            4,
+            6
+          ],
+          "focal_hue_family": "peach",
+          "comparator_hue_families": [
+            "gray",
+            "green",
+            "pink",
+            "mint"
+          ],
+          "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
+        },
+        "ordered_slots": [
+          1,
+          6,
+          3,
+          2,
+          5,
+          4
+        ]
+      },
+      "variants": [
+        {
+          "name": "muted-pastel-six",
+          "label": "Opaque pastel"
+        }
+      ]
+    },
+    {
+      "id": "muted-reference",
+      "title": "Reference six-color",
+      "tier": "extended",
+      "recommended_preset": "muted-reference-six",
+      "base": {
+        "description": "Six fixed coordinated medium-light design colors: blue, green, lavender, warm yellow, rose and turquoise. Visually matched to a supplied scientific multi-panel reference; approximate sRGB design values, not recovered original source colors. Category identities are unordered. Continuous stops are illustrative, not perceptually uniform.",
+        "anchors": [
+          "#8EABC0",
+          "#AD9AB7",
+          "#D9BF7C"
+        ],
+        "categorical": [
+          "#8EABC0",
+          "#94B5A1",
+          "#AD9AB7",
+          "#D9BF7C",
+          "#CC99A4",
+          "#91BCB4"
+        ],
+        "continuous": [
+          "#8EABC0",
+          "#94B5A1",
+          "#AD9AB7",
+          "#D9BF7C",
+          "#CC99A4",
+          "#91BCB4"
+        ],
+        "missing": "#B8B8B8",
+        "fill_alpha": 0.4,
+        "point_alpha": 0.5,
+        "paired_point_alpha": 0.7,
+        "paired_point_darken": 0.0,
+        "paired_point_lighten": 0.0,
+        "distribution_point_alpha": 0.55,
+        "distribution_point_darken": 0.2,
+        "categorical_selection": "ordered-prefix",
+        "focal_model_mapping": {
+          "focal_slots": [
+            3
+          ],
+          "comparator_slots": [
+            1,
+            2,
+            4,
+            5,
+            6
+          ],
+          "focal_hue_family": "purple",
+          "comparator_hue_families": [
+            "blue",
+            "green",
+            "yellow",
+            "rose",
+            "turquoise"
+          ],
+          "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
+        },
+        "ordered_slots": [
+          4,
+          5,
+          3,
+          1,
+          6,
+          2
+        ]
+      },
+      "variants": [
+        {
+          "name": "muted-reference-six",
+          "label": "Soft six-color"
+        }
+      ]
+    },
+    {
+      "id": "blue-green",
+      "title": "Blue / green companions",
+      "tier": "extended",
+      "recommended_preset": "blue-green-yellow",
+      "base": {
+        "description": "Six fixed soft blue, green and golden-yellow design colors: three medium hues followed by lighter counterparts. Category identities are unordered. Continuous stops are illustrative, not perceptually uniform.",
+        "anchors": [
+          "#7BAAC2",
+          "#83B59E",
+          "#D8BA69"
+        ],
+        "categorical": [
+          "#7BAAC2",
+          "#83B59E",
+          "#D8BA69",
+          "#B2CDD9",
+          "#B8D0B1",
+          "#E5D69C"
+        ],
+        "continuous": [
+          "#7BAAC2",
+          "#83B59E",
+          "#D8BA69",
+          "#B2CDD9",
+          "#B8D0B1",
+          "#E5D69C"
+        ],
+        "missing": "#B8B8B8",
+        "fill_alpha": 0.4,
+        "point_alpha": 0.5,
+        "paired_point_alpha": 0.7,
+        "paired_point_darken": 0.0,
+        "paired_point_lighten": 0.0,
+        "distribution_point_alpha": 0.55,
+        "distribution_point_darken": 0.2,
+        "categorical_selection": "ordered-prefix",
+        "focal_model_mapping": {
+          "focal_slots": [
+            3
+          ],
+          "comparator_slots": [
+            1,
+            2,
+            4,
+            5
+          ],
+          "focal_hue_family": "yellow",
+          "comparator_hue_families": [
+            "blue",
+            "green"
+          ],
+          "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
+        },
+        "ordered_slots": [
+          3,
+          6,
+          5,
+          2,
+          1,
+          4
+        ]
+      },
+      "variants": [
+        {
+          "name": "blue-green-yellow",
+          "label": "Yellow companion"
+        },
+        {
+          "name": "blue-green-coral",
+          "label": "Coral companion",
+          "overrides": {
+            "description": "Six fixed soft blue, green and coral design colors: three medium hues followed by lighter counterparts. Category identities are unordered. Continuous stops are illustrative, not perceptually uniform.",
+            "anchors": [
+              "#7DAAC2",
+              "#81B79D",
+              "#D8998E"
+            ],
+            "categorical": [
+              "#7DAAC2",
+              "#81B79D",
+              "#D8998E",
+              "#B7CAD7",
+              "#B7D1B8",
+              "#E7BBB1"
+            ],
+            "continuous": [
+              "#7DAAC2",
+              "#81B79D",
+              "#D8998E",
+              "#B7CAD7",
+              "#B7D1B8",
+              "#E7BBB1"
+            ],
+            "focal_model_mapping": {
+              "focal_slots": [
+                3
+              ],
+              "comparator_slots": [
+                1,
+                2,
+                4,
+                5
+              ],
+              "focal_hue_family": "coral",
+              "comparator_hue_families": [
+                "blue",
+                "green"
+              ],
+              "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "yellow-green",
+      "title": "Yellow / green companions",
+      "tier": "extended",
+      "recommended_preset": "yellow-green",
+      "base": {
+        "description": "Six fixed yellow and green design colors for categorical comparisons: medium gold/green, light gold/green and deep gold/green. Colors encode identities without an ordinal or performance meaning. Continuous stops are illustrative and are not perceptually uniform.",
+        "anchors": [
+          "#D5B14A",
+          "#6E9D72",
+          "#3F7661"
+        ],
+        "categorical": [
+          "#D5B14A",
+          "#6E9D72",
+          "#E9CE7A",
+          "#A5C39B",
+          "#A9872E",
+          "#3F7661"
+        ],
+        "continuous": [
+          "#E9CE7A",
+          "#D5B14A",
+          "#A5C39B",
+          "#6E9D72",
+          "#3F7661"
+        ],
+        "missing": "#B8B8B8",
+        "fill_alpha": 0.4,
+        "point_alpha": 0.5,
+        "paired_point_alpha": 0.7,
+        "paired_point_darken": 0.0,
+        "paired_point_lighten": 0.0,
+        "distribution_point_alpha": 0.55,
+        "distribution_point_darken": 0.2,
+        "categorical_selection": "ordered-prefix",
+        "focal_model_mapping": {
+          "focal_slots": [
+            1
+          ],
+          "comparator_slots": [
+            2,
+            4,
+            6
+          ],
+          "focal_hue_family": "yellow",
+          "comparator_hue_families": [
+            "green"
+          ],
+          "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
+        },
+        "ordered_slots": [
+          5,
+          1,
+          3,
+          4,
+          2,
+          6
+        ]
+      },
+      "variants": [
+        {
+          "name": "yellow-green",
+          "label": "Two hue families"
+        },
+        {
+          "name": "yellow-green-red",
+          "label": "Red companion",
+          "overrides": {
+            "description": "Six fixed muted yellow, green and red design colors for categorical comparisons: three medium hues and their lighter counterparts. Colors encode identities without an ordinal or performance meaning. Continuous stops are illustrative and are not perceptually uniform.",
+            "anchors": [
+              "#D6B14C",
+              "#639B77",
+              "#C97070"
+            ],
+            "categorical": [
+              "#D6B14C",
+              "#639B77",
+              "#C97070",
+              "#E9D58C",
+              "#ACC9A5",
+              "#DDA5A1"
+            ],
+            "continuous": [
+              "#639B77",
+              "#ACC9A5",
+              "#E9D58C",
+              "#D6B14C",
+              "#DDA5A1",
+              "#C97070"
+            ],
+            "focal_model_mapping": {
+              "focal_slots": [
+                3
+              ],
+              "comparator_slots": [
+                1,
+                2,
+                4,
+                5
+              ],
+              "focal_hue_family": "red",
+              "comparator_hue_families": [
+                "yellow",
+                "green"
+              ],
+              "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
+            },
+            "ordered_slots": [
+              3,
+              6,
+              4,
+              1,
+              2,
+              5
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "warm-yellow-leaf",
+      "title": "Warm yellow / leaf green",
+      "tier": "extended",
+      "recommended_preset": "warm-yellow-leaf-crisper",
+      "base": {
+        "description": "One orange-yellow-green family: six fixed medium-tone unordered categorical slots with separated golden-orange/apricot-orange and leaf-green/yellow-green hues, plus a light crisper orange-yellow-leaf-green continuous ramp. Reuse the ramp as an explicitly requested ordered categorical rank map; never infer model rank colors automatically.",
+        "anchors": [
+          "#FFBC78",
+          "#FFEC9E",
+          "#B5E0BA"
+        ],
+        "categorical": [
+          "#D18A05",
+          "#E0B338",
+          "#228A76",
+          "#E98452",
+          "#399F5C",
+          "#8BA735"
+        ],
+        "continuous": [
+          "#FFBC78",
+          "#FFC680",
+          "#FFD089",
+          "#FFDC91",
+          "#FFE799",
+          "#FCEE9E",
+          "#EBECA7",
+          "#D9E7AD",
+          "#C5E4B2",
+          "#B5E0BA"
+        ],
+        "missing": "#B8B8B8",
+        "fill_alpha": 0.4,
+        "point_alpha": 0.5,
+        "paired_point_alpha": 0.7,
+        "paired_point_darken": 0.0,
+        "paired_point_lighten": 0.0,
+        "distribution_point_alpha": 0.55,
+        "distribution_point_darken": 0.2,
+        "categorical_selection": "ordered-prefix",
+        "focal_model_mapping": {
+          "focal_slots": [
+            3
+          ],
+          "comparator_slots": [
+            1,
+            2,
+            4
+          ],
+          "focal_hue_family": "teal",
+          "comparator_hue_families": [
+            "gold",
+            "yellow",
+            "orange"
+          ],
+          "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
+        },
+        "ordered_slots": [
+          4,
+          1,
+          2,
+          6,
+          5,
+          3
+        ]
+      },
+      "variants": [
+        {
+          "name": "warm-yellow-leaf-crisper",
+          "label": "Medium categorical / light ramp"
+        }
+      ]
+    }
+  ]
+}

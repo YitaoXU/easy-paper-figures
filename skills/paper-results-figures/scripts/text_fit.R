@@ -69,6 +69,7 @@ measure_text_panel_mm <- function(plot, cfg) {
   arial_pdf_device(path, width = cfg$width, height = cfg$height)
   on.exit({grDevices::dev.off(); unlink(path)}, add = TRUE)
   g <- ggplot2::ggplotGrob(plot)
+  if (length(cfg$reference_lines)) g <- frame_numeric_reference_labels(g, cfg, draw = FALSE)$grob
   panels <- g$layout[grepl("^panel($|-)", g$layout$name), , drop = FALSE]
   # Null panel units have zero physical extent here; subtract only fixed units.
   c(width = (cfg$width_mm - grid::convertWidth(sum(g$widths), "mm", valueOnly = TRUE)) /

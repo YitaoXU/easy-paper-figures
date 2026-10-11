@@ -1,0 +1,35 @@
+{
+  "plot_type": "mutl-comparison",
+  "data_mode": "raw",
+  "layout": "long",
+  "model": "model",
+  "value": "score",
+  "id": "observation_id",
+  "paired": true,
+  "style": "violin",
+  "orientation": "horizontal",
+  "direction": "higher",
+  "highlight": "Ours",
+  "layout_columns": 4,
+  "show_points": false,
+  "show_sd": false,
+  "show_significance": false,
+  "value_label": "Score",
+  "metric_domain": [
+    0,
+    1
+  ],
+  "limits": [
+    0,
+    1
+  ],
+  "reference_lines": [
+    {
+      "value": 0.05,
+      "label": "Baseline = 0.05"
+    }
+  ],
+  "input": "INPUT_DATA_PATH",
+  "output_prefix": "OUTPUT_PARENT/pastel-four-violin/pastel-four-violin",
+  "palette": "pastel-green-blue-purple-peach"
+}

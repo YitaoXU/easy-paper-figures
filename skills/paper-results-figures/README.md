@@ -188,18 +188,30 @@ Every preview has an independent folder with a usable prompt and a link to a fix
 <td align="center" width="300"><a href="examples/palette-blue-pink-purple-peach-transparent/prompt.md"><img src="examples/palette-blue-pink-purple-peach-transparent/preview-card.svg" width="300" height="285" alt="Violin palette demonstration"></a><br><strong>Violin palette demonstration</strong><br><code>blue-pink-purple-peach-transparent</code><br><a href="examples/palette-blue-pink-purple-peach-transparent/prompt.md">Prompt and CSV</a> · <a href="examples/palette-blue-pink-purple-peach-transparent/preview.png">Actual export</a></td>
 </tr></table>
 
+Single-metric comparisons optionally add numeric thresholds such as `reference_lines: [{"value": 0.05, "label": "Baseline = 0.05"}]`. They default to a red compact dashed line (`linetype: "42"`, dash/gap ratio 2:1) along the numeric axis, with an optional measured exterior Arial label; color, line type and physical line/text sizes are configurable. Reference values affect the displayed axis range without changing observations or summaries. Vertical reference labels also reserve the measured upper bounds of rotated mean annotations at the original font size. See the [single-metric guide](references/multi-comparison.md#optional-numeric-reference-lines) for the continuous-axis contract and both orientations.
+
 ## Fixed palette references
 
-Named palettes preserve fixed RGB assignments. Transparent variants apply mark-specific opacity. Each scientific preview identifies its actual palette. Click a palette reference to view the original-resolution image.
+The catalog is organized into **11 families: 6 common and 5 extended**, with opacity/brightness/capacity variants grouped together. Start here; every legacy preset name and exact color profile remains supported. [Full family catalog](references/palette-catalog.md) · [Fixed color contract](references/palette-contract.md).
 
-<table><tr>
-<td align="center" width="900" colspan="2"><a href="examples/palettes/palette-overview.png"><img src="examples/palettes/palette-overview.png" width="900" alt="palette-overview"></a><br><code>palette-overview</code></td>
-</tr><tr>
-<td align="center" width="450"><a href="examples/palettes/palette-muted-pastel-six.png"><img src="examples/palettes/palette-muted-pastel-six.png" width="450" alt="palette-muted-pastel-six"></a><br><code>palette-muted-pastel-six</code></td>
-<td align="center" width="450"><a href="examples/palettes/palette-muted-balanced-six.png"><img src="examples/palettes/palette-muted-balanced-six.png" width="450" alt="palette-muted-balanced-six"></a><br><code>palette-muted-balanced-six</code></td>
-</tr></table>
+| Color family | Recommended preset | Use |
+| --- | --- | --- |
+| Pastel four-color | `pastel-green-blue-purple-peach` | Soft four-method distributions |
+| Green / blue / purple | `muted-green-blue-purple` | Stronger hue contrast; lighter RGB variant available |
+| Muted rainbow | `rainbow-transparent` | Several distinct method identities |
+| Blue / yellow | `blue-yellow-transparent` | Two hue families; opaque fill variant available |
+| Blue / pink / purple / peach | `blue-pink-purple-peach-transparent` | Four coordinated hue families |
+| Balanced multicolor | `muted-balanced-twelve` | Six-color core and twelve-category extension |
 
-Paired scatter supports a fixed `point_color` without a color covariate or legend; omitted marginal colors inherit that same transformed color. Categorical guides are measured together with the statistics and placed above them; the automatic lower statistics frame is at least as wide as the upper guide, with actual Arial text and inner clearance checked. Explicit requests can permit a bounded number of points beneath a transparent category-guide background while keeping labels/keys and statistics clear. Green-blue-purple paired marks use an 18% white blend after their existing darkening; base RGB identities and other figure families retain their colors. Additional six-category palettes include `blue-green-yellow`, `blue-green-coral`, `muted-reference-six`, `yellow-green`, `yellow-green-red` and `warm-yellow-leaf-crisper`. The last preset separates golden orange from apricot orange and leaf green from yellow green, alongside yellow and teal; medium-tone scatter colors share one family with a light orange-yellow-green ramp.
+<p align="center"><a href="examples/palettes/palette-families-overview.png"><img src="examples/palettes/palette-families-overview.png" width="900" alt="Common palette families"></a></p>
+
+The saved four-color option uses pale green `#D9EAC4`, pale blue `#B5D0E0`, purple `#A396B9` and peach `#F6D1B9`, with fill opacity 0.40.
+
+The extended catalog retains pastel six-color, reference six-color, blue/green with yellow/coral companions, yellow/green with a red companion and warm yellow/leaf-green options. Near-looking RGB lists retain their distinct variants; identical lists share definitions.
+
+Scientific example: [pastel four-color violin](examples/palette-pastel-green-blue-purple-peach/prompt.md).
+
+[Legacy full overview](examples/palettes/palette-overview.png) · [Pastel four-color reference](examples/palettes/palette-pastel-green-blue-purple-peach.png)
 
 ## File organization
 
@@ -211,3 +223,9 @@ Paired scatter supports a fixed `point_color` without a color covariate or legen
 When a different encoding is needed, provide the result data and a reference figure, then identify the visual elements to retain. The agent inspects the scientific meaning and chooses or adapts a reusable layout.
 
 New figures use complete 56 × 40 mm or 42 × 40 mm canvases; a two-slot horizontal compound canvas is 88 × 40 mm. Bar, box and violin outer outlines default to 0.28 mm. Saved explicit figure settings retain their values. Existing gallery images retain their previously exported sizes. The single `warm-yellow-leaf-crisper` family combines medium categorical colors with a light orange-yellow-green ramp for continuous guides or explicitly ordered named maps; see its [color reference](examples/palettes/palette-warm-yellow-leaf-crisper.png).
+
+Color sequence is independent of opacity: use `palette_order: ordered` (default) for nearby hues together, or `palette_order: shuffled` with `palette_seed: 42` for a repeatable permutation of the same selected colors. The seed accepts nonnegative integers. Scientific model/data order, continuous gradients and reserved focal hues stay governed by their own contracts. Explicit named maps, including maps stored in a resolved configuration, take priority; remove those maps to apply a new automatic order.
+
+![Ordered and shuffled colors](examples/palettes/palette-order-comparison.png)
+
+Composite bars with inside values use 88 × 54 mm when dimensions are omitted; shared-axis metric bars with mean lines use 70 × 46 mm. Explicit canvas allocations remain authoritative.

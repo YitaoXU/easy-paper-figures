@@ -32,6 +32,8 @@ Choose a preview and copy the fenced prompt. For its supplied fixed CSV, edit on
 <td align="center" width="300"><a href="multi-comparison-significance-horizontal/prompt.md"><img src="multi-comparison-significance-horizontal/preview-card.svg" width="300" height="285" alt="Horizontal significance brackets"></a><br><strong>Horizontal significance brackets</strong><br><code>blue-pink-purple-peach-transparent</code><br><a href="multi-comparison-significance-horizontal/prompt.md">Prompt and CSV</a> · <a href="multi-comparison-significance-horizontal/preview.png">Actual export</a></td>
 </tr></table>
 
+<p><a href="palette-pastel-green-blue-purple-peach/prompt.md"><img src="palette-pastel-green-blue-purple-peach/preview-card.svg" width="300" height="285" alt="Pastel four-color violin"></a><br><strong>Pastel four-color violin</strong> · <code>pastel-green-blue-purple-peach</code> · <a href="palette-pastel-green-blue-purple-peach/prompt.md">Prompt and CSV</a></p>
+
 ### Several metrics across methods
 
 <table><tr>
@@ -155,3 +157,5 @@ Named palettes preserve fixed RGB assignments. Transparent variants apply mark-s
 ## File organization
 
 `examples/<figure-id>/prompt.md` is the user-facing example, `request.json` provides a minimal configuration structure where useful, and `preview.png` is the unchanged scientific export and `preview-card.svg` contains it in an equal-size display frame. Shared synthetic inputs live in `examples/data/`. Runtime instructions, scientific contracts, reusable renderers and fixed palette definitions live in `SKILL.md`, `references/`, `scripts/` and `palettes/`.
+
+[Color order comparison](palettes/palette-order-comparison.png) shows the default ordered sequence and a reproducible shuffle with seed 42, using the same colors and opacity in each pair.

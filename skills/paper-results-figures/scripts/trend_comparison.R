@@ -12,7 +12,7 @@ config_path <- normalizePath(args[1],mustWork=TRUE)
 defaults <- list(plot_type="trend-comparsion",input=NULL,output_prefix=NULL,mode="continuous",x="x",value="value",model="model",metric=NULL,id=NULL,
   sampling_unit=NULL,missing="error",highlight=NULL,model_order=NULL,metric_order=NULL,category_order=NULL,model_labels=NULL,metric_labels=NULL,category_labels=NULL,
   regression="linear",fit_extent="axis",slope_reference=NULL,statistic_labels=NULL,legend_labels=NULL,statistics=c("slope","r_squared"),p_value_target="auto",show_ci=NULL,ci_level=.95,show_points=TRUE,
-  palette="rainbow-transparent",color_values=NULL,palette_mapping=NULL,point_alpha=NULL,point_darken=NULL,fill_alpha=NULL,point_size=NULL,line_width=.25,shape_values=NULL,
+  palette="rainbow-transparent",palette_order="ordered",palette_seed=42,color_values=NULL,palette_mapping=NULL,point_alpha=NULL,point_darken=NULL,fill_alpha=NULL,point_size=NULL,line_width=.25,shape_values=NULL,
   dual_axis=FALSE,orientation="horizontal",facet_scales="free",title=NULL,panel_tag=NULL,x_label=NULL,y_label=NULL,
   x_limits=NULL,x_breaks=NULL,y_limits=NULL,y_breaks=NULL,secondary_limits=NULL,secondary_breaks=NULL,
   width_mm=NULL,height_mm=NULL,layout_columns=3,base_size=7,axis_text_size=6,legend_size=6,title_size=7.5,label_angle="auto",label_wrap="auto",
@@ -20,6 +20,7 @@ defaults <- list(plot_type="trend-comparsion",input=NULL,output_prefix=NULL,mode
 user <- jsonlite::fromJSON(config_path)
 unknown <- setdiff(names(user),names(defaults));if(length(unknown))stop("Unknown keys: ",paste(unknown,collapse=", "))
 cfg <- utils::modifyList(defaults,user,keep.null=TRUE)
+validate_palette_order_controls(cfg)
 if(!cfg$plot_type %in% c("trend-comparsion","trend-comparison"))stop("Invalid plot_type.")
 if(!cfg$mode %in% c("continuous","categorical"))stop("mode must be continuous or categorical.")
 if(!cfg$fit_extent %in% c("axis","observed"))stop("fit_extent must be axis or observed.")
@@ -72,7 +73,8 @@ palettes<-jsonlite::fromJSON(file.path(skill_dir,"palettes/palettes.json"),simpl
 if(!cfg$palette %in% names(palettes))stop("Unknown palette.")
 palette<-palettes[[cfg$palette]]
 color_resolution<-resolve_model_palette_mapping(series,palette,
- focal=if(cfg$dual_axis)character()else cfg$highlight,colors=cfg$color_values,saved_record=cfg$palette_mapping)
+ focal=if(cfg$dual_axis)character()else cfg$highlight,colors=cfg$color_values,saved_record=cfg$palette_mapping,
+ palette_order=cfg$palette_order,palette_seed=cfg$palette_seed)
 colors<-color_resolution$colors;cfg$palette_mapping<-color_resolution$record
 if(!all(series %in% names(colors)))stop("color_values must name every series.")
 cfg$color_values<-as.list(colors)
