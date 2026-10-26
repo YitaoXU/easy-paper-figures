@@ -14,6 +14,27 @@ score 是 [0,1] 范围的无量纲分数，越高越好，突出显示 Ours。
 
 替换输入路径和输出文件夹。如果数据本身无法明确说明，请给出指标含义、观测单位、配对关系和改善方向。使用图库 Prompt 时，可以直接提供附带的 CSV，也可以换成自己的结果数据。Agent 会完成明确的列映射，创建最小绘图请求，检查图片并导出结果。
 
+## 目录
+
+- [将图库 Prompt 换成自己的数据](#将图库-prompt-换成自己的数据)
+- [支持的图形](#支持的图形)
+- [外观与输出](#外观与输出)
+- [合成数据预览](#合成数据预览)
+- [配对观测](#配对观测)
+- [单指标多方法](#单指标多方法)
+- [多指标多方法](#多指标多方法)
+- [分组分布](#分组分布)
+- [断轴箱线图](#断轴箱线图)
+- [趋势比较](#趋势比较)
+- [雷达图](#雷达图)
+- [分组环形热图与小提琴图](#分组环形热图与小提琴图)
+- [色板](#色板)
+- [固定色板参考](#固定色板参考)
+- [相同数据的不同色板](#相同数据的不同色板)
+- [色板顺序](#色板顺序)
+- [文件组织](#文件组织)
+- [扩展图形](#扩展图形)
+
 ## 将图库 Prompt 换成自己的数据
 
 每张预览都链接到一段可复制的提示词，统一分为两部分。使用随附合成 CSV 时，只改 `INPUT_DATA_PATH` 和 `OUTPUT_PARENT`；使用自己的 CSV、TSV 或 XLSX 时，修改 **DATA SETTINGS（数据设置）** 中的值，保留 **FIGURE SETTINGS（图形设置）** 即可沿用展示图的布局与配色。
@@ -84,6 +105,8 @@ score 是 [0,1] 范围的无量纲分数，越高越好，突出显示 Ours。
 <td align="center" width="300"><a href="examples/multi-comparison-significance/prompt.md"><img src="examples/multi-comparison-significance/preview-card.svg" width="300" height="285" alt="纵向显著性括号"></a><br><strong>纵向显著性括号</strong><br><code>rainbow-transparent</code><br><a href="examples/multi-comparison-significance/prompt.md">Prompt 与 CSV</a> · <a href="examples/multi-comparison-significance/preview.png">实际导出</a></td>
 <td align="center" width="300"><a href="examples/multi-comparison-significance-horizontal/prompt.md"><img src="examples/multi-comparison-significance-horizontal/preview-card.svg" width="300" height="285" alt="横向显著性括号"></a><br><strong>横向显著性括号</strong><br><code>blue-pink-purple-peach-transparent</code><br><a href="examples/multi-comparison-significance-horizontal/prompt.md">Prompt 与 CSV</a> · <a href="examples/multi-comparison-significance-horizontal/preview.png">实际导出</a></td>
 </tr></table>
+
+单指标比较可选添加数值参考线，例如 `reference_lines: [{"value": 0.05, "label": "Baseline = 0.05"}]`。默认沿数值轴绘制红色紧凑虚线（`linetype: "42"`，实线段与空档长度比例为 2:1），可配经测量的外部 Arial 标签，并配置颜色、线型以及以毫米计的线宽和文字大小。参考值纳入显示轴范围，原始观测和统计汇总保持不变。 纵向参考线标签还会按原字号为旋转后的均值标注预留经测量的顶部边界。横纵方向和连续轴的使用要求见[单指标指南](references/multi-comparison.md#optional-numeric-reference-lines)。
 
 ### 多指标多方法
 
@@ -169,6 +192,35 @@ score 是 [0,1] 范围的无量纲分数，越高越好，突出显示 Ours。
 <td align="center" width="300"><a href="examples/grouped-circular-heatmap-twelve-groups/prompt.md"><img src="examples/grouped-circular-heatmap-twelve-groups/preview-card.svg" width="300" height="285" alt="环形热图：12 个小组"></a><br><strong>环形热图：12 个小组</strong><br><code>muted-green-blue-purple-light</code><br><a href="examples/grouped-circular-heatmap-twelve-groups/prompt.md">Prompt 与 CSV</a> · <a href="examples/grouped-circular-heatmap-twelve-groups/preview.png">实际导出</a></td>
 </tr></table>
 
+## 色板
+
+### 固定色板参考
+
+色盘按 **11 个色系组织：6 个常用、5 个扩展**，同一色系的透明度、亮度和容量变化归为变体。优先从下表选择；旧预设名称与原有颜色设置继续兼容。[完整色系目录](references/palette-catalog.md) · [固定颜色规则](references/palette-contract.md)。
+
+| 色系 | 推荐预设 | 适用情形 |
+| --- | --- | --- |
+| 淡绿 / 淡蓝 / 紫 / 桃色 | `pastel-green-blue-purple-peach` | 柔和的四模型分布图 |
+| 绿 / 蓝 / 紫 | `muted-green-blue-purple` | 更强的色相区分，也可选更浅 RGB 变体 |
+| 柔和彩虹 | `rainbow-transparent` | 多种方法的分类对比 |
+| 蓝 / 黄 | `blue-yellow-transparent` | 两种主色相，可选不透明填充 |
+| 蓝 / 粉 / 紫 / 桃色 | `blue-pink-purple-peach-transparent` | 四种协调色相 |
+| 平衡多色 | `muted-balanced-twelve` | 六色核心与十二分类颜色扩展 |
+
+自动分配两种或三种分类颜色时，会从允许的固定色中选择最小 Lab 色差更大的组合，并将焦点方法的保留色纳入比较，减少“两色接近、第三色突出”的情况；已有命名颜色映射优先。蓝／粉／紫／桃色系的两个变体均将桃色从 `#F6D1B9` 略微加深为 `#E8B594`。 [三色绘图 Prompt](examples/palette-three-colors/prompt.md) · [预览](examples/palette-three-colors/preview.png)。
+
+<p align="center"><a href="examples/palettes/palette-families-overview.png"><img src="examples/palettes/palette-families-overview.png" width="900" alt="Common palette families"></a></p>
+
+当前保存的四颜色系：淡绿 `#D9EAC4`、淡蓝 `#B5D0E0`、紫 `#A396B9`、桃色 `#F6D1B9`，填充不透明度 0.40。
+
+扩展目录保留柔和六色、参考六色、蓝绿配黄/珊瑚、黄绿配红及暖黄叶绿方案。相近 RGB 保留为变体；只有完全相同的颜色列表共用定义。
+
+作图示例：[淡绿／淡蓝／紫／桃色小提琴图](examples/palette-pastel-green-blue-purple-peach/prompt.md)。
+
+[旧版完整总览](examples/palettes/palette-overview.png) · [当前四色参考](examples/palettes/palette-pastel-green-blue-purple-peach.png)
+
+统一的 `warm-yellow-leaf-crisper` 色板同时包含中等深浅的分类颜色与浅色橙黄绿渐变，可用于连续色标或明确指定顺序的命名颜色映射；见[色板参考](examples/palettes/palette-warm-yellow-leaf-crisper.png)。
+
 ### 相同数据的不同色板
 
 <table><tr>
@@ -188,44 +240,20 @@ score 是 [0,1] 范围的无量纲分数，越高越好，突出显示 Ours。
 <td align="center" width="300"><a href="examples/palette-blue-pink-purple-peach-transparent/prompt.md"><img src="examples/palette-blue-pink-purple-peach-transparent/preview-card.svg" width="300" height="285" alt="Violin palette demonstration"></a><br><strong>Violin palette demonstration</strong><br><code>blue-pink-purple-peach-transparent</code><br><a href="examples/palette-blue-pink-purple-peach-transparent/prompt.md">Prompt 与 CSV</a> · <a href="examples/palette-blue-pink-purple-peach-transparent/preview.png">实际导出</a></td>
 </tr></table>
 
-单指标比较可选添加数值参考线，例如 `reference_lines: [{"value": 0.05, "label": "Baseline = 0.05"}]`。默认沿数值轴绘制红色紧凑虚线（`linetype: "42"`，实线段与空档长度比例为 2:1），可配经测量的外部 Arial 标签，并配置颜色、线型以及以毫米计的线宽和文字大小。参考值纳入显示轴范围，原始观测和统计汇总保持不变。 纵向参考线标签还会按原字号为旋转后的均值标注预留经测量的顶部边界。横纵方向和连续轴的使用要求见[单指标指南](references/multi-comparison.md#optional-numeric-reference-lines)。
+### 色板顺序
 
-## 固定色板参考
+颜色顺序与透明度独立：`palette_order: ordered` 为默认值，将相近颜色排在邻近位置；`palette_order: shuffled` 使用 `palette_seed: 42`，对同一组已选颜色进行可重复的乱序。种子可设为其他非负整数。此选项不改变模型/数据的展示顺序、连续渐变或焦点方法保留的色相。显式颜色映射（包括保存后的完整配置中的映射）优先；希望重新自动分配时，先移除这些映射。乱序偶尔可能与顺序结果一致。
 
-色盘按 **11 个色系组织：6 个常用、5 个扩展**，同一色系的透明度、亮度和容量变化归为变体。优先从下表选择；旧预设名称与原有颜色设置继续兼容。[完整色系目录](references/palette-catalog.md) · [固定颜色规则](references/palette-contract.md)。
-
-| 色系 | 推荐预设 | 适用情形 |
-| --- | --- | --- |
-| 淡绿 / 淡蓝 / 紫 / 桃色 | `pastel-green-blue-purple-peach` | 柔和的四模型分布图 |
-| 绿 / 蓝 / 紫 | `muted-green-blue-purple` | 更强的色相区分，也可选更浅 RGB 变体 |
-| 柔和彩虹 | `rainbow-transparent` | 多种方法的分类对比 |
-| 蓝 / 黄 | `blue-yellow-transparent` | 两种主色相，可选不透明填充 |
-| 蓝 / 粉 / 紫 / 桃色 | `blue-pink-purple-peach-transparent` | 四种协调色相 |
-| 平衡多色 | `muted-balanced-twelve` | 六色核心与十二分类颜色扩展 |
-
-<p align="center"><a href="examples/palettes/palette-families-overview.png"><img src="examples/palettes/palette-families-overview.png" width="900" alt="Common palette families"></a></p>
-
-当前保存的四颜色系：淡绿 `#D9EAC4`、淡蓝 `#B5D0E0`、紫 `#A396B9`、桃色 `#F6D1B9`，填充不透明度 0.40。
-
-扩展目录保留柔和六色、参考六色、蓝绿配黄/珊瑚、黄绿配红及暖黄叶绿方案。相近 RGB 保留为变体；只有完全相同的颜色列表共用定义。
-
-作图示例：[淡绿／淡蓝／紫／桃色小提琴图](examples/palette-pastel-green-blue-purple-peach/prompt.md)。
-
-[旧版完整总览](examples/palettes/palette-overview.png) · [当前四色参考](examples/palettes/palette-pastel-green-blue-purple-peach.png)
+![Ordered and shuffled colors](examples/palettes/palette-order-comparison.png)
 
 ## 文件组织
 
 `examples/<figure-id>/prompt.md` 是面向用户的使用示例，`request.json` 在适用时提供最小配置结构，`preview.png` 是未经修改的科学导出，`preview-card.svg` 将其等比例放入统一尺寸的展示框。共享合成输入集中放在 `examples/data/`。运行时说明、科学契约、可复用渲染器和固定色板分别位于 `SKILL.md`、`references/`、`scripts/` 和 `palettes/`。
 
-
-## 扩展图形与色板
+## 扩展图形
 
 若需要其他表达形式，请提供结果数据和参考图，并说明需要保留哪些视觉元素。Agent 会检查数据的科学含义，再选择或调整可复用的布局。
 
-新图默认使用包含全部文字的 56 × 40 mm 或 42 × 40 mm 画布；横向占用两格的组合图使用 88 × 40 mm。柱状图、箱型图和小提琴图的外轮廓默认 0.28 mm。已保存的显式图形设置继续保留，既有示例预览保持原导出尺寸。统一的 `warm-yellow-leaf-crisper` 色板同时包含中等深浅的分类颜色与浅色橙黄绿渐变，可用于连续色标或明确指定顺序的命名颜色映射；见[色板参考](examples/palettes/palette-warm-yellow-leaf-crisper.png)。
-
-颜色顺序与透明度独立：`palette_order: ordered` 为默认值，将相近颜色排在邻近位置；`palette_order: shuffled` 使用 `palette_seed: 42`，对同一组已选颜色进行可重复的乱序。种子可设为其他非负整数。此选项不改变模型/数据的展示顺序、连续渐变或焦点方法保留的色相。显式颜色映射（包括保存后的完整配置中的映射）优先；希望重新自动分配时，先移除这些映射。乱序偶尔可能与顺序结果一致。
-
-![Ordered and shuffled colors](examples/palettes/palette-order-comparison.png)
+新图默认使用包含全部文字的 56 × 40 mm 或 42 × 40 mm 画布；横向占用两格的组合图使用 88 × 40 mm。柱状图、箱型图和小提琴图的外轮廓默认 0.28 mm。已保存的显式图形设置继续保留，既有示例预览保持原导出尺寸。
 
 未指定尺寸时，带内部数值的共享行/上下堆叠柱形图使用 88 × 54 mm，共享坐标的指标柱形与均值线使用 70 × 46 mm，以保留数值、SD 与图例所需空间。显式指定的画布尺寸优先。

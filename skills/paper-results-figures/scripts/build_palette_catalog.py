@@ -43,6 +43,11 @@ def materialize(registry):
             slots = roles["focal_slots"] + roles["comparator_slots"]
             if len(set(slots)) != len(slots) or any(not 1 <= x <= len(palette["categorical"]) for x in slots):
                 raise ValueError(f"Invalid focal/comparator slots: {name}")
+            small = roles.get("small_set_comparator_slots")
+            if small is not None and (not small or any(type(x) is not int for x in small)
+                    or len(set(small)) != len(small) or set(small) & set(roles["focal_slots"])
+                    or any(not 1 <= x <= len(palette["categorical"]) for x in small)):
+                raise ValueError(f"Invalid small-set comparator slots: {name}")
             result[name] = palette
             names.append(name)
         if family["recommended_preset"] not in names:

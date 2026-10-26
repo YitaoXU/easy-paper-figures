@@ -428,17 +428,17 @@
       "tier": "common",
       "recommended_preset": "blue-pink-purple-peach-transparent",
       "base": {
-        "description": "Blue, pink, purple and peach sampled from interior point-color regions of a supplied raster reference after conversion of its embedded color profile to sRGB; approximate displayed RGB.",
+        "description": "Blue, pink, purple and peach sampled from interior point-color regions of a supplied raster reference after conversion of its embedded color profile to sRGB; approximate displayed RGB. Peach is slightly deepened by user request.",
         "anchors": [
           "#7E8AB9",
           "#DEAFC3",
-          "#F6D1B9"
+          "#E8B594"
         ],
         "categorical": [
           "#7E8AB9",
           "#DEAFC3",
           "#A396B9",
-          "#F6D1B9",
+          "#E8B594",
           "#96A3D0",
           "#BAADD0"
         ],
@@ -447,7 +447,7 @@
           "#A396B9",
           "#BAADD0",
           "#DEAFC3",
-          "#F6D1B9"
+          "#E8B594"
         ],
         "missing": "#B8B8B8",
         "fill_alpha": 1.0,
@@ -472,7 +472,19 @@
             "blue",
             "purple"
           ],
-          "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
+          "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection",
+          "small_set_comparator_slots": [
+            1,
+            2,
+            3,
+            5,
+            6
+          ],
+          "small_set_comparator_hue_families": [
+            "blue",
+            "pink",
+            "purple"
+          ]
         },
         "ordered_slots": [
           1,
@@ -492,7 +504,7 @@
           "name": "blue-pink-purple-peach-transparent",
           "label": "Soft fill",
           "overrides": {
-            "description": "Transparent variant of blue-pink-purple-peach; identical approximate sampled sRGB slots with lower opacity.",
+            "description": "Transparent variant of blue-pink-purple-peach; identical fixed sRGB slots, including the slightly deepened peach, with lower opacity.",
             "fill_alpha": 0.4,
             "point_alpha": 0.3,
             "paired_point_alpha": 0.6

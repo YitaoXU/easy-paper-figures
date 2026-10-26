@@ -35,11 +35,35 @@ order_palette_slots <- function(slots, palette, palette_order = "ordered", palet
 }
 
 # Fixed identities are independent of scores, input rows and display order.
+# For two/three colors, search fixed eligible slots instead of taking a prefix.
+# Maximize the closest Lab pair; use relative balance to break equal minima.
+# Including reserved slots in the score avoids a close comparator pair beside
+# a distant focal color. No RGB values, role capacities or saved maps change.
+select_small_palette_slots <- function(slots, n, palette, reserved = integer()) {
+  if (n < 0L || n > length(slots)) stop("More categories than eligible fixed palette slots.")
+  if (!n) return(integer())
+  if (n + length(reserved) < 2L || n + length(reserved) > 3L || n == length(slots))
+    return(slots[seq_len(n)])
+  rgb <- t(grDevices::col2rgb(palette$categorical)) / 255
+  lab <- grDevices::convertColor(rgb, from = "sRGB", to = "Lab", scale.in = 1)
+  distances <- as.matrix(stats::dist(lab))
+  candidates <- utils::combn(slots, n, simplify = FALSE)
+  scores <- vapply(candidates, function(candidate) {
+    chosen <- c(reserved, candidate)
+    d <- distances[chosen, chosen, drop = FALSE]
+    pairs <- d[lower.tri(d)]
+    c(min(pairs), min(pairs) / max(pairs))
+  }, numeric(2))
+  best <- order(-scores[1, ], -scores[2, ], seq_along(candidates))[1]
+  candidates[[best]]
+}
+
 fixed_palette_mapping <- function(categories, palette, palette_order = "ordered", palette_seed = 42) {
   keys <- sort(unique(as.character(categories)), method = "radix")
   if (length(keys) > length(palette$categorical))
     stop("More categories than fixed palette slots; request an extended palette or provide an authorized named color_values map.")
-  slots <- order_palette_slots(seq_along(keys), palette, palette_order, palette_seed)
+  selected <- select_small_palette_slots(seq_along(palette$categorical), length(keys), palette)
+  slots <- order_palette_slots(selected, palette, palette_order, palette_seed)
   setNames(palette$categorical[slots], keys)
 }
 
@@ -71,7 +95,8 @@ resolve_model_palette_mapping <- function(categories, palette, focal = NULL,
     return(list(colors = result, record = record))
   }
   if (!length(focal)) {
-    slots <- order_palette_slots(seq_along(keys), palette, palette_order, palette_seed)
+    selected <- select_small_palette_slots(seq_along(palette$categorical), length(keys), palette)
+    slots <- order_palette_slots(selected, palette, palette_order, palette_seed)
     result <- setNames(palette$categorical[slots], keys)
     return(list(colors = result, record = list(policy = "fixed-palette-model-identity",
       focal_models = character(), base_colors = as.list(result),
@@ -92,13 +117,23 @@ resolve_model_palette_mapping <- function(categories, palette, focal = NULL,
   if (length(opponents) > length(comparator_slots))
     stop("More comparator models than reserved contrasting palette slots; select a suitable palette or provide an authorized named color_values map. Automatic colors are never invented or recycled.")
   focal_used <- order_palette_slots(focal_slots[seq_along(focal)], palette, palette_order, palette_seed)
-  opponent_used <- order_palette_slots(comparator_slots[seq_along(opponents)], palette, palette_order, palette_seed)
+  eligible <- comparator_slots
+  if (length(keys) <= 3L && !is.null(roles$small_set_comparator_slots)) {
+    eligible <- as.integer(unlist(roles$small_set_comparator_slots))
+    if (anyNA(eligible) || anyDuplicated(eligible) || any(eligible %in% focal_slots) ||
+        any(eligible < 1L | eligible > length(palette$categorical)))
+      stop("Invalid small-set comparator palette slots.")
+  }
+  selected <- select_small_palette_slots(eligible, length(opponents), palette, reserved = focal_used)
+  opponent_used <- order_palette_slots(selected, palette, palette_order, palette_seed)
   assigned <- c(setNames(focal_used, focal), setNames(opponent_used, opponents))[keys]
   result <- setNames(palette$categorical[assigned], keys)
   list(colors = result, record = list(policy = "fixed-focal-model-hue-slots",
     focal_models = focal, base_colors = as.list(result), palette_slots = as.list(assigned),
     palette_order = palette_order, palette_seed = palette_seed,
-    focal_hue_family = roles$focal_hue_family, comparator_hue_families = roles$comparator_hue_families))
+    focal_hue_family = roles$focal_hue_family,
+    comparator_hue_families = if (length(keys) <= 3L && !is.null(roles$small_set_comparator_hue_families))
+      roles$small_set_comparator_hue_families else roles$comparator_hue_families))
 }
 
 # A fixed, mark-family-specific transform; keep base palette slots unchanged.

@@ -132,9 +132,9 @@
 <rect x='411.07' y='274.96' width='42.43' height='11.34' style='stroke-width: 0.22; stroke: #CCCCCC; fill: #DEAFC3;' />
 <rect x='411.07' y='289.13' width='42.43' height='11.34' style='stroke-width: 0.22; stroke: #CCCCCC; fill: #DEAFC3; fill-opacity: 0.40;' />
 <text x='432.28' y='311.31' text-anchor='middle' style='font-size: 6.50px;fill: #333333; font-family: "Arial";' textLength='29.22px' lengthAdjust='spacingAndGlyphs'>#DEAFC3</text>
-<rect x='455.48' y='274.96' width='42.43' height='11.34' style='stroke-width: 0.22; stroke: #CCCCCC; fill: #F6D1B9;' />
-<rect x='455.48' y='289.13' width='42.43' height='11.34' style='stroke-width: 0.22; stroke: #CCCCCC; fill: #F6D1B9; fill-opacity: 0.40;' />
-<text x='476.69' y='311.31' text-anchor='middle' style='font-size: 6.50px;fill: #333333; font-family: "Arial";' textLength='27.42px' lengthAdjust='spacingAndGlyphs'>#F6D1B9</text>
+<rect x='455.48' y='274.96' width='42.43' height='11.34' style='stroke-width: 0.22; stroke: #CCCCCC; fill: #E8B594;' />
+<rect x='455.48' y='289.13' width='42.43' height='11.34' style='stroke-width: 0.22; stroke: #CCCCCC; fill: #E8B594; fill-opacity: 0.40;' />
+<text x='476.69' y='311.31' text-anchor='middle' style='font-size: 6.50px;fill: #333333; font-family: "Arial";' textLength='26.70px' lengthAdjust='spacingAndGlyphs'>#E8B594</text>
 <text x='11.34' y='340.90' style='font-size: 10.00px; font-weight: bold;fill: #333333; font-family: "Arial";' textLength='95.59px' lengthAdjust='spacingAndGlyphs'>Balanced multicolor</text>
 <text x='11.34' y='354.00' style='font-size: 7.00px;fill: #333333; font-family: "Arial";' textLength='72.34px' lengthAdjust='spacingAndGlyphs'>muted-balanced-twelve</text>
 <text x='11.34' y='368.17' style='font-size: 7.00px;fill: #333333; font-family: "Arial";' textLength='126.62px' lengthAdjust='spacingAndGlyphs'>Fill 1.00; up to 11 methods with one focal</text>

@@ -159,3 +159,5 @@ Named palettes preserve fixed RGB assignments. Transparent variants apply mark-s
 `examples/<figure-id>/prompt.md` is the user-facing example, `request.json` provides a minimal configuration structure where useful, and `preview.png` is the unchanged scientific export and `preview-card.svg` contains it in an equal-size display frame. Shared synthetic inputs live in `examples/data/`. Runtime instructions, scientific contracts, reusable renderers and fixed palette definitions live in `SKILL.md`, `references/`, `scripts/` and `palettes/`.
 
 [Color order comparison](palettes/palette-order-comparison.png) shows the default ordered sequence and a reproducible shuffle with seed 42, using the same colors and opacity in each pair.
+
+Three-color automatic contrast: [Prompt and CSV](palette-three-colors/prompt.md) · [Actual export](palette-three-colors/preview.png).

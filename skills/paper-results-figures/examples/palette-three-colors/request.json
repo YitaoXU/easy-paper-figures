@@ -1,0 +1,32 @@
+{
+  "plot_type": "mutl-comparison",
+  "input": "INPUT_DATA_PATH",
+  "output_prefix": "OUTPUT_PARENT/palette-three-colors/palette-three-colors",
+  "data_mode": "raw",
+  "layout": "long",
+  "model": "model",
+  "metric": "metric",
+  "metrics": [
+    "Metric A"
+  ],
+  "value": "value",
+  "id": "observation_id",
+  "paired": true,
+  "missing": "error",
+  "style": "violin",
+  "orientation": "vertical",
+  "direction": "higher",
+  "sort": "performance",
+  "highlight": "Ours",
+  "palette": "blue-pink-purple-peach-transparent",
+  "show_points": true,
+  "show_sd": true,
+  "show_values": true,
+  "show_rank": true,
+  "show_significance": false,
+  "value_label": "Score",
+  "metric_domain": [
+    0,
+    1
+  ]
+}

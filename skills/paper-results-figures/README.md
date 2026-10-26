@@ -14,6 +14,27 @@ Save the result under OUTPUT_PARENT.
 
 Replace the placeholders with your input path and output folder. State your metric meaning, observation unit, pairing and favorable direction when these cannot be inferred safely. To use a gallery prompt, choose its supplied CSV or substitute your own results. The agent prepares an unambiguous column mapping, creates the minimal rendering request, inspects the figure and exports the result.
 
+## Contents
+
+- [Adapt a gallery prompt](#adapt-a-gallery-prompt)
+- [Available figures](#available-figures)
+- [Appearance and outputs](#appearance-and-outputs)
+- [Synthetic previews](#synthetic-previews)
+- [Paired observations](#paired-observations)
+- [One metric across methods](#one-metric-across-methods)
+- [Several metrics across methods](#several-metrics-across-methods)
+- [Grouped distributions](#grouped-distributions)
+- [Broken box axes](#broken-box-axes)
+- [Trend comparison](#trend-comparison)
+- [Radar comparison](#radar-comparison)
+- [Grouped circular heatmaps and violins](#grouped-circular-heatmaps-and-violins)
+- [Palettes](#palettes)
+- [Fixed palette references](#fixed-palette-references)
+- [Palette appearance on the same data](#palette-appearance-on-the-same-data)
+- [Palette order](#palette-order)
+- [File organization](#file-organization)
+- [Extend a figure](#extend-a-figure)
+
 ## Adapt a gallery prompt
 
 Each preview links to one copyable prompt with two clearly labeled parts. With the supplied synthetic CSV, change only `INPUT_DATA_PATH` and `OUTPUT_PARENT`. With your own CSV, TSV or XLSX, edit the **DATA SETTINGS** values; keep **FIGURE SETTINGS** for the displayed layout and palette.
@@ -84,6 +105,8 @@ Every preview has an independent folder with a usable prompt and a link to a fix
 <td align="center" width="300"><a href="examples/multi-comparison-significance/prompt.md"><img src="examples/multi-comparison-significance/preview-card.svg" width="300" height="285" alt="Vertical significance brackets"></a><br><strong>Vertical significance brackets</strong><br><code>rainbow-transparent</code><br><a href="examples/multi-comparison-significance/prompt.md">Prompt and CSV</a> · <a href="examples/multi-comparison-significance/preview.png">Actual export</a></td>
 <td align="center" width="300"><a href="examples/multi-comparison-significance-horizontal/prompt.md"><img src="examples/multi-comparison-significance-horizontal/preview-card.svg" width="300" height="285" alt="Horizontal significance brackets"></a><br><strong>Horizontal significance brackets</strong><br><code>blue-pink-purple-peach-transparent</code><br><a href="examples/multi-comparison-significance-horizontal/prompt.md">Prompt and CSV</a> · <a href="examples/multi-comparison-significance-horizontal/preview.png">Actual export</a></td>
 </tr></table>
+
+Single-metric comparisons optionally add numeric thresholds such as `reference_lines: [{"value": 0.05, "label": "Baseline = 0.05"}]`. They default to a red compact dashed line (`linetype: "42"`, dash/gap ratio 2:1) along the numeric axis, with an optional measured exterior Arial label; color, line type and physical line/text sizes are configurable. Reference values affect the displayed axis range without changing observations or summaries. Vertical reference labels also reserve the measured upper bounds of rotated mean annotations at the original font size. See the [single-metric guide](references/multi-comparison.md#optional-numeric-reference-lines) for the continuous-axis contract and both orientations.
 
 ### Several metrics across methods
 
@@ -169,6 +192,35 @@ Every preview has an independent folder with a usable prompt and a link to a fix
 <td align="center" width="300"><a href="examples/grouped-circular-heatmap-twelve-groups/prompt.md"><img src="examples/grouped-circular-heatmap-twelve-groups/preview-card.svg" width="300" height="285" alt="Circular heatmap: twelve small groups"></a><br><strong>Circular heatmap: twelve small groups</strong><br><code>muted-green-blue-purple-light</code><br><a href="examples/grouped-circular-heatmap-twelve-groups/prompt.md">Prompt and CSV</a> · <a href="examples/grouped-circular-heatmap-twelve-groups/preview.png">Actual export</a></td>
 </tr></table>
 
+## Palettes
+
+### Fixed palette references
+
+The catalog is organized into **11 families: 6 common and 5 extended**, with opacity/brightness/capacity variants grouped together. Start here; every legacy preset name and exact color profile remains supported. [Full family catalog](references/palette-catalog.md) · [Fixed color contract](references/palette-contract.md).
+
+| Color family | Recommended preset | Use |
+| --- | --- | --- |
+| Pastel four-color | `pastel-green-blue-purple-peach` | Soft four-method distributions |
+| Green / blue / purple | `muted-green-blue-purple` | Stronger hue contrast; lighter RGB variant available |
+| Muted rainbow | `rainbow-transparent` | Several distinct method identities |
+| Blue / yellow | `blue-yellow-transparent` | Two hue families; opaque fill variant available |
+| Blue / pink / purple / peach | `blue-pink-purple-peach-transparent` | Four coordinated hue families |
+| Balanced multicolor | `muted-balanced-twelve` | Six-color core and twelve-category extension |
+
+Automatic sets of two or three categorical colors choose the eligible fixed slots with the greatest minimum Lab color distance, including any reserved focal color. This reduces close pairs beside an isolated third color; saved named maps take priority. Both blue-pink-purple-peach variants now use slightly deeper peach `#E8B594` (previously `#F6D1B9`). [Three-color prompt](examples/palette-three-colors/prompt.md) · [Preview](examples/palette-three-colors/preview.png).
+
+<p align="center"><a href="examples/palettes/palette-families-overview.png"><img src="examples/palettes/palette-families-overview.png" width="900" alt="Common palette families"></a></p>
+
+The saved four-color option uses pale green `#D9EAC4`, pale blue `#B5D0E0`, purple `#A396B9` and peach `#F6D1B9`, with fill opacity 0.40.
+
+The extended catalog retains pastel six-color, reference six-color, blue/green with yellow/coral companions, yellow/green with a red companion and warm yellow/leaf-green options. Near-looking RGB lists retain their distinct variants; identical lists share definitions.
+
+Scientific example: [pastel four-color violin](examples/palette-pastel-green-blue-purple-peach/prompt.md).
+
+[Legacy full overview](examples/palettes/palette-overview.png) · [Pastel four-color reference](examples/palettes/palette-pastel-green-blue-purple-peach.png)
+
+The single `warm-yellow-leaf-crisper` family combines medium categorical colors with a light orange-yellow-green ramp for continuous guides or explicitly ordered named maps; see its [color reference](examples/palettes/palette-warm-yellow-leaf-crisper.png).
+
 ### Palette appearance on the same data
 
 <table><tr>
@@ -188,44 +240,20 @@ Every preview has an independent folder with a usable prompt and a link to a fix
 <td align="center" width="300"><a href="examples/palette-blue-pink-purple-peach-transparent/prompt.md"><img src="examples/palette-blue-pink-purple-peach-transparent/preview-card.svg" width="300" height="285" alt="Violin palette demonstration"></a><br><strong>Violin palette demonstration</strong><br><code>blue-pink-purple-peach-transparent</code><br><a href="examples/palette-blue-pink-purple-peach-transparent/prompt.md">Prompt and CSV</a> · <a href="examples/palette-blue-pink-purple-peach-transparent/preview.png">Actual export</a></td>
 </tr></table>
 
-Single-metric comparisons optionally add numeric thresholds such as `reference_lines: [{"value": 0.05, "label": "Baseline = 0.05"}]`. They default to a red compact dashed line (`linetype: "42"`, dash/gap ratio 2:1) along the numeric axis, with an optional measured exterior Arial label; color, line type and physical line/text sizes are configurable. Reference values affect the displayed axis range without changing observations or summaries. Vertical reference labels also reserve the measured upper bounds of rotated mean annotations at the original font size. See the [single-metric guide](references/multi-comparison.md#optional-numeric-reference-lines) for the continuous-axis contract and both orientations.
+### Palette order
 
-## Fixed palette references
+Color sequence is independent of opacity: use `palette_order: ordered` (default) for nearby hues together, or `palette_order: shuffled` with `palette_seed: 42` for a repeatable permutation of the same selected colors. The seed accepts nonnegative integers. Scientific model/data order, continuous gradients and reserved focal hues stay governed by their own contracts. Explicit named maps, including maps stored in a resolved configuration, take priority; remove those maps to apply a new automatic order.
 
-The catalog is organized into **11 families: 6 common and 5 extended**, with opacity/brightness/capacity variants grouped together. Start here; every legacy preset name and exact color profile remains supported. [Full family catalog](references/palette-catalog.md) · [Fixed color contract](references/palette-contract.md).
-
-| Color family | Recommended preset | Use |
-| --- | --- | --- |
-| Pastel four-color | `pastel-green-blue-purple-peach` | Soft four-method distributions |
-| Green / blue / purple | `muted-green-blue-purple` | Stronger hue contrast; lighter RGB variant available |
-| Muted rainbow | `rainbow-transparent` | Several distinct method identities |
-| Blue / yellow | `blue-yellow-transparent` | Two hue families; opaque fill variant available |
-| Blue / pink / purple / peach | `blue-pink-purple-peach-transparent` | Four coordinated hue families |
-| Balanced multicolor | `muted-balanced-twelve` | Six-color core and twelve-category extension |
-
-<p align="center"><a href="examples/palettes/palette-families-overview.png"><img src="examples/palettes/palette-families-overview.png" width="900" alt="Common palette families"></a></p>
-
-The saved four-color option uses pale green `#D9EAC4`, pale blue `#B5D0E0`, purple `#A396B9` and peach `#F6D1B9`, with fill opacity 0.40.
-
-The extended catalog retains pastel six-color, reference six-color, blue/green with yellow/coral companions, yellow/green with a red companion and warm yellow/leaf-green options. Near-looking RGB lists retain their distinct variants; identical lists share definitions.
-
-Scientific example: [pastel four-color violin](examples/palette-pastel-green-blue-purple-peach/prompt.md).
-
-[Legacy full overview](examples/palettes/palette-overview.png) · [Pastel four-color reference](examples/palettes/palette-pastel-green-blue-purple-peach.png)
+![Ordered and shuffled colors](examples/palettes/palette-order-comparison.png)
 
 ## File organization
 
 `examples/<figure-id>/prompt.md` is the user-facing example, `request.json` provides a minimal configuration structure where useful, and `preview.png` is the unchanged scientific export and `preview-card.svg` contains it in an equal-size display frame. Shared synthetic inputs live in `examples/data/`. Runtime instructions, scientific contracts, reusable renderers and fixed palette definitions live in `SKILL.md`, `references/`, `scripts/` and `palettes/`.
 
-
-## Extend a figure or palette
+## Extend a figure
 
 When a different encoding is needed, provide the result data and a reference figure, then identify the visual elements to retain. The agent inspects the scientific meaning and chooses or adapts a reusable layout.
 
-New figures use complete 56 × 40 mm or 42 × 40 mm canvases; a two-slot horizontal compound canvas is 88 × 40 mm. Bar, box and violin outer outlines default to 0.28 mm. Saved explicit figure settings retain their values. Existing gallery images retain their previously exported sizes. The single `warm-yellow-leaf-crisper` family combines medium categorical colors with a light orange-yellow-green ramp for continuous guides or explicitly ordered named maps; see its [color reference](examples/palettes/palette-warm-yellow-leaf-crisper.png).
-
-Color sequence is independent of opacity: use `palette_order: ordered` (default) for nearby hues together, or `palette_order: shuffled` with `palette_seed: 42` for a repeatable permutation of the same selected colors. The seed accepts nonnegative integers. Scientific model/data order, continuous gradients and reserved focal hues stay governed by their own contracts. Explicit named maps, including maps stored in a resolved configuration, take priority; remove those maps to apply a new automatic order.
-
-![Ordered and shuffled colors](examples/palettes/palette-order-comparison.png)
+New figures use complete 56 × 40 mm or 42 × 40 mm canvases; a two-slot horizontal compound canvas is 88 × 40 mm. Bar, box and violin outer outlines default to 0.28 mm. Saved explicit figure settings retain their values. Existing gallery images retain their previously exported sizes.
 
 Composite bars with inside values use 88 × 54 mm when dimensions are omitted; shared-axis metric bars with mean lines use 70 × 46 mm. Explicit canvas allocations remain authoritative.
