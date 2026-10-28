@@ -39,15 +39,34 @@ def materialize(registry):
                     order = palette.get(order_key)
                     if not isinstance(order, list) or any(type(x) is not int for x in order) or sorted(order) != list(range(1, len(palette[colors_key]) + 1)):
                         raise ValueError(f"Invalid complete color order: {name}/{order_key}")
-            roles = palette["focal_model_mapping"]
-            slots = roles["focal_slots"] + roles["comparator_slots"]
-            if len(set(slots)) != len(slots) or any(not 1 <= x <= len(palette["categorical"]) for x in slots):
-                raise ValueError(f"Invalid focal/comparator slots: {name}")
-            small = roles.get("small_set_comparator_slots")
-            if small is not None and (not small or any(type(x) is not int for x in small)
-                    or len(set(small)) != len(small) or set(small) & set(roles["focal_slots"])
-                    or any(not 1 <= x <= len(palette["categorical"]) for x in small)):
-                raise ValueError(f"Invalid small-set comparator slots: {name}")
+            assignment = palette.get("categorical_assignment", "identity")
+            if assignment not in {"identity", "display-order"}:
+                raise ValueError(f"Invalid categorical assignment: {name}")
+            roles = palette.get("focal_model_mapping")
+            if assignment == "display-order":
+                if roles is not None:
+                    raise ValueError(f"Display-order palettes must not reserve focal slots: {name}")
+            elif roles is None:
+                raise ValueError(f"Missing focal policy: {name}")
+            if roles is not None:
+                slots = roles["focal_slots"] + roles["comparator_slots"]
+                if len(set(slots)) != len(slots) or any(type(x) is not int or not 1 <= x <= len(palette["categorical"]) for x in slots):
+                    raise ValueError(f"Invalid focal/comparator slots: {name}")
+                small = roles.get("small_set_comparator_slots")
+                if small is not None and (not small or any(type(x) is not int for x in small)
+                        or len(set(small)) != len(small) or set(small) & set(roles["focal_slots"])
+                        or any(not 1 <= x <= len(palette["categorical"]) for x in small)):
+                    raise ValueError(f"Invalid small-set comparator slots: {name}")
+            for color_key, group_key in (("categorical", "categorical_hue_groups"), ("group_categorical", "group_hue_groups")):
+                groups = palette.get(group_key)
+                if groups is not None:
+                    slots = [slot for group in groups.values() for slot in group]
+                    if (color_key not in palette or len(groups) != 2 or any(not group for group in groups.values())
+                            or any(type(x) is not int for x in slots)
+                            or sorted(slots) != list(range(1, len(palette[color_key]) + 1))):
+                        raise ValueError(f"Invalid balanced hue groups: {name}/{group_key}")
+            if palette.get("categorical_selection") == "balanced-hues" and "categorical_hue_groups" not in palette:
+                raise ValueError(f"Balanced palette lacks hue groups: {name}")
             result[name] = palette
             names.append(name)
         if family["recommended_preset"] not in names:
@@ -62,7 +81,7 @@ def catalog(registry, palettes):
     lines = [
         "# Palette families", "",
         "Start with the six common families below. Choose a variant for opacity, brightness, hue companion or method capacity; the variant name is the configuration's `palette` value.", "",
-        "The canonical source is `palettes/palette-families.json`. Run `python3 scripts/build_palette_catalog.py` after editing it. `palettes/palettes.json` is the generated, flat runtime index used by every renderer; all legacy names retain their exact RGB slots, mark opacity/transforms and focal/comparator capacity.", "",
+        "The canonical source is `palettes/palette-families.json`. Run `python3 scripts/build_palette_catalog.py` after editing it. `palettes/palettes.json` is the generated, flat runtime index used by every renderer; existing preset names remain available; saved named color maps retain their recorded values.", "",
         "## Common families", "",
         "| Family | Recommended `palette` | Variants | Fixed slots / methods with one focal |",
         "| --- | --- | --- | --- |",
@@ -78,8 +97,8 @@ def catalog(registry, palettes):
             capacities = []
             for variant in family["variants"]:
                 palette = palettes[variant["name"]]
-                roles = palette["focal_model_mapping"]
-                capacity = len(roles["focal_slots"]) + len(roles["comparator_slots"])
+                roles = palette.get("focal_model_mapping")
+                capacity = len(palette["categorical"]) if roles is None else len(roles["focal_slots"]) + len(roles["comparator_slots"])
                 capacities.append(f"{len(palette['categorical'])} / {capacity}")
             lines.append(f"| {family['title']} | `{family['recommended_preset']}` | {variants} | {'; '.join(capacities)} |")
     lines += [

@@ -289,7 +289,8 @@ labels<-setNames(models,models);if(!is.null(cfg$model_labels)){if(!all(models %i
 
 # Metric-colored encodings do not reserve a method hue: their colors mean metrics.
 model_color_active<-!(combo && (cfg$combo_color_by=="metric" || cfg$combo_layout=="shared-axis"))
-model_color_resolution<-resolve_model_palette_mapping(models,pal,
+model_color_order<-if(cfg$orientation=="horizontal")rev(models)else models
+model_color_resolution<-resolve_model_palette_mapping(model_color_order,pal,
  focal=if(model_color_active)user$highlight else character(),
  colors=cfg$color_values,saved_record=cfg$palette_mapping,
  palette_order=cfg$palette_order,palette_seed=cfg$palette_seed)

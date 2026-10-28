@@ -1,6 +1,6 @@
 {
   "muted-green-blue-purple": {
-    "description": "Moderately muted green, blue and purple with distinct primary hues and a wider dark-to-light range. Paired scatter uses a fixed 18% white blend after darkening; base slots and other mark families retain their existing colors.",
+    "description": "Muted green, blue and purple in that display sequence. Automatic categorical mappings follow the established display order; explicit named maps remain authoritative. Paired scatter retains its fixed transforms.",
     "anchors": [
       "#2F8668",
       "#3A7FAA",
@@ -29,32 +29,16 @@
     "distribution_point_darken": 0.2,
     "categorical_selection": "ordered-prefix",
     "paired_point_darken": 0.12,
-    "focal_model_mapping": {
-      "focal_slots": [
-        3
-      ],
-      "comparator_slots": [
-        1,
-        2,
-        4,
-        5
-      ],
-      "focal_hue_family": "purple",
-      "comparator_hue_families": [
-        "green",
-        "blue"
-      ],
-      "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
-    },
     "paired_point_lighten": 0.18,
     "ordered_slots": [
       1,
       4,
-      5,
       2,
+      5,
       3,
       6
-    ]
+    ],
+    "categorical_assignment": "display-order"
   },
   "rainbow": {
     "description": "Muted categorical rainbow sampled from interior fills of a supplied raster reference; approximate displayed RGB values, not original source colors. Keep assignments stable across related figures.",
@@ -195,7 +179,7 @@
     ]
   },
   "muted-green-blue-purple-transparent": {
-    "description": "Transparent variant of muted-green-blue-purple; identical higher-contrast RGB slots with softer fills. Paired scatter uses a fixed 18% white blend after darkening; base slots and other mark families retain their existing colors.",
+    "description": "Softer-opacity variant with identical RGB and green-blue-purple display sequence; paired scatter retains its fixed transforms.",
     "anchors": [
       "#2F8668",
       "#3A7FAA",
@@ -224,35 +208,19 @@
     "distribution_point_darken": 0.2,
     "categorical_selection": "ordered-prefix",
     "paired_point_darken": 0.12,
-    "focal_model_mapping": {
-      "focal_slots": [
-        3
-      ],
-      "comparator_slots": [
-        1,
-        2,
-        4,
-        5
-      ],
-      "focal_hue_family": "purple",
-      "comparator_hue_families": [
-        "green",
-        "blue"
-      ],
-      "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
-    },
     "paired_point_lighten": 0.18,
     "ordered_slots": [
       1,
       4,
-      5,
       2,
+      5,
       3,
       6
-    ]
+    ],
+    "categorical_assignment": "display-order"
   },
   "blue-yellow": {
-    "description": "Blue and golden yellow derived from color-managed reference samples, then lightened by user request. The first four fixed slots are medium blue, medium yellow, light blue and light yellow; opaque fills remain fully opaque.",
+    "description": "Fixed blue and golden-yellow RGB. Automatic categorical selections balance blue and yellow equally for even totals, including any focal method; odd totals use one additional blue. A designated focal retains medium yellow slot 2.",
     "anchors": [
       "#87AAC4",
       "#F5C258",
@@ -281,7 +249,7 @@
     "paired_point_darken": 0.0,
     "distribution_point_alpha": 0.55,
     "distribution_point_darken": 0.2,
-    "categorical_selection": "ordered-prefix",
+    "categorical_selection": "balanced-hues",
     "focal_model_mapping": {
       "focal_slots": [
         2
@@ -289,13 +257,16 @@
       "comparator_slots": [
         1,
         3,
-        5
+        4,
+        5,
+        6
       ],
       "focal_hue_family": "yellow",
       "comparator_hue_families": [
-        "blue"
+        "blue",
+        "yellow"
       ],
-      "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
+      "assignment": "radix-sorted identities; reserve focal yellow slot 2 and balance total blue/yellow counts, including the focal"
     },
     "group_categorical": [
       "#9BBACF",
@@ -332,10 +303,40 @@
       6,
       8,
       2
-    ]
+    ],
+    "categorical_hue_groups": {
+      "blue": [
+        1,
+        3,
+        5
+      ],
+      "yellow": [
+        2,
+        4,
+        6
+      ]
+    },
+    "group_hue_groups": {
+      "blue": [
+        1,
+        3,
+        5,
+        7,
+        9,
+        11
+      ],
+      "yellow": [
+        2,
+        4,
+        6,
+        8,
+        10,
+        12
+      ]
+    }
   },
   "blue-yellow-transparent": {
-    "description": "Transparent variant of blue-yellow; identical revised RGB slots, with the same balanced two-medium/two-light prefix and lower opacity.",
+    "description": "Soft-fill variant with identical fixed RGB and balanced blue/yellow category and group selections.",
     "anchors": [
       "#87AAC4",
       "#F5C258",
@@ -364,7 +365,7 @@
     "paired_point_darken": 0.0,
     "distribution_point_alpha": 0.55,
     "distribution_point_darken": 0.2,
-    "categorical_selection": "ordered-prefix",
+    "categorical_selection": "balanced-hues",
     "focal_model_mapping": {
       "focal_slots": [
         2
@@ -372,14 +373,31 @@
       "comparator_slots": [
         1,
         3,
-        5
+        4,
+        5,
+        6
       ],
       "focal_hue_family": "yellow",
       "comparator_hue_families": [
-        "blue"
+        "blue",
+        "yellow"
       ],
-      "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
+      "assignment": "radix-sorted identities; reserve focal yellow slot 2 and balance total blue/yellow counts, including the focal"
     },
+    "group_categorical": [
+      "#9BBACF",
+      "#F4CC7B",
+      "#C0D7E4",
+      "#F8E7C4",
+      "#81A7BD",
+      "#F6DCA8",
+      "#AAC8D9",
+      "#EDD597",
+      "#CEE0E9",
+      "#EBDDB8",
+      "#93B3C5",
+      "#F3DFB5"
+    ],
     "ordered_slots": [
       5,
       1,
@@ -401,27 +419,57 @@
       6,
       8,
       2
-    ]
+    ],
+    "categorical_hue_groups": {
+      "blue": [
+        1,
+        3,
+        5
+      ],
+      "yellow": [
+        2,
+        4,
+        6
+      ]
+    },
+    "group_hue_groups": {
+      "blue": [
+        1,
+        3,
+        5,
+        7,
+        9,
+        11
+      ],
+      "yellow": [
+        2,
+        4,
+        6,
+        8,
+        10,
+        12
+      ]
+    }
   },
   "blue-pink-purple-peach": {
-    "description": "Blue, pink, purple and peach sampled from interior point-color regions of a supplied raster reference after conversion of its embedded color profile to sRGB; approximate displayed RGB. Peach is slightly deepened by user request.",
+    "description": "Muted blue, pink, purple and peach. Blue and purple have separated hue/lightness for clearer categorical contrast, with unchanged pink, peach and mark opacities. Continuous stops are illustrative.",
     "anchors": [
-      "#7E8AB9",
+      "#6F95BC",
       "#DEAFC3",
       "#E8B594"
     ],
     "categorical": [
-      "#7E8AB9",
+      "#6F95BC",
       "#DEAFC3",
-      "#A396B9",
+      "#A087B8",
       "#E8B594",
-      "#96A3D0",
-      "#BAADD0"
+      "#9EBFDC",
+      "#C4ABD5"
     ],
     "continuous": [
-      "#7E8AB9",
-      "#A396B9",
-      "#BAADD0",
+      "#6F95BC",
+      "#A087B8",
+      "#C4ABD5",
       "#DEAFC3",
       "#E8B594"
     ],
@@ -474,22 +522,22 @@
   "blue-pink-purple-peach-transparent": {
     "description": "Transparent variant of blue-pink-purple-peach; identical fixed sRGB slots, including the slightly deepened peach, with lower opacity.",
     "anchors": [
-      "#7E8AB9",
+      "#6F95BC",
       "#DEAFC3",
       "#E8B594"
     ],
     "categorical": [
-      "#7E8AB9",
+      "#6F95BC",
       "#DEAFC3",
-      "#A396B9",
+      "#A087B8",
       "#E8B594",
-      "#96A3D0",
-      "#BAADD0"
+      "#9EBFDC",
+      "#C4ABD5"
     ],
     "continuous": [
-      "#7E8AB9",
-      "#A396B9",
-      "#BAADD0",
+      "#6F95BC",
+      "#A087B8",
+      "#C4ABD5",
       "#DEAFC3",
       "#E8B594"
     ],
@@ -750,7 +798,7 @@
     ]
   },
   "muted-green-blue-purple-light": {
-    "description": "Lighter green-blue-purple preset for circular score tracks and coordinated method/group colors, with fixed pale continuous stops and preserved distinct focal purple hue.",
+    "description": "Lighter fixed green, blue and purple RGB for circular score tracks and coordinated group colors; categorical mappings follow established display order.",
     "anchors": [
       "#78B695",
       "#7DA6C5",
@@ -779,31 +827,15 @@
     "distribution_point_darken": 0.2,
     "categorical_selection": "ordered-prefix",
     "paired_point_darken": 0.12,
-    "focal_model_mapping": {
-      "focal_slots": [
-        3
-      ],
-      "comparator_slots": [
-        1,
-        2,
-        4,
-        5
-      ],
-      "focal_hue_family": "purple",
-      "comparator_hue_families": [
-        "green",
-        "blue"
-      ],
-      "assignment": "radix-sorted identities within explicitly selected roles; exact Ours fallback; no performance or orientation selection"
-    },
     "ordered_slots": [
       1,
       4,
-      5,
       2,
+      5,
       3,
       6
     ],
+    "categorical_assignment": "display-order",
     "group_categorical": [
       "#9BCAB0",
       "#9DBED4",

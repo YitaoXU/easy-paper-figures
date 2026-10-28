@@ -2,6 +2,8 @@
 
 Choose a preview and copy the fenced prompt. For its supplied fixed CSV, edit only `INPUT_DATA_PATH` and `OUTPUT_PARENT`; for your own results, edit the labeled **DATA SETTINGS**, including column names and scientific meaning. Keep **FIGURE SETTINGS** to reproduce the layout. Set an unambiguous column mapping to `auto` if you want the agent to identify it. [Data meanings](data/README.md) · [English guide](../README.md) · [中文指南](../README.zh.md).
 
+Images in each row share one visible height, with proportional widths inside consistent cards; complete exports are never stretched or cropped.
+
 ### Paired observations
 
 <table><tr>
@@ -148,7 +150,7 @@ Previews use fixed synthetic inputs with 1, 3, 6, 8 or 12 groups and several pal
 Named palettes preserve fixed RGB assignments. Transparent variants apply mark-specific opacity. Each scientific preview identifies its actual palette. Click a palette reference to view the original-resolution image.
 
 <table><tr>
-<td align="center" width="900" colspan="2"><a href="palettes/palette-overview.png"><img src="palettes/palette-overview.png" width="900" alt="palette-overview"></a><br><code>palette-overview</code></td>
+<td align="center" width="900" colspan="2"><a href="palettes/palette-families-overview.png"><img src="palettes/palette-families-overview.png" width="900" alt="Common palette families"></a><br><code>Common palette families</code></td>
 </tr><tr>
 <td align="center" width="450"><a href="palettes/palette-muted-pastel-six.png"><img src="palettes/palette-muted-pastel-six.png" width="450" alt="palette-muted-pastel-six"></a><br><code>palette-muted-pastel-six</code></td>
 <td align="center" width="450"><a href="palettes/palette-muted-balanced-six.png"><img src="palettes/palette-muted-balanced-six.png" width="450" alt="palette-muted-balanced-six"></a><br><code>palette-muted-balanced-six</code></td>

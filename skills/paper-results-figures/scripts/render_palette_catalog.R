@@ -32,7 +32,7 @@ render <- function(stem, families, width_mm=180, row_mm=20) {
       text(family$title,4,yy-3,10,TRUE)
       text(family$recommended_preset,4,yy-8,7)
       roles <- pal$focal_model_mapping
-      capacity <- length(roles$focal_slots)+length(roles$comparator_slots)
+      capacity <- if(is.null(roles))length(pal$categorical)else length(roles$focal_slots)+length(roles$comparator_slots)
       text(sprintf("Fill %.2f; up to %d methods with one focal",pal$fill_alpha,capacity),4,yy-13,7)
       colors <- pal$categorical[order_palette_slots(seq_along(pal$categorical),pal)];n <- length(colors);left <- 82;slot <- (width_mm-left-4)/n
       for (j in seq_along(colors)) {

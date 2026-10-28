@@ -78,10 +78,11 @@ if (cfg$orientation == "horizontal") {p <- p + coord_flip(xlim = cat_limits, yli
 fitted <- fit_comparison_text(p, cfg, metric_labels, metric_centers, text_fit_policy, NULL, FALSE)
 cfg$label_angle <- fitted$label_angle; cfg$value_angle <- fitted$value_angle; text_fitting <- fitted$record
 p <- apply_comparison_text(p, cfg, fitted$labels, metric_centers)
-legend_keys <- data.frame(model = models, .x = NA_real_, .y = NA_real_)
+legend_models <- if (cfg$orientation == "horizontal" && identical(pal$categorical_assignment, "display-order")) rev(models) else models
+legend_keys <- data.frame(model = legend_models, .x = NA_real_, .y = NA_real_)
 p <- p + geom_rect(data = legend_keys, aes(xmin = .x, xmax = .x, ymin = .y, ymax = .y, fill = model),
   color = edge, alpha = cfg$fill_alpha, show.legend = TRUE, na.rm = TRUE) +
-  scale_fill_manual(values = cols, breaks = models, labels = unname(labels[models]), name = NULL) +
+  scale_fill_manual(values = cols, breaks = legend_models, labels = unname(labels[legend_models]), name = NULL) +
   theme(legend.position = "top", legend.location = "plot", legend.text = element_text(size = cfg$axis_text_size, family = "Arial"),
     legend.background = element_rect(fill="white",color=NA),
     legend.key.size = grid::unit(2, "mm"), legend.spacing.x = grid::unit(.6, "mm"),

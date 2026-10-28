@@ -74,7 +74,7 @@ Each figure has its own folder under your output parent. It contains vector PDF,
 
 ## Synthetic previews
 
-Every preview has an independent folder with a usable prompt and a link to a fixed supplied CSV. Synthetic `Ours` performs best on score fixtures and weaker methods make differences visible. The same inputs are reused across related layouts and palettes; prompts never ask the user to create data. Display cards have equal dimensions, with the original figure contained without stretching.
+Every preview has an independent folder with a usable prompt and a link to a fixed supplied CSV. Synthetic `Ours` performs best on score fixtures and weaker methods make differences visible. The same inputs are reused across related layouts and palettes; prompts never ask the user to create data. Display cards have equal dimensions and images within each row share the same visible height; widths preserve the original aspect ratios, without stretching or cropping.
 
 ### Paired observations
 
@@ -196,7 +196,7 @@ Single-metric comparisons optionally add numeric thresholds such as `reference_l
 
 ### Fixed palette references
 
-The catalog is organized into **11 families: 6 common and 5 extended**, with opacity/brightness/capacity variants grouped together. Start here; every legacy preset name and exact color profile remains supported. [Full family catalog](references/palette-catalog.md) · [Fixed color contract](references/palette-contract.md).
+The catalog is organized into **11 families: 6 common and 5 extended**, with opacity/brightness/capacity variants grouped together. Start here; preset names remain supported, and saved named maps preserve prior color assignments. [Full family catalog](references/palette-catalog.md) · [Fixed color contract](references/palette-contract.md).
 
 | Color family | Recommended preset | Use |
 | --- | --- | --- |
@@ -207,7 +207,7 @@ The catalog is organized into **11 families: 6 common and 5 extended**, with opa
 | Blue / pink / purple / peach | `blue-pink-purple-peach-transparent` | Four coordinated hue families |
 | Balanced multicolor | `muted-balanced-twelve` | Six-color core and twelve-category extension |
 
-Automatic sets of two or three categorical colors choose the eligible fixed slots with the greatest minimum Lab color distance, including any reserved focal color. This reduces close pairs beside an isolated third color; saved named maps take priority. Both blue-pink-purple-peach variants use peach `#E8B594`. [Three-color prompt](examples/palette-three-colors/prompt.md) · [Preview](examples/palette-three-colors/preview.png).
+Green-blue-purple variants present their colors in green → blue → purple order, following the established display order (horizontal method comparisons read bottom to top). Blue-yellow variants split every even categorical set evenly between blue and yellow, including the focal method; coordinated circular groups follow the same rule. Blue-pink-purple-peach uses more distinct blue and purple hues while preserving pink, peach and opacity. Saved named maps take priority. [Three-color prompt](examples/palette-three-colors/prompt.md) · [Preview](examples/palette-three-colors/preview.png).
 
 <p align="center"><a href="examples/palettes/palette-families-overview.png"><img src="examples/palettes/palette-families-overview.png" width="900" alt="Common palette families"></a></p>
 
@@ -217,7 +217,7 @@ The extended catalog retains pastel six-color, reference six-color, blue/green w
 
 Scientific example: [pastel four-color violin](examples/palette-pastel-green-blue-purple-peach/prompt.md).
 
-[Legacy full overview](examples/palettes/palette-overview.png) · [Pastel four-color reference](examples/palettes/palette-pastel-green-blue-purple-peach.png)
+[Pastel four-color reference](examples/palettes/palette-pastel-green-blue-purple-peach.png)
 
 The single `warm-yellow-leaf-crisper` family combines medium categorical colors with a light orange-yellow-green ramp for continuous guides or explicitly ordered named maps; see its [color reference](examples/palettes/palette-warm-yellow-leaf-crisper.png).
 
@@ -242,7 +242,7 @@ The single `warm-yellow-leaf-crisper` family combines medium categorical colors 
 
 ### Palette order
 
-Color sequence is independent of opacity: use `palette_order: ordered` (default) for nearby hues together, or `palette_order: shuffled` with `palette_seed: 42` for a repeatable permutation of the same selected colors. The seed accepts nonnegative integers. Scientific model/data order, continuous gradients and reserved focal hues stay governed by their own contracts. Explicit named maps, including maps stored in a resolved configuration, take priority; remove those maps to apply a new automatic order.
+Color sequence is independent of opacity: use `palette_order: ordered` (default) for nearby hues together, or `palette_order: shuffled` with `palette_seed: 42` for a repeatable permutation of the same selected colors. The seed accepts nonnegative integers. Scientific model/data order and continuous gradients stay unchanged; family-specific focal and hue-balance rules still apply. Explicit named maps, including maps stored in a resolved configuration, take priority; remove those maps to apply a new automatic order.
 
 ![Ordered and shuffled colors](examples/palettes/palette-order-comparison.png)
 

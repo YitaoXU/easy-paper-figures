@@ -58,7 +58,21 @@ trend_numeric_axis <- function(values, limits=NULL, breaks=NULL, mm=40, font_pt=
   if(is.null(limits)){delta<-diff(r);if(delta==0)delta<-max(abs(r),1)*.1;limits<-r+c(-1,1)*delta*.06}
   if(length(limits)!=2 || any(!is.finite(limits)) || diff(limits)<=0)stop("Axis limits must be two increasing finite values.")
   if(any(values[is.finite(values)] < limits[1] | values[is.finite(values)] > limits[2]))stop("Axis limits would crop observations or shown confidence intervals.")
-  if(is.null(breaks))breaks<-choose_axis_breaks(limits,mm,font_pt,horizontal)
+  if(is.null(breaks)) {
+    breaks<-choose_axis_breaks(limits,mm,font_pt,horizontal)
+    # On compact axes the general helper can fall back to arbitrary data-derived
+    # endpoints. Prefer two interior regular ticks before labeling those bounds;
+    # inverse secondary-axis transforms can also lose a boundary tick to roundoff.
+    if(identical(as.numeric(breaks),as.numeric(limits))) {
+      for(n in 1:8) {
+        ticks<-snap_axis_breaks(pretty(limits,n=n),limits)
+        if(length(ticks)<2)next
+        ticks<-range(ticks)
+        widths<-if(horizontal)systemfonts::string_width(format_axis_ticks(ticks),family="Arial",size=font_pt,res=72)*25.4/72 else rep(font_pt*25.4/72,2)
+        if(diff(ticks)/diff(limits)*max(8,mm)>=mean(widths)+if(horizontal)1.8 else 1.5) {breaks<-ticks;break}
+      }
+    }
+  }
   else if(!is.numeric(breaks)||any(!is.finite(breaks)))stop("Axis breaks must be finite numbers.")
   if(automatic) {
     completed<-complete_nearby_axis_ticks(limits,breaks)

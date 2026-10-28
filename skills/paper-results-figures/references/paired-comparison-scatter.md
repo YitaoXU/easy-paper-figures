@@ -126,7 +126,7 @@ All settings are JSON fields. Unknown keys are rejected to catch typos. Relative
 | `show_mean_caption` | Whether to show means and pair count under the figure, default false. |
 | `formats`, `dpi` | Any of `pdf`, `svg`, `png`; all three and 600 dpi by default. |
 
-The initial palette has three anchors (green, blue, purple) and six categorical swatches. Map sorted raw category IDs to the first N categorical slots using the fixed palette contract, independent of ranking and legend order. For more than six categories, supply an authorized explicit mapping or add another palette instead of silently reusing colors. Continuous color uses the five-stop gradient. Each statistics file records the base category map and the effective paired-point map separately; saved configurations contain the base map, preventing repeated darkening.
+The initial palette has three anchors (green, blue, purple) and six categorical swatches. Apply the [family-specific palette contract](palette-contract.md#fixed-categorical-slots): green-blue-purple follows `color_levels` (the default sorted category order), and blue-yellow selects balanced hue counts. Saved named maps retain their assignments. For more than six categories, supply an authorized explicit mapping or add another palette instead of silently reusing colors. Continuous color uses the five-stop gradient. Each statistics file records the base category map and the effective paired-point map separately; saved configurations contain the base map, preventing repeated darkening.
 
 ## Files and review
 

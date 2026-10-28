@@ -74,7 +74,7 @@ score 是 [0,1] 范围的无量纲分数，越高越好，突出显示 Ours。
 
 ## 合成数据预览
 
-每张预览都有独立文件夹，包含可直接使用的 Prompt 和固定 CSV 链接。分数示例中的 `Ours` 表现最好，较弱方法使差异更直观。相关图形和色板重复使用相同输入，Prompt 无须用户自行生成数据。展示卡片尺寸一致，完整容纳原图且不拉伸。
+每张预览都有独立文件夹，包含可直接使用的 Prompt 和固定 CSV 链接。分数示例中的 `Ours` 表现最好，较弱方法使差异更直观。相关图形和色板重复使用相同输入，Prompt 无须用户自行生成数据。展示卡片尺寸一致，同一行图片的实际显示高度一致；宽度按原始比例缩放，不拉伸、不裁切。
 
 ### 配对观测
 
@@ -196,7 +196,7 @@ score 是 [0,1] 范围的无量纲分数，越高越好，突出显示 Ours。
 
 ### 固定色板参考
 
-色盘按 **11 个色系组织：6 个常用、5 个扩展**，同一色系的透明度、亮度和容量变化归为变体。优先从下表选择；旧预设名称与原有颜色设置继续兼容。[完整色系目录](references/palette-catalog.md) · [固定颜色规则](references/palette-contract.md)。
+色盘按 **11 个色系组织：6 个常用、5 个扩展**，同一色系的透明度、亮度和容量变化归为变体。优先从下表选择；既有预设名称继续支持，已保存的命名映射保留原颜色。[完整色系目录](references/palette-catalog.md) · [固定颜色规则](references/palette-contract.md)。
 
 | 色系 | 推荐预设 | 适用情形 |
 | --- | --- | --- |
@@ -207,7 +207,7 @@ score 是 [0,1] 范围的无量纲分数，越高越好，突出显示 Ours。
 | 蓝 / 粉 / 紫 / 桃色 | `blue-pink-purple-peach-transparent` | 四种协调色相 |
 | 平衡多色 | `muted-balanced-twelve` | 六色核心与十二分类颜色扩展 |
 
-自动分配两种或三种分类颜色时，会从允许的固定色中选择最小 Lab 色差更大的组合，并将焦点方法的保留色纳入比较，减少“两色接近、第三色突出”的情况；已有命名颜色映射优先。蓝／粉／紫／桃色系的两个变体均使用桃色 `#E8B594`。 [三色绘图 Prompt](examples/palette-three-colors/prompt.md) · [预览](examples/palette-three-colors/preview.png)。
+绿／蓝／紫系列按已确定的展示顺序呈现绿 → 蓝 → 紫（横向方法对比从下向上读）。蓝黄系列在分类总数为偶数时，蓝黄各占一半，焦点方法也计入总数；环形图的协调分组配色遵循同一规则。蓝／粉／紫／桃色系列增强了蓝紫区分度，保留粉色、桃色和透明度。已保存的命名颜色映射优先。 [三色绘图 Prompt](examples/palette-three-colors/prompt.md) · [预览](examples/palette-three-colors/preview.png)。
 
 <p align="center"><a href="examples/palettes/palette-families-overview.png"><img src="examples/palettes/palette-families-overview.png" width="900" alt="Common palette families"></a></p>
 
@@ -217,7 +217,7 @@ score 是 [0,1] 范围的无量纲分数，越高越好，突出显示 Ours。
 
 作图示例：[淡绿／淡蓝／紫／桃色小提琴图](examples/palette-pastel-green-blue-purple-peach/prompt.md)。
 
-[旧版完整总览](examples/palettes/palette-overview.png) · [当前四色参考](examples/palettes/palette-pastel-green-blue-purple-peach.png)
+[当前四色参考](examples/palettes/palette-pastel-green-blue-purple-peach.png)
 
 统一的 `warm-yellow-leaf-crisper` 色板同时包含中等深浅的分类颜色与浅色橙黄绿渐变，可用于连续色标或明确指定顺序的命名颜色映射；见[色板参考](examples/palettes/palette-warm-yellow-leaf-crisper.png)。
 
@@ -242,7 +242,7 @@ score 是 [0,1] 范围的无量纲分数，越高越好，突出显示 Ours。
 
 ### 色板顺序
 
-颜色顺序与透明度独立：`palette_order: ordered` 为默认值，将相近颜色排在邻近位置；`palette_order: shuffled` 使用 `palette_seed: 42`，对同一组已选颜色进行可重复的乱序。种子可设为其他非负整数。此选项不改变模型/数据的展示顺序、连续渐变或焦点方法保留的色相。显式颜色映射（包括保存后的完整配置中的映射）优先；希望重新自动分配时，先移除这些映射。乱序偶尔可能与顺序结果一致。
+颜色顺序与透明度独立：`palette_order: ordered` 为默认值，将相近颜色排在邻近位置；`palette_order: shuffled` 使用 `palette_seed: 42`，对同一组已选颜色进行可重复的乱序。种子可设为其他非负整数。此选项不改变模型/数据的展示顺序或连续渐变，各色系的焦点和蓝黄数量平衡规则仍然适用。显式颜色映射（包括保存后的完整配置中的映射）优先；希望重新自动分配时，先移除这些映射。乱序偶尔可能与顺序结果一致。
 
 ![Ordered and shuffled colors](examples/palettes/palette-order-comparison.png)
 

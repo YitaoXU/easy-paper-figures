@@ -89,12 +89,13 @@ render <- function(config_path,skill_dir) {
     cfg$group_palette<-if(length(cfg$group_order)<=length(group_slots))cfg$heatmap_palette else "muted-balanced-twelve"
   }
   for(k in c("heatmap_palette","palette","group_palette"))assert(cfg[[k]] %in% names(palettes),paste("Unknown",k))
-  model_map<-resolve_model_palette_mapping(cfg$model_order,palettes[[cfg$palette]],cfg$focus_model,cfg$color_values,cfg$palette_mapping,
+  model_map<-resolve_model_palette_mapping(rev(cfg$model_order),palettes[[cfg$palette]],cfg$focus_model,cfg$color_values,cfg$palette_mapping,
     palette_order=cfg$palette_order,palette_seed=cfg$palette_seed)
   cfg$color_values<-as.list(model_map$colors);cfg$palette_mapping<-model_map$record
   group_preset<-palettes[[cfg$group_palette]]
   if(!is.null(group_preset$group_categorical)){
     group_preset$categorical<-group_preset$group_categorical
+    group_preset$categorical_hue_groups<-group_preset$group_hue_groups
     group_preset$ordered_slots<-if(is.null(group_preset$group_ordered_slots))seq_along(group_preset$categorical)else group_preset$group_ordered_slots
   }
   group_colors<-if(is.null(cfg$group_colors))fixed_palette_mapping(cfg$group_order,group_preset,palette_order=cfg$palette_order,palette_seed=cfg$palette_seed)else unlist(cfg$group_colors)

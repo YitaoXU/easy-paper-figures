@@ -2,16 +2,16 @@
 
 Start with the six common families below. Choose a variant for opacity, brightness, hue companion or method capacity; the variant name is the configuration's `palette` value.
 
-The canonical source is `palettes/palette-families.json`. Run `python3 scripts/build_palette_catalog.py` after editing it. `palettes/palettes.json` is the generated, flat runtime index used by every renderer; all legacy names retain their exact RGB slots, mark opacity/transforms and focal/comparator capacity.
+The canonical source is `palettes/palette-families.json`. Run `python3 scripts/build_palette_catalog.py` after editing it. `palettes/palettes.json` is the generated, flat runtime index used by every renderer; existing preset names remain available; saved named color maps retain their recorded values.
 
 ## Common families
 
 | Family | Recommended `palette` | Variants | Fixed slots / methods with one focal |
 | --- | --- | --- | --- |
 | Pastel four-color | `pastel-green-blue-purple-peach` | `pastel-green-blue-purple-peach` (Soft four-color) | 4 / 4 |
-| Green / blue / purple | `muted-green-blue-purple` | `muted-green-blue-purple` (Classic); `muted-green-blue-purple-transparent` (Softer opacity); `muted-green-blue-purple-light` (Lighter RGB) | 6 / 5; 6 / 5; 6 / 5 |
+| Green / blue / purple | `muted-green-blue-purple` | `muted-green-blue-purple` (Classic); `muted-green-blue-purple-transparent` (Softer opacity); `muted-green-blue-purple-light` (Lighter RGB) | 6 / 6; 6 / 6; 6 / 6 |
 | Muted rainbow | `rainbow-transparent` | `rainbow` (Opaque fill); `rainbow-transparent` (Soft fill) | 10 / 8; 10 / 8 |
-| Blue / yellow | `blue-yellow-transparent` | `blue-yellow` (Opaque fill); `blue-yellow-transparent` (Soft fill) | 6 / 4; 6 / 4 |
+| Blue / yellow | `blue-yellow-transparent` | `blue-yellow` (Opaque fill); `blue-yellow-transparent` (Soft fill) | 6 / 6; 6 / 6 |
 | Blue / pink / purple / peach | `blue-pink-purple-peach-transparent` | `blue-pink-purple-peach` (Opaque fill); `blue-pink-purple-peach-transparent` (Soft fill) | 6 / 5; 6 / 5 |
 | Balanced multicolor | `muted-balanced-twelve` | `muted-balanced-six` (Six-method focal capacity); `muted-balanced-twelve` (Twelve categorical slots) | 12 / 6; 12 / 11 |
 
