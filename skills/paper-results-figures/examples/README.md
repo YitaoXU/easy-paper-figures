@@ -7,19 +7,13 @@ Cards share display dimensions within each row. Standard figures align by image 
 ### Paired observations
 
 <table><tr>
-<td align="center" width="560"><a href="paired-comparison-scatter/prompt.md"><img src="paired-comparison-scatter/preview-card.svg" width="560" height="426" alt="Categorical paired scatter"></a><br><strong>Categorical paired scatter</strong><br><code>muted-green-blue-purple</code><br><a href="paired-comparison-scatter/prompt.md">Prompt and CSV</a> · <a href="paired-comparison-scatter/preview.png">Actual export</a></td>
+<td align="center" width="450"><a href="paired-comparison-scatter/prompt.md"><img src="paired-comparison-scatter/preview-card.svg" width="450" height="340" alt="Categorical paired scatter"></a><br><strong>Categorical paired scatter</strong><br><code>muted-green-blue-purple</code><br><a href="paired-comparison-scatter/prompt.md">Prompt and CSV</a> · <a href="paired-comparison-scatter/preview.png">Actual export</a></td>
+<td align="center" width="450"><a href="paired-comparison-scatter-continuous/prompt.md"><img src="paired-comparison-scatter-continuous/preview-card.svg" width="450" height="340" alt="Continuous-color paired scatter"></a><br><strong>Continuous-color paired scatter</strong><br><code>muted-green-blue-purple</code><br><a href="paired-comparison-scatter-continuous/prompt.md">Prompt and CSV</a> · <a href="paired-comparison-scatter-continuous/preview.png">Actual export</a></td>
 </tr></table>
 
 <table><tr>
-<td align="center" width="560"><a href="paired-comparison-scatter-continuous/prompt.md"><img src="paired-comparison-scatter-continuous/preview-card.svg" width="560" height="426" alt="Continuous-color paired scatter"></a><br><strong>Continuous-color paired scatter</strong><br><code>muted-green-blue-purple</code><br><a href="paired-comparison-scatter-continuous/prompt.md">Prompt and CSV</a> · <a href="paired-comparison-scatter-continuous/preview.png">Actual export</a></td>
-</tr></table>
-
-<table><tr>
-<td align="center" width="560"><a href="paired-comparison-scatter-size-stars/prompt.md"><img src="paired-comparison-scatter-size-stars/preview-card.svg" width="560" height="426" alt="Point sizes and selected stars"></a><br><strong>Point sizes and selected stars</strong><br><code>muted-green-blue-purple</code><br><a href="paired-comparison-scatter-size-stars/prompt.md">Prompt and CSV</a> · <a href="paired-comparison-scatter-size-stars/preview.png">Actual export</a></td>
-</tr></table>
-
-<table><tr>
-<td align="center" width="560"><a href="paired-comparison-scatter-marginals/prompt.md"><img src="paired-comparison-scatter-marginals/preview-card.svg" width="560" height="426" alt="Marginal histograms and KDE"></a><br><strong>Marginal histograms and KDE</strong><br><code>rainbow-transparent</code><br><a href="paired-comparison-scatter-marginals/prompt.md">Prompt and CSV</a> · <a href="paired-comparison-scatter-marginals/preview.png">Actual export</a></td>
+<td align="center" width="450"><a href="paired-comparison-scatter-size-stars/prompt.md"><img src="paired-comparison-scatter-size-stars/preview-card.svg" width="450" height="340" alt="Point sizes and selected stars"></a><br><strong>Point sizes and selected stars</strong><br><code>muted-green-blue-purple</code><br><a href="paired-comparison-scatter-size-stars/prompt.md">Prompt and CSV</a> · <a href="paired-comparison-scatter-size-stars/preview.png">Actual export</a></td>
+<td align="center" width="450"><a href="paired-comparison-scatter-marginals/prompt.md"><img src="paired-comparison-scatter-marginals/preview-card.svg" width="450" height="340" alt="Marginal histograms and KDE"></a><br><strong>Marginal histograms and KDE</strong><br><code>rainbow-transparent</code><br><a href="paired-comparison-scatter-marginals/prompt.md">Prompt and CSV</a> · <a href="paired-comparison-scatter-marginals/preview.png">Actual export</a></td>
 </tr></table>
 
 ### One metric across methods
@@ -32,10 +26,7 @@ Cards share display dimensions within each row. Standard figures align by image 
 
 <table><tr>
 <td align="center" width="450"><a href="multi-comparison-reference-line/prompt.md"><img src="multi-comparison-reference-line/preview-card.svg" width="450" height="340" alt="Paired reference differences"></a><br><strong>Paired reference differences</strong><br><code>muted-green-blue-purple-transparent</code><br><a href="multi-comparison-reference-line/prompt.md">Prompt and CSV</a> · <a href="multi-comparison-reference-line/preview.png">Actual export</a></td>
-</tr></table>
-
-<table><tr>
-<td align="center" width="560"><a href="multi-comparison-four-column/prompt.md"><img src="multi-comparison-four-column/preview-card.svg" width="560" height="426" alt="Four-column manuscript profile"></a><br><strong>Four-column manuscript profile</strong><br><code>blue-yellow-transparent</code><br><a href="multi-comparison-four-column/prompt.md">Prompt and CSV</a> · <a href="multi-comparison-four-column/preview.png">Actual export</a></td>
+<td align="center" width="450"><a href="multi-comparison-four-column/prompt.md"><img src="multi-comparison-four-column/preview-card.svg" width="450" height="340" alt="Four-column manuscript profile"></a><br><strong>Four-column manuscript profile</strong><br><code>blue-yellow-transparent</code><br><a href="multi-comparison-four-column/prompt.md">Prompt and CSV</a> · <a href="multi-comparison-four-column/preview.png">Actual export</a></td>
 </tr></table>
 
 <table><tr>
@@ -86,10 +77,7 @@ Cards share display dimensions within each row. Standard figures align by image 
 
 <table><tr>
 <td align="center" width="450"><a href="broken-box-vertical/prompt.md"><img src="broken-box-vertical/preview-card.svg" width="450" height="340" alt="Broken box axis, vertical"></a><br><strong>Broken box axis, vertical</strong><br><code>rainbow-transparent</code><br><a href="broken-box-vertical/prompt.md">Prompt and CSV</a> · <a href="broken-box-vertical/preview.png">Actual export</a></td>
-</tr></table>
-
-<table><tr>
-<td align="center" width="560"><a href="broken-box-horizontal/prompt.md"><img src="broken-box-horizontal/preview-card.svg" width="560" height="426" alt="Broken box axis, horizontal"></a><br><strong>Broken box axis, horizontal</strong><br><code>blue-yellow-transparent</code><br><a href="broken-box-horizontal/prompt.md">Prompt and CSV</a> · <a href="broken-box-horizontal/preview.png">Actual export</a></td>
+<td align="center" width="450"><a href="broken-box-horizontal/prompt.md"><img src="broken-box-horizontal/preview-card.svg" width="450" height="340" alt="Broken box axis, horizontal"></a><br><strong>Broken box axis, horizontal</strong><br><code>blue-yellow-transparent</code><br><a href="broken-box-horizontal/prompt.md">Prompt and CSV</a> · <a href="broken-box-horizontal/preview.png">Actual export</a></td>
 </tr></table>
 
 ### Trend comparison
@@ -101,25 +89,16 @@ Cards share display dimensions within each row. Standard figures align by image 
 </tr></table>
 
 <table><tr>
-<td align="center" width="560"><a href="trend-multi-model/prompt.md"><img src="trend-multi-model/preview-card.svg" width="560" height="426" alt="Four-model linear trend"></a><br><strong>Four-model linear trend</strong><br><code>blue-pink-purple-peach-transparent</code><br><a href="trend-multi-model/prompt.md">Prompt and CSV</a> · <a href="trend-multi-model/preview.png">Actual export</a></td>
-</tr></table>
-
-<table><tr>
+<td align="center" width="300"><a href="trend-multi-model/prompt.md"><img src="trend-multi-model/preview-card.svg" width="300" height="285" alt="Four-model linear trend"></a><br><strong>Four-model linear trend</strong><br><code>blue-pink-purple-peach-transparent</code><br><a href="trend-multi-model/prompt.md">Prompt and CSV</a> · <a href="trend-multi-model/preview.png">Actual export</a></td>
 <td align="center" width="300"><a href="trend-categorical-horizontal/prompt.md"><img src="trend-categorical-horizontal/preview-card.svg" width="300" height="285" alt="Categories on the horizontal axis"></a><br><strong>Categories on the horizontal axis</strong><br><code>blue-pink-purple-peach-transparent</code><br><a href="trend-categorical-horizontal/prompt.md">Prompt and CSV</a> · <a href="trend-categorical-horizontal/preview.png">Actual export</a></td>
-</tr></table>
-
-<table><tr>
 <td align="center" width="300"><a href="trend-categorical-vertical/prompt.md"><img src="trend-categorical-vertical/preview-card.svg" width="300" height="285" alt="Categories on the vertical axis"></a><br><strong>Categories on the vertical axis</strong><br><code>blue-yellow-transparent</code><br><a href="trend-categorical-vertical/prompt.md">Prompt and CSV</a> · <a href="trend-categorical-vertical/preview.png">Actual export</a></td>
 </tr></table>
 
 ### Radar comparison
 
 <table><tr>
-<td align="center" width="560"><a href="radar-comparison/prompt.md"><img src="radar-comparison/preview-card.svg" width="560" height="456" alt="Radar model profiles"></a><br><strong>Radar model profiles</strong><br><code>muted-green-blue-purple</code><br><a href="radar-comparison/prompt.md">Prompt and CSV</a> · <a href="radar-comparison/preview.png">Actual export</a></td>
-</tr></table>
-
-<table><tr>
-<td align="center" width="560"><a href="radar-comparison-rainbow/prompt.md"><img src="radar-comparison-rainbow/preview-card.svg" width="560" height="456" alt="Radar model profiles"></a><br><strong>Radar model profiles</strong><br><code>rainbow-transparent</code><br><a href="radar-comparison-rainbow/prompt.md">Prompt and CSV</a> · <a href="radar-comparison-rainbow/preview.png">Actual export</a></td>
+<td align="center" width="450"><a href="radar-comparison/prompt.md"><img src="radar-comparison/preview-card.svg" width="450" height="340" alt="Radar model profiles"></a><br><strong>Radar model profiles</strong><br><code>muted-green-blue-purple</code><br><a href="radar-comparison/prompt.md">Prompt and CSV</a> · <a href="radar-comparison/preview.png">Actual export</a></td>
+<td align="center" width="450"><a href="radar-comparison-rainbow/prompt.md"><img src="radar-comparison-rainbow/preview-card.svg" width="450" height="340" alt="Radar model profiles"></a><br><strong>Radar model profiles</strong><br><code>rainbow-transparent</code><br><a href="radar-comparison-rainbow/prompt.md">Prompt and CSV</a> · <a href="radar-comparison-rainbow/preview.png">Actual export</a></td>
 </tr></table>
 
 <table><tr>
