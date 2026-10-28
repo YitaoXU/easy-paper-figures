@@ -207,7 +207,7 @@ score 是 [0,1] 范围的无量纲分数，越高越好，突出显示 Ours。
 | 蓝 / 粉 / 紫 / 桃色 | `blue-pink-purple-peach-transparent` | 四种协调色相 |
 | 平衡多色 | `muted-balanced-twelve` | 六色核心与十二分类颜色扩展 |
 
-自动分配两种或三种分类颜色时，会从允许的固定色中选择最小 Lab 色差更大的组合，并将焦点方法的保留色纳入比较，减少“两色接近、第三色突出”的情况；已有命名颜色映射优先。蓝／粉／紫／桃色系的两个变体均将桃色从 `#F6D1B9` 略微加深为 `#E8B594`。 [三色绘图 Prompt](examples/palette-three-colors/prompt.md) · [预览](examples/palette-three-colors/preview.png)。
+自动分配两种或三种分类颜色时，会从允许的固定色中选择最小 Lab 色差更大的组合，并将焦点方法的保留色纳入比较，减少“两色接近、第三色突出”的情况；已有命名颜色映射优先。蓝／粉／紫／桃色系的两个变体均使用桃色 `#E8B594`。 [三色绘图 Prompt](examples/palette-three-colors/prompt.md) · [预览](examples/palette-three-colors/preview.png)。
 
 <p align="center"><a href="examples/palettes/palette-families-overview.png"><img src="examples/palettes/palette-families-overview.png" width="900" alt="Common palette families"></a></p>
 
@@ -248,12 +248,10 @@ score 是 [0,1] 范围的无量纲分数，越高越好，突出显示 Ours。
 
 ## 文件组织
 
-`examples/<figure-id>/prompt.md` 是面向用户的使用示例，`request.json` 在适用时提供最小配置结构，`preview.png` 是未经修改的科学导出，`preview-card.svg` 将其等比例放入统一尺寸的展示框。共享合成输入集中放在 `examples/data/`。运行时说明、科学契约、可复用渲染器和固定色板分别位于 `SKILL.md`、`references/`、`scripts/` 和 `palettes/`。
+`examples/<figure-id>/prompt.md` 是面向用户的使用示例，`request.json` 在适用时提供最小配置结构，`preview.png` 是未经修改的科学导出，`preview-card.svg` 将其等比例放入统一尺寸的展示框。共享合成输入集中放在 `examples/data/`。执行时从 `SKILL.md` 开始，再阅读共享样式及所选图形、色板的契约。`scripts/` 存放可复用渲染器，`palettes/` 存放固定颜色定义。本指南和图库用于选择、改写示例，不是执行时的必读内容。
 
 ## 扩展图形
 
 若需要其他表达形式，请提供结果数据和参考图，并说明需要保留哪些视觉元素。Agent 会检查数据的科学含义，再选择或调整可复用的布局。
 
-新图默认使用包含全部文字的 56 × 40 mm 或 42 × 40 mm 画布；横向占用两格的组合图使用 88 × 40 mm。柱状图、箱型图和小提琴图的外轮廓默认 0.28 mm。已保存的显式图形设置继续保留，既有示例预览保持原导出尺寸。
-
-未指定尺寸时，带内部数值的共享行/上下堆叠柱形图使用 88 × 54 mm，共享坐标的指标柱形与均值线使用 70 × 46 mm，以保留数值、SD 与图例所需空间。显式指定的画布尺寸优先。
+画布尺寸、字体和通用外观见[共享样式指南](references/style-guide.md)，各布局的具体设置集中在对应图形指南中。已保存的显式设置优先，既有示例预览保留其已验收的导出尺寸。

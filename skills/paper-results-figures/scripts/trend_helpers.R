@@ -67,17 +67,6 @@ trend_numeric_axis <- function(values, limits=NULL, breaks=NULL, mm=40, font_pt=
   list(limits=limits,breaks=snap_axis_breaks(breaks,limits))
 }
 
-trend_stat_text <- function(st, keys, p_value_target="regression") {
-  labels <- vapply(keys,function(key){
-    value<-switch(key,slope=st$slope,r_squared=st$r_squared,pearson_r=st$pearson_r,p_value=switch(p_value_target,regression=st$p_value,pearson=st$pearson_p,slope=st$slope_p))
-    if(!is.finite(value))return(paste0(switch(key,slope="Slope",r_squared="R²",pearson_r="Pearson r",p_value="p-value"),": unavailable"))
-    if(key=="p_value")return(if(value<.05)"p-value < 0.05" else sprintf("p-value = %.3f",value))
-    label<-switch(key,slope=if(st$degree>1)sprintf("Slope at x=%.3f",st$slope_reference)else"Slope",r_squared="R²",pearson_r="Pearson r")
-    sprintf("%s: %.3f",label,value)
-  },character(1))
-  paste(labels,collapse="\n")
-}
-
 # A shared statistic header is separate from per-series values in the two-row guide.
 trend_stat_header <- function(keys, labels=NULL, slope_reference=NULL) {
   stat_names<-c(slope=if(is.null(slope_reference))"Slope"else sprintf("Slope at x=%.3f",slope_reference),

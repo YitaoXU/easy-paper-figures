@@ -207,7 +207,7 @@ The catalog is organized into **11 families: 6 common and 5 extended**, with opa
 | Blue / pink / purple / peach | `blue-pink-purple-peach-transparent` | Four coordinated hue families |
 | Balanced multicolor | `muted-balanced-twelve` | Six-color core and twelve-category extension |
 
-Automatic sets of two or three categorical colors choose the eligible fixed slots with the greatest minimum Lab color distance, including any reserved focal color. This reduces close pairs beside an isolated third color; saved named maps take priority. Both blue-pink-purple-peach variants now use slightly deeper peach `#E8B594` (previously `#F6D1B9`). [Three-color prompt](examples/palette-three-colors/prompt.md) · [Preview](examples/palette-three-colors/preview.png).
+Automatic sets of two or three categorical colors choose the eligible fixed slots with the greatest minimum Lab color distance, including any reserved focal color. This reduces close pairs beside an isolated third color; saved named maps take priority. Both blue-pink-purple-peach variants use peach `#E8B594`. [Three-color prompt](examples/palette-three-colors/prompt.md) · [Preview](examples/palette-three-colors/preview.png).
 
 <p align="center"><a href="examples/palettes/palette-families-overview.png"><img src="examples/palettes/palette-families-overview.png" width="900" alt="Common palette families"></a></p>
 
@@ -248,12 +248,10 @@ Color sequence is independent of opacity: use `palette_order: ordered` (default)
 
 ## File organization
 
-`examples/<figure-id>/prompt.md` is the user-facing example, `request.json` provides a minimal configuration structure where useful, and `preview.png` is the unchanged scientific export and `preview-card.svg` contains it in an equal-size display frame. Shared synthetic inputs live in `examples/data/`. Runtime instructions, scientific contracts, reusable renderers and fixed palette definitions live in `SKILL.md`, `references/`, `scripts/` and `palettes/`.
+`examples/<figure-id>/prompt.md` is the user-facing example, `request.json` provides a minimal configuration structure where useful, and `preview.png` is the unchanged scientific export and `preview-card.svg` contains it in an equal-size display frame. Shared synthetic inputs live in `examples/data/`. Start execution with `SKILL.md`, then read the shared style and only the selected figure and palette contracts. `scripts/` contains reusable renderers; `palettes/` contains fixed color definitions. This guide and gallery are for choosing and adapting examples, not required execution reading.
 
 ## Extend a figure
 
 When a different encoding is needed, provide the result data and a reference figure, then identify the visual elements to retain. The agent inspects the scientific meaning and chooses or adapts a reusable layout.
 
-New figures use complete 56 × 40 mm or 42 × 40 mm canvases; a two-slot horizontal compound canvas is 88 × 40 mm. Bar, box and violin outer outlines default to 0.28 mm. Saved explicit figure settings retain their values. Existing gallery images retain their previously exported sizes.
-
-Composite bars with inside values use 88 × 54 mm when dimensions are omitted; shared-axis metric bars with mean lines use 70 × 46 mm. Explicit canvas allocations remain authoritative.
+Canvas allocations, typography and shared appearance are documented in the [shared style guide](references/style-guide.md); layout-specific details stay in the selected figure guide. Explicit saved settings take precedence. Existing gallery images retain their accepted export dimensions.

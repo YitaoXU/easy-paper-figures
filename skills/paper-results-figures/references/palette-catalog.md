@@ -27,10 +27,6 @@ These remain available for existing figure families and specific hue requirement
 | Yellow / green companions | `yellow-green` | `yellow-green` (Two hue families); `yellow-green-red` (Red companion) | 6 / 4; 6 / 5 |
 | Warm yellow / leaf green | `warm-yellow-leaf-crisper` | `warm-yellow-leaf-crisper` (Medium categorical / light ramp) | 6 / 4 |
 
-## Pastel four-color preset
-
-`pastel-green-blue-purple-peach` preserves four fixed slots: pale green `#D9EAC4`, pale blue `#B5D0E0`, muted purple `#A396B9`, peach `#F6D1B9`. Distribution fills use opacity 0.40; raw distribution points use opacity 0.55 and RGB darkening 0.20. Paired points use opacity 0.60 with no RGB darkening. One focal method reserves peach; up to three comparators use green, blue and purple, independently of observed performance. Ordinary categories use the fixed ordered slots. Larger automatic method comparisons require a family with sufficient focal/comparator capacity or an authorized named map.
-
 ## Consolidation rules
 
 - Exact RGB duplicates share a family base. Opacity-only variants retain their own mark profiles.

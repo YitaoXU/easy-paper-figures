@@ -73,12 +73,6 @@ paired_mark_radii_mm <- function(dat, cfg, symbol_mm) {
   result
 }
 
-# Measure Arial annotations in physical units, then normalize against the square panel.
-paired_arial_width <- function(text, size_mm) {
-  systemfonts::string_width(text, family = "Arial", size = size_mm * 72.27 / 25.4,
-    res = 1200) * 25.4 / 1200
-}
-
 # Grid uses the actual export face and multiline spacing. Cache measured glyph
 # bounds so title/end-tick packing does not depend on a nominal font-size box.
 paired_text_metric_cache <- new.env(parent = emptyenv())

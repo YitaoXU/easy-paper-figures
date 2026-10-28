@@ -83,8 +83,7 @@ def catalog(registry, palettes):
                 capacities.append(f"{len(palette['categorical'])} / {capacity}")
             lines.append(f"| {family['title']} | `{family['recommended_preset']}` | {variants} | {'; '.join(capacities)} |")
     lines += [
-        "", "## Pastel four-color preset", "",
-        "`pastel-green-blue-purple-peach` preserves four fixed slots: pale green `#D9EAC4`, pale blue `#B5D0E0`, muted purple `#A396B9`, peach `#F6D1B9`. Distribution fills use opacity 0.40; raw distribution points use opacity 0.55 and RGB darkening 0.20. Paired points use opacity 0.60 with no RGB darkening. One focal method reserves peach; up to three comparators use green, blue and purple, independently of observed performance. Ordinary categories use the fixed ordered slots. Larger automatic method comparisons require a family with sufficient focal/comparator capacity or an authorized named map.", "",
+        "",
         "## Consolidation rules", "",
         "- Exact RGB duplicates share a family base. Opacity-only variants retain their own mark profiles.",
         "- Lighter RGB and hue-companion variants are grouped for discovery, with every distinct fixed color retained.",
