@@ -13,8 +13,11 @@ Turn result data and a short brief into reproducible manuscript figures. Support
 [Full guide and gallery](skills/paper-results-figures/README.md) · [中文指南](skills/paper-results-figures/README.zh.md) · [Skill definition](skills/paper-results-figures/SKILL.md)
 
 <table><tr>
-<td align="center" width="450"><a href="skills/paper-results-figures/examples/paired-comparison-scatter-marginals/prompt.md"><img src="skills/paper-results-figures/examples/paired-comparison-scatter-marginals/preview-card.svg" width="450" height="340" alt="Marginal histograms and KDE"></a><br><strong>Marginal histograms and KDE</strong><br><code>rainbow-transparent</code></td>
-<td align="center" width="450"><a href="skills/paper-results-figures/examples/paired-comparison-scatter-size-stars/prompt.md"><img src="skills/paper-results-figures/examples/paired-comparison-scatter-size-stars/preview-card.svg" width="450" height="340" alt="Point sizes and selected stars"></a><br><strong>Point sizes and selected stars</strong><br><code>muted-green-blue-purple</code></td>
+<td align="center" width="560"><a href="skills/paper-results-figures/examples/paired-comparison-scatter-marginals/prompt.md"><img src="skills/paper-results-figures/examples/paired-comparison-scatter-marginals/preview-card.svg" width="560" height="426" alt="Marginal histograms and KDE"></a><br><strong>Marginal histograms and KDE</strong><br><code>rainbow-transparent</code></td>
+</tr></table>
+
+<table><tr>
+<td align="center" width="560"><a href="skills/paper-results-figures/examples/paired-comparison-scatter-size-stars/prompt.md"><img src="skills/paper-results-figures/examples/paired-comparison-scatter-size-stars/preview-card.svg" width="560" height="426" alt="Point sizes and selected stars"></a><br><strong>Point sizes and selected stars</strong><br><code>muted-green-blue-purple</code></td>
 </tr></table>
 
 <table><tr>

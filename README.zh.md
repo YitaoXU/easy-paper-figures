@@ -13,8 +13,11 @@
 [完整中文指南与图库](skills/paper-results-figures/README.zh.md) · [English guide](skills/paper-results-figures/README.md) · [Skill 定义](skills/paper-results-figures/SKILL.md)
 
 <table><tr>
-<td align="center" width="450"><a href="skills/paper-results-figures/examples/paired-comparison-scatter-marginals/prompt.md"><img src="skills/paper-results-figures/examples/paired-comparison-scatter-marginals/preview-card.svg" width="450" height="340" alt="边际直方图与密度曲线"></a><br><strong>边际直方图与密度曲线</strong><br><code>rainbow-transparent</code></td>
-<td align="center" width="450"><a href="skills/paper-results-figures/examples/paired-comparison-scatter-size-stars/prompt.md"><img src="skills/paper-results-figures/examples/paired-comparison-scatter-size-stars/preview-card.svg" width="450" height="340" alt="点大小与指定星形标记"></a><br><strong>点大小与指定星形标记</strong><br><code>muted-green-blue-purple</code></td>
+<td align="center" width="560"><a href="skills/paper-results-figures/examples/paired-comparison-scatter-marginals/prompt.md"><img src="skills/paper-results-figures/examples/paired-comparison-scatter-marginals/preview-card.svg" width="560" height="426" alt="边际直方图与密度曲线"></a><br><strong>边际直方图与密度曲线</strong><br><code>rainbow-transparent</code></td>
+</tr></table>
+
+<table><tr>
+<td align="center" width="560"><a href="skills/paper-results-figures/examples/paired-comparison-scatter-size-stars/prompt.md"><img src="skills/paper-results-figures/examples/paired-comparison-scatter-size-stars/preview-card.svg" width="560" height="426" alt="点大小与指定星形标记"></a><br><strong>点大小与指定星形标记</strong><br><code>muted-green-blue-purple</code></td>
 </tr></table>
 
 <table><tr>
