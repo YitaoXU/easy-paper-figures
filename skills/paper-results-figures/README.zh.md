@@ -74,18 +74,18 @@ score 是 [0,1] 范围的无量纲分数，越高越好，突出显示 Ours。
 
 ## 合成数据预览
 
-每张预览都有独立文件夹，包含可直接使用的 Prompt 和固定 CSV 链接。分数示例中的 `Ours` 表现最好，较弱方法使差异更直观。相关图形和色板重复使用相同输入，Prompt 无须用户自行生成数据。展示卡片尺寸一致，同一行图片的实际显示高度一致；宽度按原始比例缩放，不拉伸、不裁切。
+每张预览都有独立文件夹，包含可直接使用的 Prompt 和固定 CSV 链接。分数示例中的 `Ours` 表现最好，较弱方法使差异更直观。相关图形和色板重复使用相同输入，Prompt 无须用户自行生成数据。同行展示框一致；常规图按高度、雷达图按实际圆径对齐。部分紧凑图采用更大预览，完整图片保持原始比例，不拉伸、不裁切。
 
 ### 配对观测
 
 <table><tr>
-<td align="center" width="300"><a href="examples/paired-comparison-scatter/prompt.md"><img src="examples/paired-comparison-scatter/preview-card.svg" width="300" height="285" alt="分类配色的配对散点图"></a><br><strong>分类配色的配对散点图</strong><br><code>muted-green-blue-purple</code><br><a href="examples/paired-comparison-scatter/prompt.md">Prompt 与 CSV</a> · <a href="examples/paired-comparison-scatter/preview.png">实际导出</a></td>
-<td align="center" width="300"><a href="examples/paired-comparison-scatter-continuous/prompt.md"><img src="examples/paired-comparison-scatter-continuous/preview-card.svg" width="300" height="285" alt="连续数值配色的配对散点图"></a><br><strong>连续数值配色的配对散点图</strong><br><code>muted-green-blue-purple</code><br><a href="examples/paired-comparison-scatter-continuous/prompt.md">Prompt 与 CSV</a> · <a href="examples/paired-comparison-scatter-continuous/preview.png">实际导出</a></td>
+<td align="center" width="450"><a href="examples/paired-comparison-scatter/prompt.md"><img src="examples/paired-comparison-scatter/preview-card.svg" width="450" height="340" alt="分类配色的配对散点图"></a><br><strong>分类配色的配对散点图</strong><br><code>muted-green-blue-purple</code><br><a href="examples/paired-comparison-scatter/prompt.md">Prompt 与 CSV</a> · <a href="examples/paired-comparison-scatter/preview.png">实际导出</a></td>
+<td align="center" width="450"><a href="examples/paired-comparison-scatter-continuous/prompt.md"><img src="examples/paired-comparison-scatter-continuous/preview-card.svg" width="450" height="340" alt="连续数值配色的配对散点图"></a><br><strong>连续数值配色的配对散点图</strong><br><code>muted-green-blue-purple</code><br><a href="examples/paired-comparison-scatter-continuous/prompt.md">Prompt 与 CSV</a> · <a href="examples/paired-comparison-scatter-continuous/preview.png">实际导出</a></td>
 </tr></table>
 
 <table><tr>
-<td align="center" width="300"><a href="examples/paired-comparison-scatter-size-stars/prompt.md"><img src="examples/paired-comparison-scatter-size-stars/preview-card.svg" width="300" height="285" alt="点大小与指定星形标记"></a><br><strong>点大小与指定星形标记</strong><br><code>muted-green-blue-purple</code><br><a href="examples/paired-comparison-scatter-size-stars/prompt.md">Prompt 与 CSV</a> · <a href="examples/paired-comparison-scatter-size-stars/preview.png">实际导出</a></td>
-<td align="center" width="300"><a href="examples/paired-comparison-scatter-marginals/prompt.md"><img src="examples/paired-comparison-scatter-marginals/preview-card.svg" width="300" height="285" alt="边际直方图与密度曲线"></a><br><strong>边际直方图与密度曲线</strong><br><code>rainbow-transparent</code><br><a href="examples/paired-comparison-scatter-marginals/prompt.md">Prompt 与 CSV</a> · <a href="examples/paired-comparison-scatter-marginals/preview.png">实际导出</a></td>
+<td align="center" width="450"><a href="examples/paired-comparison-scatter-size-stars/prompt.md"><img src="examples/paired-comparison-scatter-size-stars/preview-card.svg" width="450" height="340" alt="点大小与指定星形标记"></a><br><strong>点大小与指定星形标记</strong><br><code>muted-green-blue-purple</code><br><a href="examples/paired-comparison-scatter-size-stars/prompt.md">Prompt 与 CSV</a> · <a href="examples/paired-comparison-scatter-size-stars/preview.png">实际导出</a></td>
+<td align="center" width="450"><a href="examples/paired-comparison-scatter-marginals/prompt.md"><img src="examples/paired-comparison-scatter-marginals/preview-card.svg" width="450" height="340" alt="边际直方图与密度曲线"></a><br><strong>边际直方图与密度曲线</strong><br><code>rainbow-transparent</code><br><a href="examples/paired-comparison-scatter-marginals/prompt.md">Prompt 与 CSV</a> · <a href="examples/paired-comparison-scatter-marginals/preview.png">实际导出</a></td>
 </tr></table>
 
 ### 单指标多方法
@@ -97,8 +97,8 @@ score 是 [0,1] 范围的无量纲分数，越高越好，突出显示 Ours。
 </tr></table>
 
 <table><tr>
-<td align="center" width="300"><a href="examples/multi-comparison-reference-line/prompt.md"><img src="examples/multi-comparison-reference-line/preview-card.svg" width="300" height="285" alt="配对参考差值"></a><br><strong>配对参考差值</strong><br><code>muted-green-blue-purple-transparent</code><br><a href="examples/multi-comparison-reference-line/prompt.md">Prompt 与 CSV</a> · <a href="examples/multi-comparison-reference-line/preview.png">实际导出</a></td>
-<td align="center" width="300"><a href="examples/multi-comparison-four-column/prompt.md"><img src="examples/multi-comparison-four-column/preview-card.svg" width="300" height="285" alt="四栏论文尺寸"></a><br><strong>四栏论文尺寸</strong><br><code>blue-yellow-transparent</code><br><a href="examples/multi-comparison-four-column/prompt.md">Prompt 与 CSV</a> · <a href="examples/multi-comparison-four-column/preview.png">实际导出</a></td>
+<td align="center" width="450"><a href="examples/multi-comparison-reference-line/prompt.md"><img src="examples/multi-comparison-reference-line/preview-card.svg" width="450" height="340" alt="配对参考差值"></a><br><strong>配对参考差值</strong><br><code>muted-green-blue-purple-transparent</code><br><a href="examples/multi-comparison-reference-line/prompt.md">Prompt 与 CSV</a> · <a href="examples/multi-comparison-reference-line/preview.png">实际导出</a></td>
+<td align="center" width="450"><a href="examples/multi-comparison-four-column/prompt.md"><img src="examples/multi-comparison-four-column/preview-card.svg" width="450" height="340" alt="四栏论文尺寸"></a><br><strong>四栏论文尺寸</strong><br><code>blue-yellow-transparent</code><br><a href="examples/multi-comparison-four-column/prompt.md">Prompt 与 CSV</a> · <a href="examples/multi-comparison-four-column/preview.png">实际导出</a></td>
 </tr></table>
 
 <table><tr>
@@ -148,11 +148,13 @@ score 是 [0,1] 范围的无量纲分数，越高越好，突出显示 Ours。
 ### 断轴箱线图
 
 <table><tr>
-<td align="center" width="300"><a href="examples/broken-box-vertical/prompt.md"><img src="examples/broken-box-vertical/preview-card.svg" width="300" height="285" alt="纵向断轴箱线图"></a><br><strong>纵向断轴箱线图</strong><br><code>rainbow-transparent</code><br><a href="examples/broken-box-vertical/prompt.md">Prompt 与 CSV</a> · <a href="examples/broken-box-vertical/preview.png">实际导出</a></td>
-<td align="center" width="300"><a href="examples/broken-box-horizontal/prompt.md"><img src="examples/broken-box-horizontal/preview-card.svg" width="300" height="285" alt="横向断轴箱线图"></a><br><strong>横向断轴箱线图</strong><br><code>blue-yellow-transparent</code><br><a href="examples/broken-box-horizontal/prompt.md">Prompt 与 CSV</a> · <a href="examples/broken-box-horizontal/preview.png">实际导出</a></td>
+<td align="center" width="450"><a href="examples/broken-box-vertical/prompt.md"><img src="examples/broken-box-vertical/preview-card.svg" width="450" height="340" alt="纵向断轴箱线图"></a><br><strong>纵向断轴箱线图</strong><br><code>rainbow-transparent</code><br><a href="examples/broken-box-vertical/prompt.md">Prompt 与 CSV</a> · <a href="examples/broken-box-vertical/preview.png">实际导出</a></td>
+<td align="center" width="450"><a href="examples/broken-box-horizontal/prompt.md"><img src="examples/broken-box-horizontal/preview-card.svg" width="450" height="340" alt="横向断轴箱线图"></a><br><strong>横向断轴箱线图</strong><br><code>blue-yellow-transparent</code><br><a href="examples/broken-box-horizontal/prompt.md">Prompt 与 CSV</a> · <a href="examples/broken-box-horizontal/preview.png">实际导出</a></td>
 </tr></table>
 
 ### 趋势比较
+
+四方法趋势图例在单行放不下时，每行显示两个方法。
 
 <table><tr>
 <td align="center" width="300"><a href="examples/trend-two-models/prompt.md"><img src="examples/trend-two-models/preview-card.svg" width="300" height="285" alt="双方法线性趋势"></a><br><strong>双方法线性趋势</strong><br><code>muted-green-blue-purple</code><br><a href="examples/trend-two-models/prompt.md">Prompt 与 CSV</a> · <a href="examples/trend-two-models/preview.png">实际导出</a></td>
@@ -169,8 +171,8 @@ score 是 [0,1] 范围的无量纲分数，越高越好，突出显示 Ours。
 ### 雷达图
 
 <table><tr>
-<td align="center" width="300"><a href="examples/radar-comparison/prompt.md"><img src="examples/radar-comparison/preview-card.svg" width="300" height="285" alt="雷达图：绿蓝紫"></a><br><strong>雷达图：绿蓝紫</strong><br><code>muted-green-blue-purple</code><br><a href="examples/radar-comparison/prompt.md">Prompt 与 CSV</a> · <a href="examples/radar-comparison/preview.png">实际导出</a></td>
-<td align="center" width="300"><a href="examples/radar-comparison-rainbow/prompt.md"><img src="examples/radar-comparison-rainbow/preview-card.svg" width="300" height="285" alt="雷达图：彩虹"></a><br><strong>雷达图：彩虹</strong><br><code>rainbow-transparent</code><br><a href="examples/radar-comparison-rainbow/prompt.md">Prompt 与 CSV</a> · <a href="examples/radar-comparison-rainbow/preview.png">实际导出</a></td>
+<td align="center" width="350"><a href="examples/radar-comparison/prompt.md"><img src="examples/radar-comparison/preview-card.svg" width="350" height="285" alt="雷达图：绿蓝紫"></a><br><strong>雷达图：绿蓝紫</strong><br><code>muted-green-blue-purple</code><br><a href="examples/radar-comparison/prompt.md">Prompt 与 CSV</a> · <a href="examples/radar-comparison/preview.png">实际导出</a></td>
+<td align="center" width="350"><a href="examples/radar-comparison-rainbow/prompt.md"><img src="examples/radar-comparison-rainbow/preview-card.svg" width="350" height="285" alt="雷达图：彩虹"></a><br><strong>雷达图：彩虹</strong><br><code>rainbow-transparent</code><br><a href="examples/radar-comparison-rainbow/prompt.md">Prompt 与 CSV</a> · <a href="examples/radar-comparison-rainbow/preview.png">实际导出</a></td>
 </tr></table>
 
 <table><tr>

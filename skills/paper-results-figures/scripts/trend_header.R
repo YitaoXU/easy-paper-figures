@@ -21,6 +21,9 @@ trend_guide_grob <- function(cfg, series, labels, colors, shapes, fits) {
   }
   columns<-length(series)
   while(columns>1L && prefix_width+columns*max(widths)>available)columns<-columns-1L
+  # Balance the same number of blocks instead of filling the first row and
+  # stranding a final series (four models wrap as two plus two, not three plus one).
+  columns<-ceiling(length(series)/ceiling(length(series)/columns))
   if(cfg$mode=="continuous" && length(series)==2L && columns!=2L)
     stop("The two-row comparison guide cannot fit both model names/statistics at this width; increase width_mm or supply authorized shorter display labels.")
   if(prefix_width+max(widths)>available)
