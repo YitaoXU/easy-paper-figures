@@ -20,11 +20,12 @@
 <table><tr>
 <td align="center" width="300"><a href="skills/paper-results-figures/examples/multi-comparison-significance/prompt.md"><img src="skills/paper-results-figures/examples/multi-comparison-significance/preview-card.svg" width="300" height="285" alt="纵向显著性括号"></a><br><strong>纵向显著性括号</strong><br><code>rainbow-transparent</code></td>
 <td align="center" width="300"><a href="skills/paper-results-figures/examples/multi-metric-comparison-dual-axis/prompt.md"><img src="skills/paper-results-figures/examples/multi-metric-comparison-dual-axis/preview-card.svg" width="300" height="285" alt="双轴，按方法配色"></a><br><strong>双轴，按方法配色</strong><br><code>blue-yellow-transparent</code></td>
+<td align="center" width="300"><a href="skills/paper-results-figures/examples/trend-polynomial/prompt.md"><img src="skills/paper-results-figures/examples/trend-polynomial/preview-card.svg" width="300" height="285" alt="探索性多项式趋势"></a><br><strong>探索性多项式趋势</strong><br><code>muted-green-blue-purple</code></td>
 </tr></table>
 
 <table><tr>
-<td align="center" width="300"><a href="skills/paper-results-figures/examples/trend-polynomial/prompt.md"><img src="skills/paper-results-figures/examples/trend-polynomial/preview-card.svg" width="300" height="285" alt="探索性多项式趋势"></a><br><strong>探索性多项式趋势</strong><br><code>muted-green-blue-purple</code></td>
-<td align="center" width="300"><a href="skills/paper-results-figures/examples/radar-comparison-bands/prompt.md"><img src="skills/paper-results-figures/examples/radar-comparison-bands/preview-card.svg" width="300" height="285" alt="雷达图：绿色渐变环带"></a><br><strong>雷达图：绿色渐变环带</strong><br><code>muted-green-blue-purple</code></td>
+<td align="center" width="450"><a href="skills/paper-results-figures/examples/radar-comparison/prompt.md"><img src="skills/paper-results-figures/examples/radar-comparison/preview-card.svg" width="450" height="340" alt="雷达模型轮廓"></a><br><strong>雷达模型轮廓</strong><br><code>muted-green-blue-purple</code></td>
+<td align="center" width="450"><a href="skills/paper-results-figures/examples/radar-comparison-bands/prompt.md"><img src="skills/paper-results-figures/examples/radar-comparison-bands/preview-card.svg" width="450" height="340" alt="雷达图：绿色渐变环带"></a><br><strong>雷达图：绿色渐变环带</strong><br><code>muted-green-blue-purple</code></td>
 </tr></table>
 
 <table><tr>

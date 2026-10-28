@@ -20,11 +20,12 @@ Turn result data and a short brief into reproducible manuscript figures. Support
 <table><tr>
 <td align="center" width="300"><a href="skills/paper-results-figures/examples/multi-comparison-significance/prompt.md"><img src="skills/paper-results-figures/examples/multi-comparison-significance/preview-card.svg" width="300" height="285" alt="Vertical significance brackets"></a><br><strong>Vertical significance brackets</strong><br><code>rainbow-transparent</code></td>
 <td align="center" width="300"><a href="skills/paper-results-figures/examples/multi-metric-comparison-dual-axis/prompt.md"><img src="skills/paper-results-figures/examples/multi-metric-comparison-dual-axis/preview-card.svg" width="300" height="285" alt="Dual axes, model colors"></a><br><strong>Dual axes, model colors</strong><br><code>blue-yellow-transparent</code></td>
+<td align="center" width="300"><a href="skills/paper-results-figures/examples/trend-polynomial/prompt.md"><img src="skills/paper-results-figures/examples/trend-polynomial/preview-card.svg" width="300" height="285" alt="Exploratory polynomial trend"></a><br><strong>Exploratory polynomial trend</strong><br><code>muted-green-blue-purple</code></td>
 </tr></table>
 
 <table><tr>
-<td align="center" width="300"><a href="skills/paper-results-figures/examples/trend-polynomial/prompt.md"><img src="skills/paper-results-figures/examples/trend-polynomial/preview-card.svg" width="300" height="285" alt="Exploratory polynomial trend"></a><br><strong>Exploratory polynomial trend</strong><br><code>muted-green-blue-purple</code></td>
-<td align="center" width="300"><a href="skills/paper-results-figures/examples/radar-comparison-bands/prompt.md"><img src="skills/paper-results-figures/examples/radar-comparison-bands/preview-card.svg" width="300" height="285" alt="Radar: green tinted bands"></a><br><strong>Radar: green tinted bands</strong><br><code>muted-green-blue-purple</code></td>
+<td align="center" width="450"><a href="skills/paper-results-figures/examples/radar-comparison/prompt.md"><img src="skills/paper-results-figures/examples/radar-comparison/preview-card.svg" width="450" height="340" alt="Radar model profiles"></a><br><strong>Radar model profiles</strong><br><code>muted-green-blue-purple</code></td>
+<td align="center" width="450"><a href="skills/paper-results-figures/examples/radar-comparison-bands/prompt.md"><img src="skills/paper-results-figures/examples/radar-comparison-bands/preview-card.svg" width="450" height="340" alt="Radar: green tinted bands"></a><br><strong>Radar: green tinted bands</strong><br><code>muted-green-blue-purple</code></td>
 </tr></table>
 
 <table><tr>

@@ -176,8 +176,8 @@ Four-method trend legends use two entries per row when all four cannot fit on on
 </tr></table>
 
 <table><tr>
-<td align="center" width="300"><a href="examples/radar-comparison-pastel/prompt.md"><img src="examples/radar-comparison-pastel/preview-card.svg" width="300" height="285" alt="Radar model profiles"></a><br><strong>Radar model profiles</strong><br><code>blue-pink-purple-peach-transparent</code><br><a href="examples/radar-comparison-pastel/prompt.md">Prompt and CSV</a> · <a href="examples/radar-comparison-pastel/preview.png">Actual export</a></td>
-<td align="center" width="300"><a href="examples/radar-comparison-bands/prompt.md"><img src="examples/radar-comparison-bands/preview-card.svg" width="300" height="285" alt="Radar: green tinted bands"></a><br><strong>Radar: green tinted bands</strong><br><code>muted-green-blue-purple</code><br><a href="examples/radar-comparison-bands/prompt.md">Prompt and CSV</a> · <a href="examples/radar-comparison-bands/preview.png">Actual export</a></td>
+<td align="center" width="450"><a href="examples/radar-comparison-pastel/prompt.md"><img src="examples/radar-comparison-pastel/preview-card.svg" width="450" height="340" alt="Radar model profiles"></a><br><strong>Radar model profiles</strong><br><code>blue-pink-purple-peach-transparent</code><br><a href="examples/radar-comparison-pastel/prompt.md">Prompt and CSV</a> · <a href="examples/radar-comparison-pastel/preview.png">Actual export</a></td>
+<td align="center" width="450"><a href="examples/radar-comparison-bands/prompt.md"><img src="examples/radar-comparison-bands/preview-card.svg" width="450" height="340" alt="Radar: green tinted bands"></a><br><strong>Radar: green tinted bands</strong><br><code>muted-green-blue-purple</code><br><a href="examples/radar-comparison-bands/prompt.md">Prompt and CSV</a> · <a href="examples/radar-comparison-bands/preview.png">Actual export</a></td>
 </tr></table>
 
 ### Grouped circular heatmaps and violins

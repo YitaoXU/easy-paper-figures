@@ -176,8 +176,8 @@ score 是 [0,1] 范围的无量纲分数，越高越好，突出显示 Ours。
 </tr></table>
 
 <table><tr>
-<td align="center" width="300"><a href="examples/radar-comparison-pastel/prompt.md"><img src="examples/radar-comparison-pastel/preview-card.svg" width="300" height="285" alt="雷达图：蓝粉紫桃"></a><br><strong>雷达图：蓝粉紫桃</strong><br><code>blue-pink-purple-peach-transparent</code><br><a href="examples/radar-comparison-pastel/prompt.md">Prompt 与 CSV</a> · <a href="examples/radar-comparison-pastel/preview.png">实际导出</a></td>
-<td align="center" width="300"><a href="examples/radar-comparison-bands/prompt.md"><img src="examples/radar-comparison-bands/preview-card.svg" width="300" height="285" alt="雷达图：绿色渐变环带"></a><br><strong>雷达图：绿色渐变环带</strong><br><code>muted-green-blue-purple</code><br><a href="examples/radar-comparison-bands/prompt.md">Prompt 与 CSV</a> · <a href="examples/radar-comparison-bands/preview.png">实际导出</a></td>
+<td align="center" width="450"><a href="examples/radar-comparison-pastel/prompt.md"><img src="examples/radar-comparison-pastel/preview-card.svg" width="450" height="340" alt="雷达图：蓝粉紫桃"></a><br><strong>雷达图：蓝粉紫桃</strong><br><code>blue-pink-purple-peach-transparent</code><br><a href="examples/radar-comparison-pastel/prompt.md">Prompt 与 CSV</a> · <a href="examples/radar-comparison-pastel/preview.png">实际导出</a></td>
+<td align="center" width="450"><a href="examples/radar-comparison-bands/prompt.md"><img src="examples/radar-comparison-bands/preview-card.svg" width="450" height="340" alt="雷达图：绿色渐变环带"></a><br><strong>雷达图：绿色渐变环带</strong><br><code>muted-green-blue-purple</code><br><a href="examples/radar-comparison-bands/prompt.md">Prompt 与 CSV</a> · <a href="examples/radar-comparison-bands/preview.png">实际导出</a></td>
 </tr></table>
 
 ### 分组环形热图与小提琴图

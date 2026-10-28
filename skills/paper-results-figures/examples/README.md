@@ -102,8 +102,8 @@ Cards share display dimensions within each row. Standard figures align by image 
 </tr></table>
 
 <table><tr>
-<td align="center" width="300"><a href="radar-comparison-pastel/prompt.md"><img src="radar-comparison-pastel/preview-card.svg" width="300" height="285" alt="Radar model profiles"></a><br><strong>Radar model profiles</strong><br><code>blue-pink-purple-peach-transparent</code><br><a href="radar-comparison-pastel/prompt.md">Prompt and CSV</a> · <a href="radar-comparison-pastel/preview.png">Actual export</a></td>
-<td align="center" width="300"><a href="radar-comparison-bands/prompt.md"><img src="radar-comparison-bands/preview-card.svg" width="300" height="285" alt="Radar: green tinted bands"></a><br><strong>Radar: green tinted bands</strong><br><code>muted-green-blue-purple</code><br><a href="radar-comparison-bands/prompt.md">Prompt and CSV</a> · <a href="radar-comparison-bands/preview.png">Actual export</a></td>
+<td align="center" width="450"><a href="radar-comparison-pastel/prompt.md"><img src="radar-comparison-pastel/preview-card.svg" width="450" height="340" alt="Radar model profiles"></a><br><strong>Radar model profiles</strong><br><code>blue-pink-purple-peach-transparent</code><br><a href="radar-comparison-pastel/prompt.md">Prompt and CSV</a> · <a href="radar-comparison-pastel/preview.png">Actual export</a></td>
+<td align="center" width="450"><a href="radar-comparison-bands/prompt.md"><img src="radar-comparison-bands/preview-card.svg" width="450" height="340" alt="Radar: green tinted bands"></a><br><strong>Radar: green tinted bands</strong><br><code>muted-green-blue-purple</code><br><a href="radar-comparison-bands/prompt.md">Prompt and CSV</a> · <a href="radar-comparison-bands/preview.png">Actual export</a></td>
 </tr></table>
 
 ### Grouped circular heatmaps and violins
